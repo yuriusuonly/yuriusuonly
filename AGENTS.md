@@ -29,5 +29,5 @@
 ## Maintenance
 - Whenever possible, update `README.md`, `CONTRIBUTING.md`, and `DESIGN.md` to reflect relevant changes (behavior, config, conventions, UI/tokens, workflows).
 - Whenever possible, update `.*ignore*` files (e.g. `.gitignore`, `.dockerignore`) when new generated artifacts, local files, or build outputs should be excluded.
-- Follow the commit rules in `CONTRIBUTING.md` (**Commits & PRs**): commit automatically as work completes, using the tagged types and message format defined there.
+- Follow the commit rules in `CONTRIBUTING.md` (**Commits & PRs**): commit automatically as work completes, using the tagged types and message format defined there — but never push automatically; pushes are always explicit requests.
 - Do not duplicate repeated mentions/references across or within the docs. State each fact once in its canonical doc, and reference it elsewhere instead of restating it (e.g. the project tree lives in `README.md`; `CONTRIBUTING.md` links to it).

@@ -90,5 +90,5 @@ flowchart TD
   - `(fix)` — bug and hot fixes
   - `(refactor)` — optimizations and code quality
 - Format: a one-line short descriptive title after the tag, followed by a multi-line bulleted list of the individual changes. For example, a feature addition with three changes would read: the `(feature)` tag, the title, and then `-` bullets — one per change.
-- Commit automatically as work completes: apply the tagged types and the message format above to every commit, at least one commit per cohesive change, without waiting for an explicit commit request.
+- Commit automatically as work completes: apply the tagged types and the message format above to every commit, at least one commit per cohesive change, without waiting for an explicit commit request. **Never push automatically** — pushing to the remote is always a deliberate, explicit action; automated deploys happen through the push-to-deploy workflow (`README.md` → Deployment), not by pushing from a working session.
 - Keep changes focused; include manual verification steps in the list when relevant. Repository URL and default branch are listed in `README.md`.
