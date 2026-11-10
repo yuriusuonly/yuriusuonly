@@ -13,13 +13,13 @@ import TiltCard from "../../components/motion/tilt-card.js";
 /**
  * Corner-bracket crop mark for the dimension tiles (white or dark variant).
  *
- * @param {{ dark?: boolean }} [props] - Render the ink mark for light tiles.
+ * @param {{ dark?: boolean, positionClass?: string }} [props] - Render the ink mark for light tiles and optionally override inset position.
  * @returns {JSX.Element} The corner bracket decoration positioned absolutely.
  */
-function CornerMark({ dark = false }) {
+function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
   return (
     <View
-      className={`absolute right-2 top-2 h-2.5 w-2.5 md:h-3 md:w-3 border-t-2 border-r-2 ${dark ? "border-[#161823]/90" : "border-white/90"}`}
+      className={`absolute h-2.5 w-2.5 md:h-3 md:w-3 border-t-2 border-r-2 ${positionClass} ${dark ? "border-[#161823]/90" : "border-white/90"}`}
     />
   );
 }
@@ -34,7 +34,7 @@ function ClientTile({ sector, note, tileClass, textClass, dark }) {
   return (
     <TiltCard style={{ flex: 1 }} maxTilt={9}>
       <View className={`relative h-full flex-1 rounded-2xl p-4 md:p-6 justify-center ${tileClass}`}>
-        <CornerMark dark={dark} />
+        <CornerMark dark={dark} positionClass="right-4 top-4 md:right-6 md:top-6" />
         <Text className={`font-outfit text-xl md:text-2xl font-extrabold leading-tight ${textClass}`}>{sector}</Text>
         <Text className={`font-outfit mt-2 text-xs md:text-sm leading-snug ${textClass}`}>{note}</Text>
       </View>

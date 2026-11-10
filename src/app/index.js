@@ -23,13 +23,13 @@ const COVER_MS = 340;
 /**
  * Card top-right crop-mark accent used across the bento tiles.
  *
- * @param {{ markClass?: string }} [props] - Tailwind border-color override for the accent (defaults to white — for red/`#161823` tiles; blue tiles use a dark mark).
+ * @param {{ markClass?: string, positionClass?: string }} [props] - Tailwind overrides: border color and inset position (defaults align to the card edge).
  * @returns {JSX.Element} Small corner bracket decoration positioned absolutely.
  */
-function CornerMark({ markClass = "border-white/90" }) {
+function CornerMark({ markClass = "border-white/90", positionClass = "right-2 top-2" }) {
   return (
     <View
-      className={`absolute right-2 top-2 h-2.5 w-2.5 md:h-3 md:w-3 border-t-2 border-r-2 ${markClass}`}
+      className={`absolute h-2.5 w-2.5 md:h-3 md:w-3 border-t-2 border-r-2 ${positionClass} ${markClass}`}
     />
   );
 }
@@ -161,7 +161,7 @@ export default function Index() {
               <Text className="font-outfit text-base md:text-lg font-semibold text-[#161823]">About Me</Text>
             </View>
             <View className="relative flex-1 bg-[#25F4EE] rounded-3xl p-5 md:p-6 items-center justify-center">
-              <CornerMark markClass="border-[#161823]/90" />
+              <CornerMark markClass="border-[#161823]/90" positionClass="right-5 top-5 md:right-6 md:top-6" />
               {/* Avatar with ring on pink circle */}
               <View className="h-32 w-32 md:h-40 md:w-40 items-center justify-center rounded-full border-2 border-[#161823] bg-[#FE2C55]">
                 <Image

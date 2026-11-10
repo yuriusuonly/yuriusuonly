@@ -13,11 +13,12 @@ import DomainShell from "../components/domain/domain-shell.js";
 /**
  * Small white corner-bracket crop mark matching the home tile accent.
  *
+ * @param {{ markClass?: string, positionClass?: string }} [props] - Tailwind overrides: border color and inset position (defaults align to the card edge).
  * @returns {JSX.Element} The corner bracket decoration positioned absolutely.
  */
-function CornerMark() {
+function CornerMark({ markClass = "border-white/90", positionClass = "right-2 top-2" }) {
   return (
-    <View className="absolute right-2 top-2 h-2.5 md:h-3 w-2.5 md:w-3 border-t-2 border-r-2 border-white/90" />
+    <View className={`absolute h-2.5 w-2.5 md:h-3 md:w-3 border-t-2 border-r-2 ${positionClass} ${markClass}`} />
   );
 }
 
@@ -42,7 +43,7 @@ export default function NotFound() {
 
           {/* Cyan identity-style card describing the miss */}
           <View className="relative mt-4 md:mt-6 w-full md:max-w-md bg-[#25F4EE] rounded-3xl p-5 md:p-6">
-            <CornerMark markClass="border-[#161823]/90" />
+            <CornerMark markClass="border-[#161823]/90" positionClass="right-5 top-5 md:right-6 md:top-6" />
             <Text className="font-outfit text-2xl md:text-3xl font-semibold text-[#161823]">Hmm...</Text>
             <Text className="font-outfit mt-2 text-base md:text-lg text-[#161823] leading-snug">
               The page you are looking for is not part of {config.title}.
