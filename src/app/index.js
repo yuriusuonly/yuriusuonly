@@ -1,10 +1,16 @@
-import { Image, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
+import { useRouter } from "expo-router";
 import config from "../shared/config.js";
+import { DIMENSIONS } from "../shared/tokens.js";
+import DomainShell from "../components/domain/domain-shell.js";
+import TiltCard from "../components/motion/tilt-card.js";
 import logo from "../../png/logo.png";
 
 /**
- * Home route (`src/app/index.js`): bento-grid portfolio layout inspired by
- * the "Portfolio Website V1" reference (`.dribbble/portfolio-website-v1.png`).
+ * Home route (`src/app/index.js`): 3D interactive bento-grid portfolio layout
+ * following DESIGN.md (bento layout, TikTok palette + typography tokens).
+ * Bento tiles are portals: pressing one expands its domain — the chibi cat
+ * teleports into a themed dimension page for that content.
  * @module app/index
  */
 
@@ -31,35 +37,52 @@ function CornerMark({ markClass = "border-white/90" }) {
  * @property {string} tileClass Tailwind classes for the tile surface.
  * @property {string} [numberClass] Optional text color override for number and label.
  * @property {string} [markClass] Optional corner-mark border color override.
+ * @property {string} [href] Route to push when the portal tile is pressed; omit for a non-portal tile.
  */
 
 /**
- * Numbered stat tile used in the right-hand bento grid.
+ * Numbered stat tile doubling as a domain portal when `href` is set.
  *
  * @param {StatTileProps} props - Component props.
- * @returns {JSX.Element} A rounded stat tile with a corner mark.
+ * @returns {JSX.Element} A rounded, tilting stat tile that opens its dimension.
  */
-function StatTile({ number, label, tileClass, numberClass, markClass }) {
-  return (
-    <View className={`relative flex-1 items-center justify-center rounded-2xl ${tileClass}`}>
+function StatTile({ number, label, tileClass, numberClass, markClass, href }) {
+  const router = useRouter();
+  const tile = (
+    <View className={`relative h-full flex-1 items-center justify-center rounded-2xl ${tileClass}`}>
       <CornerMark {...(markClass ? { markClass } : {})} />
       <Text className={`font-outfit text-2xl md:text-4xl font-extrabold leading-none ${numberClass ?? "text-[#161823]"}`}>{number}</Text>
       <Text className={`font-outfit mt-1 md:mt-2 text-sm md:text-base ${numberClass ?? "text-[#161823]"}`}>{label}</Text>
     </View>
   );
+  if (!href) {
+    return tile;
+  }
+  return (
+    <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={() => router.push(href)} className="flex-1 active:opacity-90">
+      <TiltCard style={{ flex: 1 }} maxTilt={10}>
+        {tile}
+      </TiltCard>
+    </Pressable>
+  );
 }
 
 /**
- * Landing screen rendered at `/`: left identity card + right bento grid.
+ * Landing screen rendered at `/`: left identity card + right bento grid of
+ * domain portals, staged inside the home-themed 3D dimension.
  *
- * @returns {JSX.Element} The bento-grid portfolio layout.
+ * @returns {JSX.Element} The 3D bento-grid portfolio layout.
  */
 export default function Index() {
+  const router = useRouter();
+  /** @param {string} href */
+  const expand = (href) => router.push(href);
+
   return (
-    <View className="flex-1 bg-[#F1F1F2]">
+    <DomainShell theme={DIMENSIONS.home}>
       <View className="flex-1 items-center justify-center p-4 md:p-10">
         <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 flex-col md:flex-row gap-6 md:gap-8">
-          {/* Left rail: purple about card */}
+          {/* Left rail: cyan about card */}
           <View className="flex-col gap-2 mt-14 md:mt-0 md:w-[38%]">
             <View className="flex-row items-center gap-2">
               <Text className="text-base text-[#161823]">❖</Text>
@@ -92,7 +115,7 @@ export default function Index() {
             </View>
           </View>
 
-          {/* Right: giant title + bento tiles */}
+          {/* Right: giant title + bento portals */}
           <View className="flex-1 flex-col gap-4 md:gap-6">
             <View className="relative self-start px-1">
               <Text className="font-outfit text-5xl md:text-8xl font-black tracking-tight text-[#161823] leading-none">
@@ -101,48 +124,60 @@ export default function Index() {
               <View className="absolute -top-1 right-0 h-3 w-3 md:h-4 md:w-4 border-t-4 border-r-4 border-[#161823]" />
             </View>
 
-            {/* Row 1: feature image tile + stacked stats */}
+            {/* Row 1: featured image portal + stacked stat portals */}
             <View className="flex-row gap-3 md:gap-4 h-44 md:h-64">
-              <View className="relative flex-1 overflow-hidden rounded-2xl bg-[#25F4EE]">
-                <CornerMark markClass="border-[#161823]/90" />
-                <Image
-                  source={logo}
-                  className="!h-full !w-full"
-                  resizeMode="cover"
-                  accessibilityLabel={`${config.title} featured work`}
-                />
-              </View>
+              <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={() => expand("/dimensions/projects")} className="flex-1 active:opacity-90">
+                <TiltCard style={{ flex: 1 }} maxTilt={10}>
+                  <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#25F4EE]">
+                    <CornerMark markClass="border-[#161823]/90" />
+                    <Image
+                      source={logo}
+                      className="!h-full !w-full"
+                      resizeMode="cover"
+                      accessibilityLabel={`${config.title} featured work`}
+                    />
+                  </View>
+                </TiltCard>
+              </Pressable>
               <View className="flex-col gap-3 md:gap-4 w-24 md:w-40">
-                <StatTile number="251" label="Projects" tileClass="bg-[#25F4EE]" markClass="border-[#161823]/90" />
-                <StatTile number="156" label="Awards" tileClass="bg-[#FE2C55]" numberClass="text-white" />
+                <StatTile number="251" label="Projects" tileClass="bg-[#25F4EE]" markClass="border-[#161823]/90" href="/dimensions/projects" />
+                <StatTile number="156" label="Awards" tileClass="bg-[#FE2C55]" numberClass="text-white" href="/dimensions/awards" />
               </View>
             </View>
 
-            {/* Row 2: clients + awards */}
+            {/* Row 2: clients + awards portals */}
             <View className="flex-row gap-3 md:gap-4 h-28 md:h-36">
-              <View className="relative flex-1 rounded-2xl bg-[#161823] items-center justify-center">
-                <CornerMark />
-                <Text className="font-outfit mt-3 md:mt-4 text-base md:text-xl text-white">Clients</Text>
-              </View>
-              <View className="relative flex-1 flex-row rounded-2xl bg-[#161823] overflow-hidden">
-                <View className="flex-1 items-center justify-center p-2 md:p-4">
-                  <Image
-                    source={logo}
-                    className="!h-10 !w-10 md:!h-14 md:!w-14 rounded-full"
-                    resizeMode="cover"
-                    accessibilityLabel={`${config.title} awards highlight`}
-                  />
-                </View>
-                <View className="relative flex-1 bg-[#25F4EE] items-center justify-center p-2 md:p-4">
-                  <CornerMark markClass="border-[#161823]/90" />
-                  <Text className="font-outfit text-xl md:text-3xl font-extrabold leading-none text-[#161823]">172</Text>
-                  <Text className="font-outfit mt-1 text-xs md:text-sm text-[#161823] leading-tight">Global Design Awards.</Text>
-                </View>
-              </View>
+              <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={() => expand("/dimensions/clients")} className="flex-1 active:opacity-90">
+                <TiltCard style={{ flex: 1 }} maxTilt={10}>
+                  <View className="relative h-full flex-1 rounded-2xl bg-[#161823] items-center justify-center">
+                    <CornerMark />
+                    <Text className="font-outfit mt-3 md:mt-4 text-base md:text-xl text-white">Clients</Text>
+                  </View>
+                </TiltCard>
+              </Pressable>
+              <Pressable accessibilityRole="button" accessibilityLabel="Open the awards dimension" onPress={() => expand("/dimensions/awards")} className="flex-1 active:opacity-90">
+                <TiltCard style={{ flex: 1 }} maxTilt={10}>
+                  <View className="relative h-full flex-1 flex-row rounded-2xl bg-[#161823] overflow-hidden">
+                    <View className="flex-1 items-center justify-center p-2 md:p-4">
+                      <Image
+                        source={logo}
+                        className="!h-10 !w-10 md:!h-14 md:!w-14 rounded-full"
+                        resizeMode="cover"
+                        accessibilityLabel={`${config.title} awards highlight`}
+                      />
+                    </View>
+                    <View className="relative flex-1 bg-[#25F4EE] items-center justify-center p-2 md:p-4">
+                      <CornerMark markClass="border-[#161823]/90" />
+                      <Text className="font-outfit text-xl md:text-3xl font-extrabold leading-none text-[#161823]">172</Text>
+                      <Text className="font-outfit mt-1 text-xs md:text-sm text-[#161823] leading-tight">Global Design Awards.</Text>
+                    </View>
+                  </View>
+                </TiltCard>
+              </Pressable>
             </View>
           </View>
         </View>
       </View>
-    </View>
+    </DomainShell>
   );
 }

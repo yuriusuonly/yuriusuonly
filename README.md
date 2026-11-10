@@ -5,6 +5,8 @@
 
 A web-only Expo Router app styled with NativeWind/Tailwind (React Native Web + NativeWind v4 + Tailwind v3, React 19). Static web export with server-rendered API routes; deployable via Expo Hosting (EAS), Node (expo serve) + Caddy, or Docker.
 
+**3D interactive portfolio** — a chibi cat follows your clicks through bento-grid portal tiles: pressing a tile expands its "domain", teleporting the cat into a themed dimension page (Projects / Awards / Clients) built on a `three` + `@react-three/fiber` scene with pointer-tilted tiles (state via `zustand`). Details in [DESIGN.md](./DESIGN.md).
+
 Repository: `git@github.com:yuriusuonly/yuriusuonly.git` (default branch: `portfolio`, the only branch).
 
 Docs:
@@ -46,7 +48,7 @@ Notes:
 npm ci                    # install deps (no fallback; use lockfile)
 npm run expo:start        # loads .env; runs Expo dev server on $PORT
 npm run expo:start:tunnel # tunnel mode (when LAN access is blocked)
-npm run opencode          # launch OpenCode (loads .env for opencode.json MCP tooling)
+npm run opencode          # launch OpenCode (loads .env)
 ```
 
 Dev server availability is announced by Expo CLI in the terminal; `URL_PORT` in `.env` controls the port.

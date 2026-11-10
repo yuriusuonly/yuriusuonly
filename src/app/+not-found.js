@@ -1,9 +1,12 @@
 import { Text, View } from "react-native";
 import config from "../shared/config.js";
+import { VOID } from "../shared/tokens.js";
+import DomainShell from "../components/domain/domain-shell.js";
 
 /**
  * Fallback route (`src/app/+not-found.js`) rendered when no route matches.
- * Follows the bento-grid design language from DESIGN.md (same tokens as home).
+ * The 404 lives in its own lighter, calmer dimension (no floating geometry) —
+ * same tokens and portal-back-home affordance, per DESIGN.md.
  * @module app/+not-found
  */
 
@@ -19,13 +22,13 @@ function CornerMark() {
 }
 
 /**
- * 404 screen displayed for unmatched routes.
+ * 404 screen displayed for unmatched routes: an unmapped void dimension.
  *
- * @returns {JSX.Element} Centered bento panel with a giant 404 display title.
+ * @returns {JSX.Element} Centered bento panel with a giant 404 display title inside the void scene.
  */
 export default function NotFound() {
   return (
-    <View className="flex-1 bg-[#F1F1F2]">
+    <DomainShell theme={VOID} floatShapes={false} returnPortal>
       <View className="flex-1 items-center justify-center p-4 md:p-10">
         <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 items-center">
           {/* Giant display title with corner-bracket accent */}
@@ -36,7 +39,7 @@ export default function NotFound() {
             <View className="absolute -top-1 right-0 h-3 w-3 md:h-4 md:w-4 border-t-4 border-r-4 border-[#161823]" />
           </View>
 
-          {/* Purple identity-style card describing the miss */}
+          {/* Cyan identity-style card describing the miss */}
           <View className="relative mt-4 md:mt-6 w-full md:max-w-md bg-[#25F4EE] rounded-3xl p-5 md:p-6">
             <CornerMark markClass="border-[#161823]/90" />
             <Text className="font-outfit text-2xl md:text-3xl font-semibold text-[#161823]">Hmm...</Text>
@@ -49,6 +52,6 @@ export default function NotFound() {
           </View>
         </View>
       </View>
-    </View>
+    </DomainShell>
   );
 }
