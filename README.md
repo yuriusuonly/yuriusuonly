@@ -26,6 +26,9 @@ Docs:
 | `API_URL` | API base/path value for the project (project-level config value). |
 | `DRIBBBLE_CLIENT_ID` | OAuth app Client ID for the local `dribbble` MCP server (`opencode.json` tooling; placeholder until registered at dribbble.com/account/applications/new). |
 | `DRIBBBLE_CLIENT_SECRET` | OAuth app Client Secret for the local `dribbble` MCP server; keep secret. |
+| `GIT_AUTHOR_NAME` | Commit author `user.name` (e.g. `Yuriusu`) — source for the `ci:secrets:name` script and the `DOT_ENV` CI secret. |
+| `GIT_AUTHOR_EMAIL` | Commit author `user.email` (e.g. `yuriusu.dev@gmail.com`) — source for the `ci:secrets:email` script and the `DOT_ENV` CI secret. |
+| `GH_TOKEN` | GitHub PAT used by the `ci:secrets` scripts (`gh` reads it automatically from the sourced environment); keep secret — needed for repository secret provisioning. |
 
 Notes:
 - Keep `.env` **POSIX-compatible** (simple `KEY=value` lines): every consumer loads it natively — `set -a` sourcing in `expo:start`/`expo:serve`, Caddy's `--envfile` in `caddy:run`, and Node's `--env-file` in `opencode.json`.
@@ -61,6 +64,14 @@ npm run caddy:trust  # trust local CA in system (needed for SW in some browsers)
 - Caddyfile admin endpoint stays enabled (`localhost:2019`) because `caddy:trust` needs it; disabling it breaks `caddy:trust`.
 - The automatic HTTP→HTTPS redirect server is disabled (binds `:80`, needs root); TLS serves on `$HTTPS_PORT` only.
 
+## Continuous integration
+- GitHub Actions workflow `.github/workflows/deployment.yml` runs on push to the `deployment` branch: it restores `.env`, builds the static web export, and commits `build/` back to `deployment` as the configured author with a `(chore)` message whose title is a UTC timestamp (`date -u +%Y%m%dT%H%M%SZ`, e.g. `(chore) 20261110T093000Z`) plus `[skip ci]` (prevents recursive runs).
+- Required repository **secrets** (Settings → Secrets and variables → Actions → New repository secret):
+  - `GIT_AUTHOR_NAME` — commit author `user.name` (e.g. `Yuriusu`)
+  - `GIT_AUTHOR_EMAIL` — commit author `user.email` (e.g. `yuriusu.dev@gmail.com`)
+  - `DOT_ENV` — the full `.env` file contents (`.env` is gitignored, so CI recreates it from this secret; Expo CLI loads it during the build)
+- Provision them with `npm run ci:secrets` (both steps), or individually: `ci:secrets:name` → `GIT_AUTHOR_NAME`, `ci:secrets:email` → `GIT_AUTHOR_EMAIL`, `ci:secrets:env` → `DOT_ENV`. `ci:secrets:author` bundles the two author steps. All values read from `.env` (see the table above); authentication uses the `GH_TOKEN` variable in `.env` (no `gh auth login` needed).
+
 ## Docker
 
 ```bash
@@ -91,6 +102,9 @@ npm run docker:down  # stop containers
 ```text
 ./
 ├── AGENTS.md
+├── .github/
+│   └── workflows/
+│       └── deployment.yml
 ├── Caddyfile
 ├── README.md
 ├── CONTRIBUTING.md

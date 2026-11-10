@@ -3,7 +3,7 @@
 ## Stack & scope
 - Expo (SDK ~58) + Expo Router app targeting **web only** (`app.config.js` sets `platforms: ["web"]`, `web.output: "static"`, `bundler: "metro"` with `apiRoutes: true`).
 - UI/styling: React 19, React Native Web, NativeWind v4 + Tailwind v3. Global CSS entry is `src/stylesheets/global.css` (wired in `metro.config.js`).
-- Plain JavaScript codebase: no TypeScript dependency, no lint/test/typecheck scripts, and no CI/test config in the repo. Types are documented with JSDoc (`@module`, `@typedef`/`@type`, `@param`, `@returns` — never `@example`).
+- Plain JavaScript codebase: no TypeScript dependency and no lint/test/typecheck scripts in the repo; the only CI is the `deployment` branch build workflow (see `README.md` → Continuous integration). Types are documented with JSDoc (`@module`, `@typedef`/`@type`, `@param`, `@returns` — never `@example`).
 
 ## Commands (from `package.json`)
 - `npm run expo:start` — starts dev server on `$PORT` after `set -a && . ./.env && set +a`; requires `.env` (notably `PORT`).
@@ -21,7 +21,7 @@
 - Assets: `png/`, `svg/`, `ttf/` (custom font `Outfit` loaded in `src/app/_layout.js` from `ttf/Outfit-VariableFont_wght.ttf`).
 
 ## Runtime & deployment notes
-- `.env` holds both `EXPO_PUBLIC_*` (bundled/client-visible) and server/proxy vars (`PROTOCOL`, `HOST`, `PORT`, `HTTPS_PORT`, `BASE_URL`, `API_URL`), plus OAuth credentials for workspace-local MCP tooling (`DRIBBBLE_CLIENT_ID`/`DRIBBBLE_CLIENT_SECRET` used by the `dribbble` server in `opencode.json`, which sources `.env` before launch). Several npm scripts source `.env` directly via `set -a && . ./.env && set +a` (needed: Expo CLI loads `.env` itself but ignores its own `PORT` when picking the dev-server port, so the shell must expand `$PORT` first); `caddy:run` uses Caddy's native `--envfile`, `caddy:trust` needs no env, and `opencode.json` loads it via Node's `--env-file` flag — keep `.env` POSIX-compatible (simple `KEY=value` lines; `--env-file` requires Node ≥ 20.6).
+- `.env` holds both `EXPO_PUBLIC_*` (bundled/client-visible) and server/proxy vars (`PROTOCOL`, `HOST`, `PORT`, `HTTPS_PORT`, `BASE_URL`, `API_URL`), CI author identity (`GIT_AUTHOR_NAME`/`GIT_AUTHOR_EMAIL` for the `ci:secrets` scripts) and GitHub token auth for `gh` (`GH_TOKEN`), plus OAuth credentials for workspace-local MCP tooling (`DRIBBBLE_CLIENT_ID`/`DRIBBBLE_CLIENT_SECRET` used by the `dribbble` server in `opencode.json`, which sources `.env` before launch). Several npm scripts source `.env` directly via `set -a && . ./.env && set +a` (needed: Expo CLI loads `.env` itself but ignores its own `PORT` when picking the dev-server port, so the shell must expand `$PORT` first); `caddy:run` uses Caddy's native `--envfile`, `caddy:trust` needs no env, and `opencode.json` loads it via Node's `--env-file` flag — keep `.env` POSIX-compatible (simple `KEY=value` lines; `--env-file` requires Node ≥ 20.6).
 - `Dockerfile` + `docker-compose.yml`: the image builds the static export (`npm run expo:build`) and defines no CMD — both service commands are plain argv arrays in compose: `server` runs `expo serve` with `--port ${PORT}` interpolated from `.env`, `caddy` runs the HTTPS edge with `BACKEND_HOST=server` for the `{$BACKEND_HOST:localhost}` Caddyfile placeholder. Compose consumes `PORT`/`HTTPS_PORT` as build args and runtime env for the placeholders. Server healthcheck hits `http://localhost:$PORT/api/health` (wget, argv form — no shell).
 - `build/` and `node_modules/` are generated/installed artifacts (gitignored). Edit source under `src/` and config at repo root, not `build/`.
 - `src/app/_layout.js` registers `/service-worker.js` on mount (client-side); service worker is implemented via the Expo Router `service-worker.js+api.js` route.
@@ -29,4 +29,5 @@
 ## Maintenance
 - Whenever possible, update `README.md`, `CONTRIBUTING.md`, and `DESIGN.md` to reflect relevant changes (behavior, config, conventions, UI/tokens, workflows).
 - Whenever possible, update `.*ignore*` files (e.g. `.gitignore`, `.dockerignore`) when new generated artifacts, local files, or build outputs should be excluded.
+- Follow the commit rules in `CONTRIBUTING.md` (**Commits & PRs**): commit automatically as work completes, using the tagged types and message format defined there.
 - Do not duplicate repeated mentions/references across or within the docs. State each fact once in its canonical doc, and reference it elsewhere instead of restating it (e.g. the project tree lives in `README.md`; `CONTRIBUTING.md` links to it).

@@ -1,0 +1,47 @@
+# Deployment build: rebuilds the static web export and commits `build/` back to
+# the `deployment` branch. Recursion is prevented via the `[skip ci]` marker on
+# the commit. Required repository secrets (see README.md → Continuous integration):
+# - GIT_AUTHOR_NAME / GIT_AUTHOR_EMAIL — commit author for the build output
+# - DOT_ENV — full `.env` file contents (Expo reads `.env` during the build)
+
+name: Deployment build
+
+on:
+  push:
+    branches:
+      - deployment
+
+permissions:
+  contents: write
+
+jobs:
+  deployment-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Restore .env from the DOT_ENV secret
+        run: printf '%s' "${{ secrets.DOT_ENV }}" > .env
+
+      - name: Set up Node (22, matching the Docker image)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the static web export
+        run: npm run expo:build
+
+      - name: Commit the build output as the configured author
+        run: |
+          git config user.name "${{ secrets.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ secrets.GIT_AUTHOR_EMAIL }}"
+          git add -f build/
+          git diff --cached --quiet || git commit -m "(chore) $(date -u +%Y%m%dT%H%M%SZ) [skip ci]"
+
+      - name: Push the build output
+        run: git push origin deployment
