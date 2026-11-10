@@ -194,7 +194,7 @@ export default function Index() {
               <Text className="font-outfit text-base md:text-lg font-semibold">About Me</Text>
             </View>
             <View className="h-56 flex-row gap-3 md:flex-1 md:h-auto md:gap-4">
-              <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/projects", COLORS.ink, e)} className="flex-1 active:opacity-90">
+              <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/clients", COLORS.ink, e)} className="flex-1 active:opacity-90">
                 <TiltCard style={{ flex: 1 }} maxTilt={10}>
                   <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
                     <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
@@ -202,7 +202,7 @@ export default function Index() {
                       source={logo}
                       className="!h-full !w-full"
                       resizeMode="cover"
-                      accessibilityLabel={`${config.title} featured work`}
+                      accessibilityLabel={`${config.title} clients`}
                     />
                   </View>
                 </TiltCard>
