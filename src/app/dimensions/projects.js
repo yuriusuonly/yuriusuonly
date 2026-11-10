@@ -1,5 +1,5 @@
 import { ScrollView, Text, View } from "react-native";
-import { DIMENSIONS } from "../../shared/tokens.js";
+import { DIMENSIONS } from "../../shared/theme.js";
 import DomainShell from "../../components/domain/domain-shell.js";
 import TiltCard from "../../components/motion/tilt-card.js";
 

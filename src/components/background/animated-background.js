@@ -15,7 +15,7 @@ import { Animated, View } from "react-native";
  * Props for {@link AnimatedBackground}.
  *
  * @typedef {object} AnimatedBackgroundProps
- * @property {import("../../shared/tokens.js").DimensionTheme} theme Theme tokens (void background, blob palette).
+ * @property {import("../../shared/theme.js").DimensionTheme} theme Theme tokens (void background, blob palette).
  * @property {number} [blobCount] How many drifting blobs to render (default 8; use 4 for calmer screens).
  */
 

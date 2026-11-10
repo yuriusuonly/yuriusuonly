@@ -1,6 +1,6 @@
 import { ScrollView, Text, View } from "react-native";
 import config from "../shared/config.js";
-import { VOID } from "../shared/tokens.js";
+import { VOID } from "../shared/theme.js";
 import DomainShell from "../components/domain/domain-shell.js";
 
 /**

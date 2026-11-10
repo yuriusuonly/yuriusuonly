@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Animated, Pressable, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useExpansionStore } from "../../stores/expansion-store.js";
-import { COLORS } from "../../shared/tokens.js";
+import { COLORS } from "../../shared/theme.js";
 import AnimatedBackground from "../background/animated-background.js";
 
 /**
@@ -20,7 +20,7 @@ import AnimatedBackground from "../background/animated-background.js";
  * Props for {@link DomainShell}.
  *
  * @typedef {object} DomainShellProps
- * @property {import("../../shared/tokens.js").DimensionTheme} theme Theme of the dimension being expanded into.
+ * @property {import("../../shared/theme.js").DimensionTheme} theme Theme of the dimension being expanded into.
  * @property {import("react").ReactNode} [children] Dimension content layered above the scene.
  * @property {boolean} [returnPortal] When true, render the portal tile back to home (dimension/404 pages).
  * @property {boolean} [calm] Calm variant with fewer background blobs (404 treatment).
