@@ -46,7 +46,7 @@
 - Match the reference palette: TikTok-style blue `#25F4EE` primary / red `#FE2C55` secondary on `#F1F1F2`/`#161823` neutrals; keep crop-mark accents consistent on new tiles.
 
 ## Assets & branding
-- Logo: `png/logo.png` (used on home tiles, PWA manifest icon). Vector source in `svg/logo.svg` — dark `#161823` bento tile with a bold geometric letter `Y` in TikTok’s chromatic-aberration style (red `#FE2C55` and cyan `#25F4EE` offset highlights behind a white foreground) and the white corner crop-mark chevron accent. Render the PNG from the SVG with `rsvg-convert -w 1024 -h 1024 svg/logo.svg -o png/logo.png` after editing the source.
+- Logo: `png/logo.png` (used on home tiles, PWA manifest icon). Vector source in `svg/logo.svg` — dark `#161823` bento tile with a bold geometric letter `Y` in TikTok’s chromatic-aberration style (red `#FE2C55` and cyan `#25F4EE` offset highlights behind a white foreground). Render the PNG from the SVG with `rsvg-convert -w 1024 -h 1024 svg/logo.svg -o png/logo.png` after editing the source.
 - Favicon configured in `app.config.js` (`web.favicon: "png/logo.png"`).
 - App name/description come from `EXPO_PUBLIC_TITLE`/`EXPO_PUBLIC_DESCRIPTION` (propagated to HTML/meta/manifest via config).
 
