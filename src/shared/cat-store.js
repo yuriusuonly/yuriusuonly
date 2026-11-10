@@ -30,14 +30,25 @@ import { create } from "zustand";
  */
 
 /**
+ * A staged exit for the collapse (reverse-expansion) back to a previous screen.
+ *
+ * @typedef {object} StagedExit
+ * @property {ExpansionOrigin} origin Pointer origin where the return portal was clicked.
+ * @property {string} accent Accent color of the dimension being left (the collapsing disc).
+ */
+
+/**
  * Cat/expansion store state and actions.
  *
  * @typedef {object} CatStore
  * @property {CatTarget|null} target Latest movement target, or null before any publish.
  * @property {ExpansionOrigin|null} origin Pointer origin for the next expansion overture.
+ * @property {StagedExit|null} exit Staged collapse overlay for the next screen mount.
  * @property {(target: CatTarget) => void} pursue Publish a new movement target.
  * @property {(origin: ExpansionOrigin|null) => void} setExpansionOrigin Stage (or clear) the overture origin.
  * @property {() => ExpansionOrigin|null} takeExpansionOrigin Read and clear the staged origin (shell mount handshake).
+ * @property {(exit: StagedExit|null) => void} setExitStage Stage (or clear) the pending collapse.
+ * @property {() => StagedExit|null} takeExitStage Read and clear the staged exit (shell mount handshake).
  */
 
 /**
@@ -48,6 +59,7 @@ import { create } from "zustand";
 export const useCatStore = create((set, get) => ({
   target: null,
   origin: null,
+  exit: null,
   /** @param {CatTarget} target */
   pursue: (target) => set({ target }),
   /** @param {ExpansionOrigin|null} origin */
@@ -57,6 +69,14 @@ export const useCatStore = create((set, get) => ({
     const { origin } = get();
     set({ origin: null });
     return origin;
+  },
+  /** @param {StagedExit|null} exit */
+  setExitStage: (exit) => set({ exit }),
+  /** @returns {StagedExit|null} */
+  takeExitStage: () => {
+    const { exit } = get();
+    set({ exit: null });
+    return exit;
   }
 }));
 
