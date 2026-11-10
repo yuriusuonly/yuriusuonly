@@ -46,6 +46,7 @@ Notes:
 npm ci                    # install deps (no fallback; use lockfile)
 npm run expo:start        # loads .env; runs Expo dev server on $PORT
 npm run expo:start:tunnel # tunnel mode (when LAN access is blocked)
+npm run opencode          # launch OpenCode (loads .env for opencode.json MCP tooling)
 ```
 
 Dev server availability is announced by Expo CLI in the terminal; `PORT` in `.env` controls the port.

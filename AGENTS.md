@@ -10,6 +10,7 @@
 - `npm run expo:start:tunnel` — dev server with tunnel (no `.env` export wrapper).
 - `npm run expo:build` — `expo export --platform web --output-dir build` (static export to `build/`).
 - `npm run expo:serve` — serves `build/` on `$PORT` (loads `.env` like `expo:start`).
+- `npm run opencode` — launches OpenCode (loads `.env` like `expo:start`; supplies the `dribbble` MCP server's OAuth credentials to `opencode.json` tooling).
 - Caddy (HTTPS reverse proxy to local serve): `npm run caddy:run` — loads `.env` natively via Caddy's `--envfile` flag; `npm run caddy:trust` — plain command, needs no env since it uses the default admin endpoint (`localhost:2019`, kept on in `Caddyfile`).
 - Docker: `npm run docker:build|up|down|logs` (`docker compose`, uses `.env` via `env_file` and build args `PORT`/`HTTPS_PORT`).
 
