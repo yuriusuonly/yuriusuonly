@@ -35,23 +35,6 @@ function CornerMark({ markClass = "border-white/90" }) {
 }
 
 /**
- * Pointer origin of a press as normalized viewport coordinates.
- *
- * @param {import("react-native").GestureResponderEvent} [event] Press event.
- * @returns {import("../stores/expansion-store.js").ExpansionOrigin} Normalized origin (center fallback).
- */
-function originOf(event) {
-  const point = event?.nativeEvent;
-  if (point && typeof point.clientX === "number" && typeof window !== "undefined") {
-    return {
-      x: point.clientX / window.innerWidth,
-      y: point.clientY / window.innerHeight
-    };
-  }
-  return { x: 0.5, y: 0.6 };
-}
-
-/**
  * Props for {@link StatTile}.
  *
  * @typedef {object} StatTileProps
@@ -92,8 +75,26 @@ function StatTile({ number, label, tileClass, accent, numberClass, markClass, hr
 }
 
 /**
- * Landing screen rendered at `/`: left identity card + right bento grid of
- * domain portals, staged inside the home-themed 2D dimension.
+ * Pointer origin of a press as normalized viewport coordinates.
+ *
+ * @param {import("react-native").GestureResponderEvent} [event] Press event.
+ * @returns {import("../stores/expansion-store.js").ExpansionOrigin} Normalized origin (center fallback).
+ */
+function originOf(event) {
+  const point = event?.nativeEvent;
+  if (point && typeof point.clientX === "number" && typeof window !== "undefined") {
+    return {
+      x: point.clientX / window.innerWidth,
+      y: point.clientY / window.innerHeight
+    };
+  }
+  return { x: 0.5, y: 0.6 };
+}
+
+/**
+ * Landing screen rendered at `/`: left identity card + right pane (large black
+ * projects portal and two stacked stat portals beside it), staged inside the
+ * home-themed 2D dimension.
  *
  * @returns {JSX.Element} The 2D bento-grid portfolio layout.
  */
@@ -186,65 +187,24 @@ export default function Index() {
             </View>
           </View>
 
-          {/* Right: giant title + bento portals */}
-          <View className="flex-1 flex-col gap-4 md:gap-6">
-            <View className="relative self-start px-1">
-              <Text className="font-outfit text-5xl md:text-8xl font-black tracking-tight text-[#161823] leading-none">
-                {config.title}
-              </Text>
-              <View className="absolute -top-1 right-0 h-3 w-3 md:h-4 md:w-4 border-t-4 border-r-4 border-[#161823]" />
-            </View>
-
-            {/* Row 1: featured image portal + stacked stat portals */}
-            <View className="flex-row gap-3 md:gap-4 h-44 md:h-64">
-              <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/projects", COLORS.primary, e)} className="flex-1 active:opacity-90">
-                <TiltCard style={{ flex: 1 }} maxTilt={10}>
-                  <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#25F4EE]">
-                    <CornerMark markClass="border-[#161823]/90" />
-                    <Image
-                      source={logo}
-                      className="!h-full !w-full"
-                      resizeMode="cover"
-                      accessibilityLabel={`${config.title} featured work`}
-                    />
-                  </View>
-                </TiltCard>
-              </Pressable>
-              <View className="flex-col gap-3 md:gap-4 w-24 md:w-40">
-                <StatTile number="251" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/dimensions/projects" onOpen={openDimension} />
-                <StatTile number="156" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/dimensions/awards" onOpen={openDimension} />
-              </View>
-            </View>
-
-            {/* Row 2: clients + awards portals */}
-            <View className="flex-row gap-3 md:gap-4 h-28 md:h-36">
-              <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/clients", COLORS.ink, e)} className="flex-1 active:opacity-90">
-                <TiltCard style={{ flex: 1 }} maxTilt={10}>
-                  <View className="relative h-full flex-1 rounded-2xl bg-[#161823] items-center justify-center">
-                    <CornerMark />
-                    <Text className="font-outfit mt-3 md:mt-4 text-base md:text-xl text-white">Clients</Text>
-                  </View>
-                </TiltCard>
-              </Pressable>
-              <Pressable accessibilityRole="button" accessibilityLabel="Open the awards dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/awards", COLORS.primary, e)} className="flex-1 active:opacity-90">
-                <TiltCard style={{ flex: 1 }} maxTilt={10}>
-                  <View className="relative h-full flex-1 flex-row rounded-2xl bg-[#161823] overflow-hidden">
-                    <View className="flex-1 items-center justify-center p-2 md:p-4">
-                      <Image
-                        source={logo}
-                        className="!h-10 !w-10 md:!h-14 md:!w-14 rounded-full"
-                        resizeMode="cover"
-                        accessibilityLabel={`${config.title} awards highlight`}
-                      />
-                    </View>
-                    <View className="relative flex-1 bg-[#25F4EE] items-center justify-center p-2 md:p-4">
-                      <CornerMark markClass="border-[#161823]/90" />
-                      <Text className="font-outfit text-xl md:text-3xl font-extrabold leading-none text-[#161823]">172</Text>
-                      <Text className="font-outfit mt-1 text-xs md:text-sm text-[#161823] leading-tight">Global Design Awards.</Text>
-                    </View>
-                  </View>
-                </TiltCard>
-              </Pressable>
+          {/* Right: large black projects card and two smaller stat cards beside it */}
+          <View className="flex-1 flex-row gap-3 md:gap-4 h-44 md:h-64">
+            <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/projects", COLORS.ink, e)} className="flex-1 active:opacity-90">
+              <TiltCard style={{ flex: 1 }} maxTilt={10}>
+                <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
+                  <CornerMark />
+                  <Image
+                    source={logo}
+                    className="!h-full !w-full"
+                    resizeMode="cover"
+                    accessibilityLabel={`${config.title} featured work`}
+                  />
+                </View>
+              </TiltCard>
+            </Pressable>
+            <View className="flex-col gap-3 md:gap-4 w-24 md:w-40">
+              <StatTile number="251" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/dimensions/projects" onOpen={openDimension} />
+              <StatTile number="156" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/dimensions/awards" onOpen={openDimension} />
             </View>
           </View>
           </View>
