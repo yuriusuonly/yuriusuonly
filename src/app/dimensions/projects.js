@@ -52,7 +52,7 @@ export default function ProjectsDimension() {
   return (
     <DomainShell theme={theme} returnPortal>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
-        <View className="flex-grow items-center justify-center p-4 pb-28 md:p-10 md:pb-32">
+        <View className="flex-grow items-center justify-center p-5 pb-28 md:p-10 md:pb-32">
           <View className="w-full max-w-5xl">
           <View className="flex-row items-center gap-2">
             <Text className="text-base" style={{ color: theme.lightColor }}>❖</Text>
