@@ -188,23 +188,29 @@ export default function Index() {
           </View>
 
           {/* Right: large black projects card and two smaller stat cards beside it */}
-          <View className="flex-1 flex-row gap-3 md:gap-4 h-44 md:h-64">
-            <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/projects", COLORS.ink, e)} className="flex-1 active:opacity-90">
-              <TiltCard style={{ flex: 1 }} maxTilt={10}>
-                <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
-                  <CornerMark />
-                  <Image
-                    source={logo}
-                    className="!h-full !w-full"
-                    resizeMode="cover"
-                    accessibilityLabel={`${config.title} featured work`}
-                  />
-                </View>
-              </TiltCard>
-            </Pressable>
-            <View className="flex-col gap-3 md:gap-4 w-24 md:w-40">
-              <StatTile number="251" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/dimensions/projects" onOpen={openDimension} />
-              <StatTile number="156" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/dimensions/awards" onOpen={openDimension} />
+          <View className="flex-1 flex-col gap-2">
+            <View className="flex-row items-center gap-2 opacity-0" pointerEvents="none">
+              <Text className="text-base">❖</Text>
+              <Text className="font-outfit text-base md:text-lg font-semibold">About Me</Text>
+            </View>
+            <View className="flex-1 flex-row gap-3 md:gap-4">
+              <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/projects", COLORS.ink, e)} className="flex-1 active:opacity-90">
+                <TiltCard style={{ flex: 1 }} maxTilt={10}>
+                  <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
+                    <CornerMark />
+                    <Image
+                      source={logo}
+                      className="!h-full !w-full"
+                      resizeMode="cover"
+                      accessibilityLabel={`${config.title} featured work`}
+                    />
+                  </View>
+                </TiltCard>
+              </Pressable>
+              <View className="flex-col gap-3 md:gap-4 w-24 md:w-40">
+                <StatTile number="251" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/dimensions/projects" onOpen={openDimension} />
+                <StatTile number="156" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/dimensions/awards" onOpen={openDimension} />
+              </View>
             </View>
           </View>
           </View>
