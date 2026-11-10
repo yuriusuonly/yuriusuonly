@@ -66,16 +66,18 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
   const { origin, mode, accent, grow, fade } = overture;
   const [entered, setEntered] = useState(mode === "none");
   /** @type {{ current: boolean }} */
-  const consumeRef = useRef(/** @type {boolean} */ (false));
-  /** @type {{ current: boolean }} */
   const leavingRef = useRef(/** @type {boolean} */ (false));
   const exitGrow = useRef(new Animated.Value(0)).current;
 
-  // Mount overture: expand forward, or play the collapse in reverse.
+  // Mount overture: dissolve the staged cover, or play the collapse in reverse.
   useEffect(() => {
-    consumeRef.current = true;
     useExpansionStore.getState().clearStages();
-    if (mode === "none" || (typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+    if (
+      mode === "none" ||
+      (typeof window !== "undefined" &&
+        typeof window.matchMedia === "function" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+    ) {
       setEntered(true);
       return undefined;
     }
@@ -85,19 +87,12 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
       Animated.timing(fade, { toValue: 1, duration: 850, useNativeDriver: true }).start(() => setEntered(true));
       return undefined;
     }
-    if (mode === "collapse") {
-      // Reverse: still covered by the leaving dimension's accent disc —
-      // shrink back into the portal point while the cover fades away.
-      Animated.parallel([
-        Animated.timing(grow, { toValue: 0, duration: 800, useNativeDriver: true }),
-        Animated.timing(fade, { toValue: 1, duration: 800, useNativeDriver: true, delay: 260 })
-      ]).start(() => setEntered(true));
-    } else {
-      Animated.sequence([
-        Animated.timing(grow, { toValue: 1, duration: 700, useNativeDriver: true }),
-        Animated.timing(fade, { toValue: 0, duration: 900, useNativeDriver: true })
-      ]).start(() => setEntered(true));
-    }
+    // Collapse: still covered by the leaving dimension's accent disc —
+    // shrink back into the portal point while the cover fades away.
+    Animated.parallel([
+      Animated.timing(grow, { toValue: 0, duration: 800, useNativeDriver: true }),
+      Animated.timing(fade, { toValue: 1, duration: 800, useNativeDriver: true, delay: 260 })
+    ]).start(() => setEntered(true));
     return undefined;
   }, [mode, grow, fade, origin]);
 
