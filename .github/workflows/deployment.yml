@@ -21,6 +21,10 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v4
+        with:
+          # Full history: the push step needs the referenced branch's commits
+          # to compute a fast-forward against `deployment`.
+          fetch-depth: 0
 
       - name: Restore .env from the DOT_ENV secret
         run: printf '%s' "${{ secrets.DOT_ENV }}" > .env
