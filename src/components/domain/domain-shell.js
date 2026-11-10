@@ -49,26 +49,30 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
   const [entered, setEntered] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const [overture] = useState(/** @type {OvertureState} */ (() => {
-    // A staged exit means we are the previous screen re-opening in reverse.
-    const stagedExit = useExpansionStore.getState().takeExitStage();
-    const origin = stagedExit
-      ? stagedExit.origin
-      : useExpansionStore.getState().takeExpansionOrigin() ?? { x: 0.5, y: 0.5 };
+    // Snapshot-read the staged values (never consume in render: React
+    // double-invokes initializers, and a consuming read would hand the second
+    // call a cleared store, dropping the pointer origin). Clearing happens in
+    // the mount effect via clearStages once this state is stamped.
+    const { exit, origin: stagedOrigin } = useExpansionStore.getState();
     return {
-      origin,
-      mode: stagedExit ? "collapse" : "expand",
-      accent: stagedExit ? stagedExit.accent : theme.accent,
-      grow: new Animated.Value(stagedExit ? 1 : 0),
-      fade: new Animated.Value(stagedExit ? 0 : 1)
+      origin: (exit ? exit.origin : stagedOrigin) ?? { x: 0.5, y: 0.5 },
+      mode: exit ? "collapse" : "expand",
+      accent: exit ? exit.accent : theme.accent,
+      grow: new Animated.Value(exit ? 1 : 0),
+      fade: new Animated.Value(exit ? 0 : 1)
     };
   }));
   const { origin, mode, accent, grow, fade } = overture;
+  /** @type {{ current: boolean }} */
+  const consumeRef = useRef(/** @type {boolean} */ (false));
   /** @type {{ current: boolean }} */
   const leavingRef = useRef(/** @type {boolean} */ (false));
   const exitGrow = useRef(new Animated.Value(0)).current;
 
   // Mount overture: expand forward, or play the collapse in reverse.
   useEffect(() => {
+    consumeRef.current = true;
+    useExpansionStore.getState().clearStages();
     if (typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setEntered(true);
       return undefined;
@@ -152,8 +156,8 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
       <View className="flex-1" pointerEvents="box-none">
         {children}
 
-        {/* Domain-expansion / collapse overlay (hidden once fully entered) */}
-        {!entered && (
+        {/* Domain-expansion / collapse overlay (kept while leaving for the cover phase) */}
+        {(!entered || leaving) && (
           <View pointerEvents="none" className="absolute inset-0">
             {overtureDisc}
           </View>

@@ -36,6 +36,7 @@ import { create } from "zustand";
  * @property {() => ExpansionOrigin|null} takeExpansionOrigin Read and clear the staged origin (shell mount handshake).
  * @property {(exit: StagedExit|null) => void} setExitStage Stage (or clear) the pending collapse.
  * @property {() => StagedExit|null} takeExitStage Read and clear the staged exit (shell mount handshake).
+ * @property {() => void} clearStages Clear both staged values once a shell has stamped them into local state.
  */
 
 /**
@@ -61,5 +62,7 @@ export const useExpansionStore = create((set, get) => ({
     const { exit } = get();
     set({ exit: null });
     return exit;
-  }
+  },
+  /** @returns {void} */
+  clearStages: () => set({ origin: null, exit: null })
 }));
