@@ -1,7 +1,7 @@
 /**
  * Canonical design tokens for non-Tailwind consumers (the 3D scene, motion, and
  * overlay layers). Tailwind classes remain the styling source for markup; these
- * values mirror DESIGN.md so the WebGL domain scenes and DOM overlays stay on
+ * values mirror DESIGN.md so the animated backgrounds and pet overlays stay on
  * the same TikTok-inspired palette.
  * @module shared/tokens
  */

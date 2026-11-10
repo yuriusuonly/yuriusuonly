@@ -1,5 +1,6 @@
 import { Image, Pressable, Text, View } from "react-native";
 import { useRouter } from "expo-router";
+import { useCatStore } from "../shared/cat-store.js";
 import config from "../shared/config.js";
 import { DIMENSIONS } from "../shared/tokens.js";
 import DomainShell from "../components/domain/domain-shell.js";
@@ -7,10 +8,10 @@ import TiltCard from "../components/motion/tilt-card.js";
 import logo from "../../png/logo.png";
 
 /**
- * Home route (`src/app/index.js`): 3D interactive bento-grid portfolio layout
+ * Home route (`src/app/index.js`): 2D interactive bento-grid portfolio layout
  * following DESIGN.md (bento layout, TikTok palette + typography tokens).
- * Bento tiles are portals: pressing one expands its domain — the chibi cat
- * teleports into a themed dimension page for that content.
+ * Bento tiles are portals: pressing one expands its domain from the click —
+ * the Shimeji-style screen cat drops into a themed dimension page there.
  * @module app/index
  */
 
@@ -26,6 +27,25 @@ function CornerMark({ markClass = "border-white/90" }) {
       className={`absolute right-2 top-2 h-2.5 w-2.5 md:h-3 md:w-3 border-t-2 border-r-2 ${markClass}`}
     />
   );
+}
+
+/**
+ * Stage the domain-expansion origin from a press event and push the route.
+ *
+ * @param {import("expo-router").Router} router Expo Router instance.
+ * @param {string} href Dimension route to expand into.
+ * @param {import("react-native").GestureResponderEvent} [event] Press event for the pointer origin (falls back to center).
+ * @returns {void}
+ */
+function expandTo(router, href, event) {
+  const point = typeof event?.nativeEvent?.clientX === "number" ? event.nativeEvent : null;
+  if (point && typeof window !== "undefined") {
+    useCatStore.getState().setExpansionOrigin({
+      x: point.clientX / window.innerWidth,
+      y: point.clientY / window.innerHeight
+    });
+  }
+  router.push(href);
 }
 
 /**
@@ -59,7 +79,7 @@ function StatTile({ number, label, tileClass, numberClass, markClass, href }) {
     return tile;
   }
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={() => router.push(href)} className="flex-1 active:opacity-90">
+    <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => expandTo(router, href, e)} className="flex-1 active:opacity-90">
       <TiltCard style={{ flex: 1 }} maxTilt={10}>
         {tile}
       </TiltCard>
@@ -69,14 +89,14 @@ function StatTile({ number, label, tileClass, numberClass, markClass, href }) {
 
 /**
  * Landing screen rendered at `/`: left identity card + right bento grid of
- * domain portals, staged inside the home-themed 3D dimension.
+ * domain portals, staged inside the home-themed 2D dimension.
  *
- * @returns {JSX.Element} The 3D bento-grid portfolio layout.
+ * @returns {JSX.Element} The 2D bento-grid portfolio layout.
  */
 export default function Index() {
   const router = useRouter();
-  /** @param {string} href */
-  const expand = (href) => router.push(href);
+  /** @param {string} href @param {import("react-native").GestureResponderEvent} [event] */
+  const expand = (href, event) => expandTo(router, href, event);
 
   return (
     <DomainShell theme={DIMENSIONS.home}>
@@ -126,7 +146,7 @@ export default function Index() {
 
             {/* Row 1: featured image portal + stacked stat portals */}
             <View className="flex-row gap-3 md:gap-4 h-44 md:h-64">
-              <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={() => expand("/dimensions/projects")} className="flex-1 active:opacity-90">
+              <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => expand("/dimensions/projects", e)} className="flex-1 active:opacity-90">
                 <TiltCard style={{ flex: 1 }} maxTilt={10}>
                   <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#25F4EE]">
                     <CornerMark markClass="border-[#161823]/90" />
@@ -147,7 +167,7 @@ export default function Index() {
 
             {/* Row 2: clients + awards portals */}
             <View className="flex-row gap-3 md:gap-4 h-28 md:h-36">
-              <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={() => expand("/dimensions/clients")} className="flex-1 active:opacity-90">
+              <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => expand("/dimensions/clients", e)} className="flex-1 active:opacity-90">
                 <TiltCard style={{ flex: 1 }} maxTilt={10}>
                   <View className="relative h-full flex-1 rounded-2xl bg-[#161823] items-center justify-center">
                     <CornerMark />
@@ -155,7 +175,7 @@ export default function Index() {
                   </View>
                 </TiltCard>
               </Pressable>
-              <Pressable accessibilityRole="button" accessibilityLabel="Open the awards dimension" onPress={() => expand("/dimensions/awards")} className="flex-1 active:opacity-90">
+              <Pressable accessibilityRole="button" accessibilityLabel="Open the awards dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => expand("/dimensions/awards", e)} className="flex-1 active:opacity-90">
                 <TiltCard style={{ flex: 1 }} maxTilt={10}>
                   <View className="relative h-full flex-1 flex-row rounded-2xl bg-[#161823] overflow-hidden">
                     <View className="flex-1 items-center justify-center p-2 md:p-4">

@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated, Pressable, Text, View } from "react-native";
 import { useRouter } from "expo-router";
-import { pursue } from "../../shared/cat-store.js";
-import DimensionScene from "../three/dimension-scene.js";
+import { pursue, useCatStore } from "../../shared/cat-store.js";
 import { COLORS } from "../../shared/tokens.js";
+import AnimatedBackground from "../background/animated-background.js";
+import ScreenCat from "../pet/screen-cat.js";
 
 /**
  * Domain shell: the full-screen frame for one "dimension".
  *
- * Wraps a themed WebGL scene (`dimension-scene`) with an expanding-color
- * overture that plays on arrival (the domain-expansion moment), forwards all
- * window clicks to the chibi cat as hop targets, teleports the cat in on
- * mount, and (on dimension pages) renders the return portal home.
+ * Layers the 2D animated background (`animated-background`), the Shimeji-style
+ * screen cat (`screen-cat`), and the domain content, opening with an
+ * expanding-color overture that grows from the exact pointer position where
+ * the opening card was clicked (staged in the cat store by the portals).
+ * Every click anywhere is forwarded to the cat as a chase target.
  * @module components/domain/domain-shell
  */
 
@@ -22,24 +24,38 @@ import { COLORS } from "../../shared/tokens.js";
  * @property {import("../../shared/tokens.js").DimensionTheme} theme Theme of the dimension being expanded into.
  * @property {import("react").ReactNode} [children] Dimension content layered above the scene.
  * @property {boolean} [returnPortal] When true, render the portal tile back to home (dimension/404 pages).
- * @property {boolean} [floatShapes] Whether floating geometry renders (default true).
+ * @property {boolean} [calm] Calm variant with fewer background blobs (404 treatment).
  */
 
 /**
- * Themed dimension shell with overture, click-following cat, and portal exit.
+ * Internal overture snapshot used for the mount animation.
+ *
+ * @typedef {object} OvertureState
+ * @property {import("../../shared/cat-store.js").ExpansionOrigin} origin Pointer origin of this expansion.
+ * @property {Animated.Value} grow Disc scale animation.
+ * @property {Animated.Value} fade Disc fade animation.
+ */
+
+/**
+ * Themed dimension shell with pointer-originated expansion, click-chasing cat,
+ * and portal exit.
  *
  * @param {DomainShellProps} props - Component props.
- * @returns {JSX.Element} Full-screen themed scene + content layer.
+ * @returns {JSX.Element} Full-screen themed stage + content layer.
  */
-export default function DomainShell({ theme, children, returnPortal = false, floatShapes = true }) {
+export default function DomainShell({ theme, children, returnPortal = false, calm = false }) {
   const router = useRouter();
   const [entered, setEntered] = useState(false);
-  const grow = /** @type {import("react").MutableRefObject<Animated.Value>} */ (useRef(new Animated.Value(0)).current);
-  const fade = /** @type {import("react").MutableRefObject<Animated.Value>} */ (useRef(new Animated.Value(1)).current);
+  const [overture] = useState(/** @type {OvertureState} */ (() => ({
+    origin: useCatStore.getState().takeExpansionOrigin() ?? { x: 0.5, y: 0.5 },
+    grow: new Animated.Value(0),
+    fade: new Animated.Value(1)
+  })));
+  const { origin, grow, fade } = overture;
 
-  // Overture: expanding accent disc + teleport pop + fade.
+  // Overture: expanding accent disc from the opening click + cat drop-in.
   useEffect(() => {
-    pursue({ x: 0.5, y: 0.92, teleport: true });
+    pursue({ x: origin.x, y: origin.y + 0.34, teleport: true });
     if (typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setEntered(true);
       return undefined;
@@ -49,9 +65,9 @@ export default function DomainShell({ theme, children, returnPortal = false, flo
       Animated.timing(fade, { toValue: 0, duration: 900, useNativeDriver: true })
     ]).start(() => setEntered(true));
     return undefined;
-  }, [grow, fade]);
+  }, [grow, fade, origin]);
 
-  // Forward every window click to the chibi cat as a hop target.
+  // Forward every window click to the screen cat as a chase target.
   useEffect(() => {
     if (typeof window === "undefined") {
       return undefined;
@@ -69,27 +85,32 @@ export default function DomainShell({ theme, children, returnPortal = false, flo
 
   return (
     <View className="flex-1" style={{ backgroundColor: theme.void }}>
-      {/* Themed WebGL stage */}
-      <DimensionScene theme={theme} floatShapes={floatShapes} />
+      {/* 2D animated stage */}
+      <AnimatedBackground theme={theme} blobCount={calm ? 4 : 8} />
+      <ScreenCat />
 
-      {/* Click-through scenery layer keeps children above the canvas */}
-      <View className="absolute inset-0" pointerEvents="box-none">
+      {/* Content layer stays hit-testable; the stage and cat pass clicks through */}
+      <View className="flex-1" pointerEvents="box-none">
         {children}
 
-        {/* Domain-expansion overture: expanding accent disc, then soft fade */}
+        {/* Domain-expansion overture: accent disc grows from the click point, then fades */}
         {!entered && (
-          <View pointerEvents="none" className="absolute inset-0 items-center justify-center">
+          <View pointerEvents="none" className="absolute inset-0">
             <Animated.View
               style={[
                 {
                   position: "absolute",
-                  width: 240,
-                  height: 240,
-                  borderRadius: 240,
-                  backgroundColor: theme.accent
+                  width: 220,
+                  height: 220,
+                  borderRadius: 220,
+                  backgroundColor: theme.accent,
+                  left: `${origin.x * 100}%`,
+                  top: `${origin.y * 100}%`,
+                  marginLeft: -110,
+                  marginTop: -110
                 },
                 {
-                  transform: [{ scale: grow.interpolate({ inputRange: [0, 1], outputRange: [0.05, 26] }) }],
+                  transform: [{ scale: grow.interpolate({ inputRange: [0, 1], outputRange: [0.05, 32] }) }],
                   opacity: fade
                 }
               ]}

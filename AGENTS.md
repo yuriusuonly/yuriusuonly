@@ -17,8 +17,8 @@
 ## Project structure / conventions
 - **No absolute paths anywhere in the project** (source, configs, docs). Use workspace-relative paths; exception: `node_modules/` internals (e.g. an installed package's own config) may do what the tooling requires.
 - Routing uses Expo Router file-based routes under `src/app/` (e.g. `_layout.js`, `index.js`, `+not-found.js`, `+html.js`, and dimension pages under `src/app/dimensions/`).
-- Shared modules live under `src/shared/` (`config.js` reads `EXPO_PUBLIC_*` env vars; `tokens.js` holds canonical design tokens + dimension themes; `cat-store.js` is the zustand store for chibi-cat movement). Reusable components live under `src/components/` (`motion/tilt-card.js`, `three/` WebGL scene + chibi cat, `domain/domain-shell.js`).
-- 3D stack: `three` + `@react-three/fiber` (Canvas scenes inside `domain-shell`); `zustand` for shared cat state.
+- Shared modules live under `src/shared/` (`config.js` reads `EXPO_PUBLIC_*` env vars; `tokens.js` holds canonical design tokens + dimension themes; `cat-store.js` is the zustand store for the screen cat + expansion origins). Reusable components live under `src/components/` (`motion/tilt-card.js`, `pet/screen-cat.js` Shimeji-style 2D pet, `background/animated-background.js`, `domain/domain-shell.js`).
+- Motion stack: React Native `Animated` + DOM pointer events only — no WebGL (`three` was removed; keep the 2D Shimeji-style approach); `zustand` for shared pet/expansion state.
 - API/special routes follow Expo Router web conventions in filenames: `src/app/api/health+api.js`, `manifest.json+api.js`, `robots.txt+api.js`, `service-worker.js+api.js`.
 - Shared app config: `src/shared/config.js` reads `EXPO_PUBLIC_*` env vars; `app.config.js` derives app name/version from `EXPO_PUBLIC_TITLE`/`EXPO_PUBLIC_VERSION` and the Expo/EAS slug from `EAS_PROJECT_SLUG`.
 - Assets: `png/`, `svg/`, `ttf/` (custom font `Outfit` loaded in `src/app/_layout.js` from `ttf/Outfit-VariableFont_wght.ttf`).

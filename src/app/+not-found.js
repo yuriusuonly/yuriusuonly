@@ -28,7 +28,7 @@ function CornerMark() {
  */
 export default function NotFound() {
   return (
-    <DomainShell theme={VOID} floatShapes={false} returnPortal>
+    <DomainShell theme={VOID} calm returnPortal>
       <View className="flex-1 items-center justify-center p-4 md:p-10">
         <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 items-center">
           {/* Giant display title with corner-bracket accent */}
