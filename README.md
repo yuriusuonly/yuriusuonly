@@ -80,6 +80,7 @@ npm run eas:deploy  # exports the web build locally, then deploys build/ to prod
 - **Pipeline:** `npm run eas:deploy` (sourced with `.env`) exports the web build (`npm run expo:build` → `build/`), then `eas deploy --non-interactive --prod --export-dir build` uploads **only the finished build artifact** and publishes it to production Expo Hosting — EAS runs no builds, so the Free plan's CI/CD minutes stay untouched.
 - **Automated:** the GitHub Actions workflow `.github/workflows/deploy.yml` runs on push to `portfolio` (or manual dispatch): it restores `.env` from the `DOT_ENV` repository secret, then runs `npm run eas:deploy` — the export runs on the GitHub runner (free for public repositories), and only the artifact is sent to EAS. Nothing is committed or pushed back to the repository. Update/push are manual via `npm run github:deploy` — it refreshes the `DOT_ENV` secret against `$GH_REPO` first, then runs `git -c "credential.helper=!gh auth git-credential" push origin HEAD` — the credential helper — feeds the `GH_TOKEN` in `.env` to git over HTTPS — no SSH key is needed, and `HEAD` pushes the currently checked-out branch to its same-name branch on `origin` with no branch name hardcoded. Configure the remote once with `npm run github:remote` (adds `origin` at the exact `GH_REPO` HTTPS URL; it errors on rerun since `origin` already exists).
 - `eas-cli` (devDependency) authenticates with only the `EXPO_TOKEN` access token in `.env` (no interactive login — create at expo.dev → Account settings → Access tokens); `app.config.js` supplies the linked project via `extra.eas.projectId` (from `EAS_PROJECT_ID` in `.env` — the config is fully env-derived and cannot be written to by the CLI), and its `slug` comes from `EAS_PROJECT_SLUG` in `.env` (must match the remote EAS project). Because the export runs wherever `eas` runs (GitHub runner or this machine) with `.env` restored, no variables need mirroring in the EAS Dashboard environment.
+- `eas.json` pins the CLI version (`cli.version` `>= 27.6.0`, matching the `eas-cli` devDependency) and declares an empty `production` build profile as a guard — no EAS builds run under the artifact-only pipeline.
 - Keep the EAS GitHub integration disconnected while the GitHub Actions workflow is the push trigger (the workflow file's `on.push` would double-run otherwise).
 - The local `web.output: "static"` export still drives the Node/Docker runtime; hosted API routes would need the `server` output mode on Expo Hosting instead.
 
@@ -121,6 +122,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 ├── README.md
 ├── CONTRIBUTING.md
 ├── DESIGN.md
+├── eas.json
 ├── LICENSE.txt
 ├── app.config.js
 ├── babel.config.js
