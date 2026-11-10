@@ -36,7 +36,7 @@ Docs:
 | `GH_TOKEN` | GitHub PAT used by the `ci:secrets` script (`gh` reads it automatically from the sourced environment); keep secret. |
 
 Notes:
-- Keep `.env` **POSIX-compatible** (simple `KEY=value` lines): every consumer loads it natively — `set -a` sourcing in `expo:start`/`expo:serve`, Caddy's `--envfile` in `caddy:run`, and Node's `--env-file` in `opencode.json`.
+- Keep `.env` **POSIX-compatible** (simple `KEY=value` lines): every consumer loads it natively — `set -a` sourcing in `expo:start`/`expo:serve`, Caddy's `--envfile` in `caddy`, and Node's `--env-file` in `opencode.json`.
 - `EXPO_PUBLIC_*` values are bundled into the client — never put secrets there.
 - Docker: `PORT`/`HTTPS_PORT` are passed as build args from `.env` via `docker-compose.yml` and consumed as runtime env for the Caddyfile placeholders.
 
@@ -63,7 +63,7 @@ npm run expo:serve  # serves build/ on $PORT (loads .env)
 ## Local HTTPS (Caddy)
 
 ```bash
-npm run caddy:run    # run Caddy (proxies https://localhost:$HTTPS_PORT -> localhost:$PORT)
+npm run caddy       # run Caddy (proxies https://localhost:$HTTPS_PORT -> localhost:$PORT)
 npm run caddy:trust  # trust local CA in system (needed for SW in some browsers)
 ```
 
@@ -90,6 +90,7 @@ npm run docker:build # compose build (no cache)
 npm run docker:up    # start containers (detached)
 npm run docker:logs  # follow logs
 npm run docker:down  # stop containers
+npm run docker       # full cycle: docker:build && docker:up && docker:logs (stays attached to logs)
 ```
 
 - Two services share one multi-stage image (see `docker-compose.yml`), which defines no CMD — all runtime commands are plain argv arrays in compose: `server` runs `expo serve` with `--port ${PORT}` interpolated from `.env`, and `caddy` is the HTTPS edge (`BACKEND_HOST=server` points the Caddyfile's `{$BACKEND_HOST:localhost}` placeholder at the server service).
