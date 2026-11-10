@@ -15,8 +15,8 @@
     "docker:logs": "docker compose logs -f",
     "docker": "npm run docker:build && npm run docker:up && npm run docker:logs",
     "github:secrets": "set -a && . ./.env && set +a && gh secret set DOT_ENV --repo \"$GH_REPO\" < .env",
-    "github:remote": "set -a && . ./.env && set +a && git remote set-url upstream \"https://github.com/$GH_REPO.git\" 2>/dev/null || git remote add upstream \"https://github.com/$GH_REPO.git\"",
-    "github:deploy": "set -a && . ./.env && set +a && npm run github:secrets && npm run github:remote && git -c \"credential.helper=!gh auth git-credential\" push -u upstream portfolio",
+    "github:remote": "set -a && . ./.env && set +a && git remote set-url origin \"git@github.com:$GH_REPO.git\" 2>/dev/null || git remote add origin \"git@github.com:$GH_REPO.git\"",
+    "github:deploy": "set -a && . ./.env && set +a && npm run github:secrets && npm run github:remote && git push -u origin portfolio",
     "eas:init": "set -a && . ./.env && set +a && eas init",
     "eas:deploy": "set -a && . ./.env && set +a && npm run expo:build && eas deploy --non-interactive --prod --export-dir build"
   },
