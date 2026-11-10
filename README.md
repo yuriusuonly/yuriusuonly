@@ -30,7 +30,7 @@ Docs:
 | `DRIBBBLE_CLIENT_ID` | OAuth app Client ID for the local `dribbble` MCP server (`opencode.json` tooling; placeholder until registered at dribbble.com/account/applications/new). |
 | `DRIBBBLE_CLIENT_SECRET` | OAuth app Client Secret for the local `dribbble` MCP server; keep secret. |
 | `EXPO_TOKEN` | Expo access token consumed by `eas-cli` through the sourced `.env` (locally and in CI); create at expo.dev → Account settings → Access tokens; keep secret. |
-| `EAS_PROJECT_ID` | Expo Hosting project id printed by `npm run eas:init`; consumed by `app.config.js` (`extra.eas.projectId`). |
+| `EAS_PROJECT_ID` | Expo Hosting project id printed by `npm run eas:initialize`; consumed by `app.config.js` (`extra.eas.projectId`). |
 | `EAS_PROJECT_SLUG` | Expo/EAS project slug (`yuriusuonly`) — must match the remote project; consumed by `app.config.js` (`expo.slug`). |
 | `GH_REPO` | Exact HTTPS repository URL (`https://github.com/yuriusuonly/yuriusuonly.git`), used by `npm run github:secrets` (gh resolves the URL) and `npm run github:remote`. |
 | `GH_TOKEN` | GitHub PAT used by the `github:secrets` script (`gh` reads it automatically from the sourced environment); keep secret. |
@@ -73,7 +73,7 @@ npm run caddy:trust  # trust local CA in system (needed for SW in some browsers)
 ## Deployment (Expo Hosting)
 
 ```bash
-npm run eas:init    # one-time: link the project; paste the printed Project ID into .env (EAS_PROJECT_ID)
+npm run eas:initialize # one-time: link the project; paste the printed Project ID into .env (EAS_PROJECT_ID)
 npm run eas:deploy  # exports the web build locally, then deploys build/ to production (EXPO_TOKEN auth)
 ```
 

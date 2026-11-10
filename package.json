@@ -17,7 +17,7 @@
     "github:secrets": "set -a && . ./.env && set +a && gh secret set DOT_ENV --repo \"$GH_REPO\" < .env",
     "github:remote": "set -a && . ./.env && set +a && git remote add origin \"$GH_REPO\"",
     "github:deploy": "set -a && . ./.env && set +a && npm run github:secrets && git -c \"credential.helper=!gh auth git-credential\" push origin HEAD",
-    "eas:init": "set -a && . ./.env && set +a && eas init",
+    "eas:initialize": "set -a && . ./.env && set +a && eas init",
     "eas:deploy": "set -a && . ./.env && set +a && npm run expo:build && eas deploy --non-interactive --prod --export-dir build"
   },
   "dependencies": {
