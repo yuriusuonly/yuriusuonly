@@ -16,7 +16,7 @@
     "docker": "npm run docker:build && npm run docker:up && npm run docker:logs",
     "github:secrets": "set -a && . ./.env && set +a && gh secret set DOT_ENV --repo \"$GH_REPO\" < .env",
     "github:remote": "set -a && . ./.env && set +a && git remote add origin \"git@github.com:$GH_REPO.git\"",
-    "github:deploy": "set -a && . ./.env && set +a && npm run github:secrets && git push -u origin portfolio",
+    "github:deploy": "set -a && . ./.env && set +a && npm run github:secrets && git push -u origin HEAD",
     "eas:init": "set -a && . ./.env && set +a && eas init",
     "eas:deploy": "set -a && . ./.env && set +a && npm run expo:build && eas deploy --non-interactive --prod --export-dir build"
   },
