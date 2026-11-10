@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { DIMENSIONS } from "../../shared/tokens.js";
 import DomainShell from "../../components/domain/domain-shell.js";
 import TiltCard from "../../components/motion/tilt-card.js";
@@ -51,8 +51,9 @@ export default function ProjectsDimension() {
   const theme = DIMENSIONS.projects;
   return (
     <DomainShell theme={theme} returnPortal>
-      <View className="flex-1 items-center justify-center p-4 md:p-10">
-        <View className="w-full max-w-5xl">
+      <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
+        <View className="flex-grow items-center justify-center p-4 pb-28 md:p-10 md:pb-32">
+          <View className="w-full max-w-5xl">
           <View className="flex-row items-center gap-2">
             <Text className="text-base" style={{ color: theme.lightColor }}>❖</Text>
             <Text className="font-outfit text-base md:text-lg font-semibold text-white">Projects</Text>
@@ -70,8 +71,9 @@ export default function ProjectsDimension() {
             <HighlightTile number="86" label="Brand & Logo" tileClass="bg-[#FE2C55]" textClass="text-white" />
             <HighlightTile number="45" label="Interactive 3D" tileClass="bg-[#161823]" textClass="text-white" />
           </View>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </DomainShell>
   );
 }

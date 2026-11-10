@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Animated, Image, Pressable, Text, View } from "react-native";
+import { Animated, Image, Pressable, ScrollView, Text, View } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useExpansionStore } from "../stores/expansion-store.js";
 import config from "../shared/config.js";
@@ -150,8 +150,9 @@ export default function Index() {
 
   return (
     <DomainShell theme={DIMENSIONS.home}>
-      <View className="flex-1 items-center justify-center p-4 md:p-10">
-        <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 flex-col md:flex-row gap-6 md:gap-8">
+      <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
+        <View className="flex-grow items-center justify-center p-4 md:p-10">
+          <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 flex-col md:flex-row gap-6 md:gap-8">
           {/* Left rail: cyan about card */}
           <View className="flex-col gap-2 mt-14 md:mt-0 md:w-[38%]">
             <View className="flex-row items-center gap-2">
@@ -246,30 +247,31 @@ export default function Index() {
               </Pressable>
             </View>
           </View>
-        </View>
-
-        {/* Pressed-card cover disc: grows from the click until navigation */}
-        {leaving && (
-          <View pointerEvents="none" className="absolute inset-0">
-            <Animated.View
-              style={[
-                {
-                  position: "absolute",
-                  width: 220,
-                  height: 220,
-                  borderRadius: 220,
-                  backgroundColor: leaving.accent,
-                  left: `${leaving.origin.x * 100}%`,
-                  top: `${leaving.origin.y * 100}%`,
-                  marginLeft: -110,
-                  marginTop: -110
-                },
-                { transform: [{ scale: coverGrow.interpolate({ inputRange: [0, 1], outputRange: [0.05, 32] }) }] }
-              ]}
-            />
           </View>
-        )}
-      </View>
+        </View>
+      </ScrollView>
+
+      {/* Pressed-card cover disc: grows from the click until navigation */}
+      {leaving && (
+        <View pointerEvents="none" className="absolute inset-0">
+          <Animated.View
+            style={[
+              {
+                position: "absolute",
+                width: 220,
+                height: 220,
+                borderRadius: 220,
+                backgroundColor: leaving.accent,
+                left: `${leaving.origin.x * 100}%`,
+                top: `${leaving.origin.y * 100}%`,
+                marginLeft: -110,
+                marginTop: -110
+              },
+              { transform: [{ scale: coverGrow.interpolate({ inputRange: [0, 1], outputRange: [0.05, 32] }) }] }
+            ]}
+          />
+        </View>
+      )}
     </DomainShell>
   );
 }

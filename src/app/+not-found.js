@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import config from "../shared/config.js";
 import { VOID } from "../shared/tokens.js";
 import DomainShell from "../components/domain/domain-shell.js";
@@ -29,8 +29,9 @@ function CornerMark() {
 export default function NotFound() {
   return (
     <DomainShell theme={VOID} calm returnPortal>
-      <View className="flex-1 items-center justify-center p-4 md:p-10">
-        <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 items-center">
+      <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
+        <View className="flex-grow items-center justify-center p-4 pb-28 md:p-10 md:pb-32">
+          <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 items-center">
           {/* Giant display title with corner-bracket accent */}
           <View className="relative self-center px-1">
             <Text className="font-outfit text-7xl md:text-9xl font-black tracking-tight text-[#161823] leading-none">
@@ -50,8 +51,9 @@ export default function NotFound() {
               <Text className="font-outfit text-xs md:text-sm text-[#161823]">Check the URL or head back home.</Text>
             </View>
           </View>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </DomainShell>
   );
 }
