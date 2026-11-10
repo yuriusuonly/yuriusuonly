@@ -57,7 +57,7 @@ function CornerMark({ markClass = "border-white/90", positionClass = "right-2 to
 function StatTile({ number, label, tileClass, accent, numberClass, markClass, href, onOpen }) {
   const tile = (
     <View className={`relative h-full flex-1 items-center justify-center rounded-2xl ${tileClass}`}>
-      <CornerMark {...(markClass ? { markClass } : {})} />
+      <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" {...(markClass ? { markClass } : {})} />
       <Text className={`font-outfit text-2xl md:text-4xl font-extrabold leading-none ${numberClass ?? "text-[#161823]"}`}>{number}</Text>
       <Text className={`font-outfit mt-1 md:mt-2 text-sm md:text-base ${numberClass ?? "text-[#161823]"}`}>{label}</Text>
     </View>
@@ -197,7 +197,7 @@ export default function Index() {
               <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/projects", COLORS.ink, e)} className="flex-1 active:opacity-90">
                 <TiltCard style={{ flex: 1 }} maxTilt={10}>
                   <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
-                    <CornerMark />
+                    <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
                     <Image
                       source={logo}
                       className="!h-full !w-full"

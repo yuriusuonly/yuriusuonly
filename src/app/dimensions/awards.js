@@ -34,7 +34,7 @@ function HighlightTile({ number, label, tileClass, textClass, dark }) {
   return (
     <TiltCard style={{ flex: 1 }} maxTilt={9}>
       <View className={`relative h-full flex-1 items-center justify-center rounded-2xl ${tileClass}`}>
-        <CornerMark dark={dark} />
+        <CornerMark dark={dark} positionClass="right-4 top-4 md:right-5 md:top-5" />
         <Text className={`font-outfit text-3xl md:text-5xl font-extrabold leading-none ${textClass}`}>{number}</Text>
         <Text className={`font-outfit mt-2 text-sm md:text-base leading-tight ${textClass}`}>{label}</Text>
       </View>
