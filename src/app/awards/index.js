@@ -17,8 +17,8 @@ const AWARDS_THEME = {
   rimColor: "#FFD2DB",
   headlineClass: "text-white"
 };
-import DomainShell from "../../components/domain/domain-shell.js";
-import TiltCard from "../../components/motion/tilt-card.js";
+import DomainShell from "../../components/domain-shell.js";
+import TiltCard from "../../components/tilt-card.js";
 
 /**
  * Awards dimension route (`src/app/awards/index.js`): red-void world

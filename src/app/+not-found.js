@@ -19,7 +19,7 @@ const VOID_THEME = {
   rimColor: COLORS.secondary,
   headlineClass: "text-[#161823]"
 };
-import DomainShell from "../components/domain/domain-shell.js";
+import DomainShell from "../components/domain-shell.js";
 
 /**
  * Fallback route (`src/app/+not-found.js`) rendered when no route matches.

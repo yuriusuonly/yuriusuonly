@@ -21,8 +21,8 @@ const HOME_THEME = {
   rimColor: COLORS.secondary,
   headlineClass: "text-[#161823]"
 };
-import DomainShell from "../components/domain/domain-shell.js";
-import TiltCard from "../components/motion/tilt-card.js";
+import DomainShell from "../components/domain-shell.js";
+import TiltCard from "../components/tilt-card.js";
 import logo from "../../png/logo.png";
 
 /**

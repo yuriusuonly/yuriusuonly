@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated, Pressable, Text, View } from "react-native";
 import { useRouter } from "expo-router";
-import { useExpansionStore } from "../../stores/expansion-store.js";
-import { COLORS } from "../../shared/theme.js";
-import AnimatedBackground from "../background/animated-background.js";
+import { useExpansionStore } from "../stores/expansion-store.js";
+import { COLORS } from "../shared/theme.js";
+import AnimatedBackground from "./animated-background.js";
 
 /**
  * Domain shell: the full-screen frame for one "dimension".
@@ -13,14 +13,14 @@ import AnimatedBackground from "../background/animated-background.js";
  * return portal plays the same animation in reverse — the domain's accent
  * disc grows to cover the screen, the previous screen mounts still covered,
  * and the disc shrinks back into the portal point while fading (the collapse).
- * @module components/domain/domain-shell
+ * @module components/domain-shell
  */
 
 /**
  * Props for {@link DomainShell}.
  *
  * @typedef {object} DomainShellProps
- * @property {import("../../shared/theme.js").DimensionTheme} theme Theme of the dimension being expanded into.
+ * @property {import("../shared/theme.js").DimensionTheme} theme Theme of the dimension being expanded into.
  * @property {import("react").ReactNode} [children] Dimension content layered above the scene.
  * @property {boolean} [returnPortal] When true, render the portal tile back to home (dimension/404 pages).
  * @property {boolean} [calm] Calm variant with fewer background blobs (404 treatment).
@@ -30,7 +30,7 @@ import AnimatedBackground from "../background/animated-background.js";
  * Internal overture state: values for the mount (expand or collapse) animation.
  *
  * @typedef {object} OvertureState
- * @property {import("../../stores/expansion-store.js").ExpansionOrigin} origin Pointer origin of this expansion or collapse.
+ * @property {import("../stores/expansion-store.js").ExpansionOrigin} origin Pointer origin of this expansion or collapse.
  * @property {"uncover"|"collapse"|"none"} mode Which overture to play on mount.
  * @property {string} accent Disc color (the pressed tile's accent on entry; the leaving dimension's on collapse).
  * @property {Animated.Value} grow Disc scale driver.

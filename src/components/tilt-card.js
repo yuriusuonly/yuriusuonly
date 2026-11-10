@@ -8,7 +8,7 @@ import { Animated } from "react-native";
  * back on leave. Implemented over react-native-web DOM events (guarded so
  * native and non-DOM environments simply do nothing) with reduced-motion
  * respected: when `prefers-reduced-motion: reduce` is set the card is static.
- * @module components/motion/tilt-card
+ * @module components/tilt-card
  */
 
 /**

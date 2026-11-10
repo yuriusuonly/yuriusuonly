@@ -17,8 +17,8 @@ const PROJECTS_THEME = {
   rimColor: "#FFFFFF",
   headlineClass: "text-white"
 };
-import DomainShell from "../../components/domain/domain-shell.js";
-import TiltCard from "../../components/motion/tilt-card.js";
+import DomainShell from "../../components/domain-shell.js";
+import TiltCard from "../../components/tilt-card.js";
 
 /**
  * Projects dimension route (`src/app/projects/index.js`): home-theme

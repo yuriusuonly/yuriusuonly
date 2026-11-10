@@ -17,8 +17,8 @@ const CLIENTS_THEME = {
   rimColor: COLORS.primary,
   headlineClass: "text-white"
 };
-import DomainShell from "../../components/domain/domain-shell.js";
-import TiltCard from "../../components/motion/tilt-card.js";
+import DomainShell from "../../components/domain-shell.js";
+import TiltCard from "../../components/tilt-card.js";
 
 /**
  * Clients dimension route (`src/app/clients/index.js`): ink-void world

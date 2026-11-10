@@ -8,14 +8,14 @@ import { Animated, View } from "react-native";
  * React Native Web views + `Animated` loops (no WebGL; prerender-safe since
  * nothing renders client-side-only content during static export). Blob
  * palette/positions derive deterministically from the dimension theme.
- * @module components/background/animated-background
+ * @module components/animated-background
  */
 
 /**
  * Props for {@link AnimatedBackground}.
  *
  * @typedef {object} AnimatedBackgroundProps
- * @property {import("../../shared/theme.js").DimensionTheme} theme Theme tokens (void background, blob palette).
+ * @property {import("../shared/theme.js").DimensionTheme} theme Theme tokens (void background, blob palette).
  * @property {number} [blobCount] How many drifting blobs to render (default 8; use 4 for calmer screens).
  */
 
