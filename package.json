@@ -12,9 +12,8 @@
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
-    "eas:login": "eas-cli login",
-    "eas:init": "eas-cli init",
-    "eas:deploy": "set -a && . ./.env && set +a && npm run expo:build && eas-cli deploy --non-interactive --prod --export-dir build"
+    "eas:init": "set -a && . ./.env && set +a && eas-cli init",
+    "eas": "set -a && . ./.env && set +a && npm run expo:build && eas-cli deploy --non-interactive --prod --export-dir build"
   },
   "dependencies": {
     "babel-preset-expo": "~58.0.24",
