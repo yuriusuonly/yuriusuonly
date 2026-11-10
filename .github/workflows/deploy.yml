@@ -1,11 +1,12 @@
-# Push-to-deploy for Expo Hosting via Expo Workflows: restores `.env` from the
-# DOT_ENV secret, then runs the `eas` script — `eas workflow:run` packages the
-# project and executes `.eas/workflows/deploy.yml` on EAS servers, where the
-# build and production Hosting publish actually happen. Nothing builds locally
-# or on the runner, and nothing is pushed back to the repository.
+# Push-to-deploy for Expo Hosting: restores `.env` from the DOT_ENV secret,
+# then runs the `eas` script — the web export executes on this runner
+# (GitHub Actions is free for public repositories), and `eas deploy` uploads
+# only the finished build/ artifact to EAS for production Hosting. Nothing is
+# pushed back to the repository, and EAS runs no builds (no CI/CD-minute cost).
 # Required repository secret (see README.md → Deployment):
-# - DOT_ENV — full `.env` file contents (EXPO_TOKEN sources EAS auth locally;
-#   EAS_PROJECT_ID links the project; Expo CLI loads the rest at config time)
+# - DOT_ENV — full `.env` file contents (EXPO_TOKEN sources EAS auth;
+#   EAS_PROJECT_ID/EAS_PROJECT_SLUG link the project; Expo CLI loads the rest
+#   at export time)
 
 name: Expo Hosting deployment
 
@@ -37,5 +38,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run the EAS Workflow deploy pipeline (cloud build + production deploy)
+      - name: Export the web build and deploy it to Expo Hosting
         run: npm run eas

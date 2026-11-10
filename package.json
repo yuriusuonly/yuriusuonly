@@ -15,7 +15,7 @@
     "ci:secrets": "set -a && . ./.env && set +a && gh secret set DOT_ENV < .env",
     "git:deploy": "set -a && . ./.env && set +a && npm run ci:secrets && git -c \"credential.helper=!gh auth git-credential\" push \"$GIT_REPO_URL\" portfolio:portfolio",
     "eas:init": "set -a && . ./.env && set +a && eas init",
-    "eas": "set -a && . ./.env && set +a && eas workflow:run .eas/workflows/deploy.yml --non-interactive --wait"
+    "eas": "set -a && . ./.env && set +a && npm run expo:build && eas deploy --non-interactive --prod --export-dir build"
   },
   "dependencies": {
     "babel-preset-expo": "~58.0.24",

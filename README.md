@@ -1,6 +1,6 @@
 # Portfolio
 
-[![Expo Hosting deploy](https://img.shields.io/github/actions/workflow/status/yuriusuonly/yuriusuonly/.github%2Fworkflows%2Fdeployment.yml?branch=portfolio&label=Expo%20Hosting%20deploy)](https://github.com/yuriusuonly/yuriusuonly/actions/workflows/deployment.yml)
+[![Expo Hosting deploy](https://img.shields.io/github/actions/workflow/status/yuriusuonly/yuriusuonly/.github%2Fworkflows%2Fdeploy.yml?branch=portfolio&label=Expo%20Hosting%20deploy)](https://github.com/yuriusuonly/yuriusuonly/actions/workflows/deploy.yml)
 [![Expo SDK 58](https://img.shields.io/badge/Expo%20SDK-58-000000?logo=expo&logoColor=white)](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough.md)
 
 A web-only Expo Router app styled with NativeWind/Tailwind (React Native Web + NativeWind v4 + Tailwind v3, React 19). Static web export with server-rendered API routes; deployable via Expo Hosting (EAS), Node (expo serve) + Caddy, or Docker.
@@ -69,17 +69,16 @@ npm run caddy:trust  # trust local CA in system (needed for SW in some browsers)
 - Caddyfile admin endpoint stays enabled (`localhost:2019`) because `caddy:trust` needs it; disabling it breaks `caddy:trust`.
 - The automatic HTTP→HTTPS redirect server is disabled (binds `:80`, needs root); TLS serves on `$HTTPS_PORT` only.
 
-## Deployment (Expo Hosting via Expo Workflows)
+## Deployment (Expo Hosting)
 
 ```bash
 npm run eas:init    # one-time: link the project; paste the printed Project ID into .env (EAS_PROJECT_ID)
-npm run eas         # packages the project and runs .eas/workflows/deploy.yml on EAS's cloud (EXPO_TOKEN auth)
+npm run eas         # exports the web build locally, then deploys build/ to production (EXPO_TOKEN auth)
 ```
 
-- **Pipeline:** `.eas/workflows/deploy.yml` is an Expo Workflows file with a `deploy` job — the web build and production Expo Hosting publish execute **on EAS servers**; `npm run eas` (`eas workflow:run`, sourced with `EXPO_TOKEN` from `.env`) only packages the project source, uploads it, and waits for the EAS-side run. The repo's local `build/` is untouched.
-- **Automated:** the GitHub Actions workflow `.github/workflows/deployment.yml` runs on push to `portfolio` (or manual dispatch): it restores `.env` from the `DOT_ENV` repository secret, then runs `npm run eas`. Nothing is committed or pushed back to the repository. Update/push are manual via `npm run git:deploy` — it refreshes the `DOT_ENV` secret first, then pushes `portfolio` to the `GIT_REPO_URL` `.env` value with the gh credential helper (`credential.helper=!gh auth git-credential`, authenticated via `GH_TOKEN` in `.env`), so the workflow always reads a fresh `.env` snapshot.
-- **EAS Dashboard environment:** the packaged upload honors `.gitignore`, so `.env` is not sent to EAS — re-create the config-derived variables (`EXPO_PUBLIC_TITLE`, `EXPO_PUBLIC_DESCRIPTION`, `EXPO_PUBLIC_VERSION`, `EAS_PROJECT_ID`, `EAS_PROJECT_SLUG`) in the EAS project's environment or the EAS-side export fails while evaluating `app.config.js`.
-- `eas-cli` (devDependency) authenticates with only the `EXPO_TOKEN` access token in `.env` (no interactive login — create at expo.dev → Account settings → Access tokens); `app.config.js` supplies the linked project via `extra.eas.projectId` (from `EAS_PROJECT_ID` in `.env` — the config is fully env-derived and cannot be written to by the CLI), and its `slug` comes from `EAS_PROJECT_SLUG` in `.env` (must match the remote EAS project).
+- **Pipeline:** `npm run eas` (sourced with `.env`) exports the web build (`npm run expo:build` → `build/`), then `eas deploy --non-interactive --prod --export-dir build` uploads **only the finished build artifact** and publishes it to production Expo Hosting — EAS runs no builds, so the Free plan's CI/CD minutes stay untouched.
+- **Automated:** the GitHub Actions workflow `.github/workflows/deploy.yml` runs on push to `portfolio` (or manual dispatch): it restores `.env` from the `DOT_ENV` repository secret, then runs `npm run eas` — the export runs on the GitHub runner (free for public repositories), and only the artifact is sent to EAS. Nothing is committed or pushed back to the repository. Update/push are manual via `npm run git:deploy` — it refreshes the `DOT_ENV` secret first, then pushes `portfolio` to the `GIT_REPO_URL` `.env` value with the gh credential helper (`credential.helper=!gh auth git-credential`, authenticated via `GH_TOKEN` in `.env`), so the workflow always reads a fresh `.env` snapshot.
+- `eas-cli` (devDependency) authenticates with only the `EXPO_TOKEN` access token in `.env` (no interactive login — create at expo.dev → Account settings → Access tokens); `app.config.js` supplies the linked project via `extra.eas.projectId` (from `EAS_PROJECT_ID` in `.env` — the config is fully env-derived and cannot be written to by the CLI), and its `slug` comes from `EAS_PROJECT_SLUG` in `.env` (must match the remote EAS project). Because the export runs wherever `eas` runs (GitHub runner or this machine) with `.env` restored, no variables need mirroring in the EAS Dashboard environment.
 - Keep the EAS GitHub integration disconnected while the GitHub Actions workflow is the push trigger (the workflow file's `on.push` would double-run otherwise).
 - The local `web.output: "static"` export still drives the Node/Docker runtime; hosted API routes would need the `server` output mode on Expo Hosting instead.
 
@@ -114,9 +113,6 @@ npm run docker:down  # stop containers
 ./
 ├── AGENTS.md
 ├── .github/
-│   └── workflows/
-│       └── deployment.yml
-├── .eas/
 │   └── workflows/
 │       └── deploy.yml
 ├── Caddyfile
