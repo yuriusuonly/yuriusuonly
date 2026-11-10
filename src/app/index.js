@@ -155,7 +155,7 @@ export default function Index() {
         <View className="flex-grow items-center justify-center p-4 md:p-10">
           <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 flex-col md:flex-row gap-6 md:gap-8">
           {/* Left rail: cyan about card */}
-          <View className="flex-col gap-2 mt-14 md:mt-0 md:w-[38%]">
+          <View className="flex-col gap-2 md:w-[38%]">
             <View className="flex-row items-center gap-2">
               <Text className="text-base text-[#161823]">❖</Text>
               <Text className="font-outfit text-base md:text-lg font-semibold text-[#161823]">About Me</Text>
