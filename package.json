@@ -14,7 +14,7 @@
     "docker:logs": "docker compose logs -f",
     "ci:secrets": "set -a && . ./.env && set +a && gh secret set DOT_ENV < .env",
     "eas:init": "set -a && . ./.env && set +a && eas init",
-    "eas": "set -a && . ./.env && set +a && npm run expo:build && eas deploy --non-interactive --prod --export-dir build"
+    "eas": "set -a && . ./.env && set +a && eas workflow:run .eas/workflows/deploy.yml --non-interactive --wait"
   },
   "dependencies": {
     "babel-preset-expo": "~58.0.24",

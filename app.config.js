@@ -22,7 +22,9 @@ export default function App({ config }) {
   return {
     ...config,
     name: process.env.EXPO_PUBLIC_TITLE,
-    slug: process.env.EXPO_PUBLIC_TITLE.toLowerCase(),
+    // Must match the slug of the remote Expo/EAS project (`yuriusuonly`); it is
+    // an identity constant, not derived from the client-visible title.
+    slug: "yuriusuonly",
     scheme: process.env.EXPO_PUBLIC_TITLE.toLowerCase(),
     version: process.env.EXPO_PUBLIC_VERSION,
     userInterfaceStyle: "automatic",

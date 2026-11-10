@@ -3,7 +3,7 @@
 ## Stack & scope
 - Expo (SDK ~58) + Expo Router app targeting **web only** (`app.config.js` sets `platforms: ["web"]`, `web.output: "static"`, `bundler: "metro"` with `apiRoutes: true`).
 - UI/styling: React 19, React Native Web, NativeWind v4 + Tailwind v3. Global CSS entry is `src/stylesheets/global.css` (wired in `metro.config.js`).
-- Plain JavaScript codebase: no TypeScript dependency and no lint/test/typecheck scripts in the repo; the only CI is the push-to-deploy Expo Hosting workflow on `portfolio` pushes (see `README.md` → Deployment). Types are documented with JSDoc (`@module`, `@typedef`/`@type`, `@param`, `@returns` — never `@example`).
+- Plain JavaScript codebase: no TypeScript dependency and no lint/test/typecheck scripts in the repo; the only CI is the push-to-deploy Expo Hosting workflow on `portfolio` pushes, which runs the EAS Workflow (`npm run eas`) so building happens on EAS servers (see `README.md` → Deployment). Types are documented with JSDoc (`@module`, `@typedef`/`@type`, `@param`, `@returns` — never `@example`).
 
 ## Commands (from `package.json`)
 - `npm run expo:start` — starts dev server on `$PORT` after `set -a && . ./.env && set +a`; requires `.env` (notably `PORT`).
