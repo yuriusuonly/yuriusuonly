@@ -188,12 +188,12 @@ export default function Index() {
           </View>
 
           {/* Right: large black projects card and two smaller stat cards beside it */}
-          <View className="flex-1 flex-col gap-2">
-            <View className="flex-row items-center gap-2 opacity-0" pointerEvents="none">
+          <View className="flex-1 flex-col md:gap-2">
+            <View className="hidden md:flex flex-row items-center gap-2 opacity-0" pointerEvents="none">
               <Text className="text-base">❖</Text>
               <Text className="font-outfit text-base md:text-lg font-semibold">About Me</Text>
             </View>
-            <View className="flex-1 flex-row gap-3 md:gap-4">
+            <View className="h-56 flex-row gap-3 md:flex-1 md:h-auto md:gap-4">
               <Pressable accessibilityRole="button" accessibilityLabel="Open the projects dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/projects", COLORS.ink, e)} className="flex-1 active:opacity-90">
                 <TiltCard style={{ flex: 1 }} maxTilt={10}>
                   <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
