@@ -1,5 +1,5 @@
 # Push-to-deploy for Expo Hosting: restores `.env` from the DOT_ENV secret,
-# then runs the `eas` script — the web export executes on this runner
+# then runs the `eas:deploy` script — the web export executes on this runner
 # (GitHub Actions is free for public repositories), and `eas deploy` uploads
 # only the finished build/ artifact to EAS for production Hosting. Nothing is
 # pushed back to the repository, and EAS runs no builds (no CI/CD-minute cost).
@@ -39,4 +39,4 @@ jobs:
         run: npm ci
 
       - name: Export the web build and deploy it to Expo Hosting
-        run: npm run eas
+        run: npm run eas:deploy

@@ -75,7 +75,7 @@ flowchart TD
 - Never include the `@example` tag in JSDoc.
 
 ## Verification
-- No lint/test/typecheck scripts are configured; the only CI is the push-to-deploy Expo Hosting workflow (`.github/workflows/deploy.yml`, documented under `README.md` → Deployment) — it exports the web build on the GitHub runner and deploys only the artifact to EAS. Manually verify changes: `npm run expo:build` and/or `npm run expo:start` (and `npm run docker:build` if touching container/runtime config).
+- No lint/test/typecheck scripts are configured; the only CI is the push-to-deploy Expo Hosting workflow (`.github/workflows/deploy.yml`, documented under `README.md` → Deployment) — it exports the web build on the GitHub runner and deploys only the artifact to EAS via `npm run eas:deploy`. Manually verify changes: `npm run expo:build` and/or `npm run expo:start` (and `npm run docker:build` if touching container/runtime config).
 - `/api/health` returns `{ status: "ok", timestamp, uptime }` with `Cache-Control: no-store` (used by Docker healthcheck).
 
 ## Documentation maintenance
