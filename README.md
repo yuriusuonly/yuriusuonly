@@ -29,8 +29,6 @@ Docs:
 | `URL_PROXY_PORT` | HTTPS proxy port served by Caddy in local proxy and Docker runtime. |
 | `URL_BASE` | Base URL/path prefix for the app (project-level config value). |
 | `URL_API` | API base/path value for the project (project-level config value). |
-| `DRIBBBLE_CLIENT_ID` | OAuth app Client ID for the local `dribbble` MCP server (`opencode.json` tooling; placeholder until registered at dribbble.com/account/applications/new). |
-| `DRIBBBLE_CLIENT_SECRET` | OAuth app Client Secret for the local `dribbble` MCP server; keep secret. |
 | `EAS_TOKEN` | EAS access token consumed by `eas-cli` — the `eas:initialize`/`eas:deploy` scripts remap it to the `EXPO_TOKEN` env name that `eas-cli` reads from the sourced `.env` (locally and in CI); create at expo.dev → Account settings → Access tokens; keep secret. |
 | `EAS_PROJECT_ID` | Expo Hosting project id printed by `npm run eas:initialize`; consumed by `app.config.js` (`extra.eas.projectId`). |
 | `EAS_PROJECT_SLUG` | Expo/EAS project slug (`yuriusuonly`) — must match the remote project; consumed by `app.config.js` (`expo.slug`). |

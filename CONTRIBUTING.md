@@ -16,7 +16,7 @@
 - Dev server: `npm run expo:start` (requires `PORT` in `.env`). Tunnel: `npm run expo:start:tunnel`.
 - Add convenience/repeatable project commands as scripts in `package.json`; do not create a `scripts/` directory for them. Treat `package.json` scripts as the single source of truth for how to run and configure the project.
 - Keep `package.json` dependencies entries limited to what is actually imported/used in the entire project — source code (`src/`), root configs (`app.config.js`, `babel.config.js`, `metro.config.js`, `tailwind.config.js`, etc.), and packages referenced in `package.json` scripts (e.g. the `expo` CLI invoked by the `expo:*` scripts). Do not list unused dependencies. List explicitly imported packages even if they are also a dependency of another package.
-- `devDependencies` holds workspace-local tooling that is not imported by the app, such as the `dribbble` MCP server launched by `opencode.json`.
+- `devDependencies` holds workspace-local tooling that is not imported by the app (e.g. `eas-cli`).
 
 ## Guides
 

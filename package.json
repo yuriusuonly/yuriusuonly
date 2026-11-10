@@ -34,7 +34,6 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "dribbble-mcp": "^1.0.0",
     "eas-cli": "^27.6.0"
   }
 }

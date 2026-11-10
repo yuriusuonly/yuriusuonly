@@ -6,15 +6,9 @@
         "type": "remote",
         "url": "https://mcp.figma.com/mcp"
       },
-      "dribbble": {
-        "type": "local",
-        "command": [
-          "node",
-          "--env-file",
-          ".env",
-          "node_modules/dribbble-mcp/dist/index.js"
-        ],
-        "cwd": "."
+      "composio": {
+        "type": "remote",
+        "url": "https://connect.composio.dev/mcp"
       }
     }
   }
