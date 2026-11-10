@@ -3,6 +3,4 @@ build/
 .expo/
 .DS_Store
 *.log
-.dribbble/
-.figma/
 .env
