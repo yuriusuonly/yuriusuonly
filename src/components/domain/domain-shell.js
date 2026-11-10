@@ -31,8 +31,8 @@ import AnimatedBackground from "../background/animated-background.js";
  *
  * @typedef {object} OvertureState
  * @property {import("../../stores/expansion-store.js").ExpansionOrigin} origin Pointer origin of this expansion or collapse.
- * @property {"expand"|"collapse"} mode Which overture to play on mount.
- * @property {string} accent Disc color (destination theme on expand; the leaving dimension's accent on collapse).
+ * @property {"uncover"|"collapse"|"none"} mode Which overture to play on mount.
+ * @property {string} accent Disc color (the pressed tile's accent on entry; the leaving dimension's on collapse).
  * @property {Animated.Value} grow Disc scale driver.
  * @property {Animated.Value} fade Disc opacity driver (set only while covered on collapse).
  */
@@ -46,23 +46,25 @@ import AnimatedBackground from "../background/animated-background.js";
  */
 export default function DomainShell({ theme, children, returnPortal = false, calm = false }) {
   const router = useRouter();
-  const [entered, setEntered] = useState(false);
   const [leaving, setLeaving] = useState(false);
+
   const [overture] = useState(/** @type {OvertureState} */ (() => {
-    // Snapshot-read the staged values (never consume in render: React
+    // Snapshot-read the staged covers (never consume in render: React
     // double-invokes initializers, and a consuming read would hand the second
     // call a cleared store, dropping the pointer origin). Clearing happens in
     // the mount effect via clearStages once this state is stamped.
-    const { exit, origin: stagedOrigin } = useExpansionStore.getState();
-    return {
-      origin: (exit ? exit.origin : stagedOrigin) ?? { x: 0.5, y: 0.5 },
-      mode: exit ? "collapse" : "expand",
-      accent: exit ? exit.accent : theme.accent,
-      grow: new Animated.Value(exit ? 1 : 0),
-      fade: new Animated.Value(exit ? 0 : 1)
-    };
+    const { exit, entry } = useExpansionStore.getState();
+    if (exit) {
+      return { origin: exit.origin, accent: exit.accent, mode: "collapse", grow: new Animated.Value(1), fade: new Animated.Value(0) };
+    }
+    if (entry) {
+      return { origin: entry.origin, accent: entry.accent, mode: "uncover", grow: new Animated.Value(1), fade: new Animated.Value(0) };
+    }
+    // Cold load / browser back: no pointer origin known — no overture.
+    return { origin: { x: 0.5, y: 0.5 }, accent: theme.accent, mode: "none", grow: new Animated.Value(0), fade: new Animated.Value(1) };
   }));
   const { origin, mode, accent, grow, fade } = overture;
+  const [entered, setEntered] = useState(mode === "none");
   /** @type {{ current: boolean }} */
   const consumeRef = useRef(/** @type {boolean} */ (false));
   /** @type {{ current: boolean }} */
@@ -73,8 +75,14 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
   useEffect(() => {
     consumeRef.current = true;
     useExpansionStore.getState().clearStages();
-    if (typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (mode === "none" || (typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
       setEntered(true);
+      return undefined;
+    }
+    if (mode === "uncover") {
+      // Expansion end: arrive still covered by the pressed tile's accent
+      // disc, then dissolve the cover into the new environment.
+      Animated.timing(fade, { toValue: 1, duration: 850, useNativeDriver: true }).start(() => setEntered(true));
       return undefined;
     }
     if (mode === "collapse") {
@@ -140,6 +148,10 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
     // Stage the reverse overture for the next screen mount, then cover here.
     useExpansionStore.getState().setExitStage({ origin: exitOrigin, accent: theme.accent });
     setLeaving(true);
+    if (typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      router.push("/");
+      return;
+    }
     Animated.timing(exitGrow, { toValue: 1, duration: 340, useNativeDriver: true }).start(({ finished }) => {
       if (finished) {
         router.push("/");

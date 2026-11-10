@@ -1,68 +1,55 @@
 import { create } from "zustand";
 
 /**
- * Zustand store for the domain-expansion overture choreography.
+ * Zustand store for the domain-expansion choreography.
  *
- * Portal presses stage the exact pointer origin of an expansion, and the
- * return portal stages a full "collapse" handoff so the previous screen can
- * mount with the expand animation playing in reverse. `domain-shell` reads
- * and clears both via the take* handshake on mount.
+ * Portal/card presses play a cover disc on the screen being left, then stage a
+ * handoff so the destination mounts already covered: `entry` stages an
+ * expansion (destination dissolves the cover into its world), `exit` stages a
+ * collapse (the previous screen re-opens with the disc shrinking back into
+ * the click point). Both originate at the pointer position of the press.
  * @module stores/expansion-store
  */
 
 /**
- * Normalized pointer origin of a domain-expansion overture.
+ * Normalized pointer origin of an expansion/collapse overture.
  *
  * @typedef {object} ExpansionOrigin
- * @property {number} x Normalized viewport x (0–1) where the card was clicked.
- * @property {number} y Normalized viewport y (0–1) where the card was clicked.
+ * @property {number} x Normalized viewport x (0–1) where the press happened.
+ * @property {number} y Normalized viewport y (0–1) where the press happened.
  */
 
 /**
- * A staged exit for the collapse (reverse-expansion) back to a previous screen.
+ * A staged cover handoff for the next screen mount.
  *
- * @typedef {object} StagedExit
- * @property {ExpansionOrigin} origin Pointer origin where the return portal was clicked.
- * @property {string} accent Accent color of the dimension being left (the collapsing disc).
+ * @typedef {object} StagedCover
+ * @property {ExpansionOrigin} origin Pointer origin where the press happened.
+ * @property {string} accent Disc color (the clicked tile's accent, or the leaving dimension's).
  */
 
 /**
  * Expansion store state and actions.
  *
  * @typedef {object} ExpansionStore
- * @property {ExpansionOrigin|null} origin Pointer origin for the next expansion overture.
- * @property {StagedExit|null} exit Staged collapse overlay for the next screen mount.
- * @property {(origin: ExpansionOrigin|null) => void} setExpansionOrigin Stage (or clear) the overture origin.
- * @property {() => ExpansionOrigin|null} takeExpansionOrigin Read and clear the staged origin (shell mount handshake).
- * @property {(exit: StagedExit|null) => void} setExitStage Stage (or clear) the pending collapse.
- * @property {() => StagedExit|null} takeExitStage Read and clear the staged exit (shell mount handshake).
+ * @property {StagedCover|null} entry Cover staged for a forward expansion (destination dissolves it).
+ * @property {StagedCover|null} exit Cover staged for a return collapse (destination shrinks it into the point).
+ * @property {(cover: StagedCover|null) => void} setEntryStage Stage (or clear) the pending expansion handoff.
+ * @property {(cover: StagedCover|null) => void} setExitStage Stage (or clear) the pending collapse handoff.
  * @property {() => void} clearStages Clear both staged values once a shell has stamped them into local state.
  */
 
 /**
- * Zustand store holding the staged overture origin and pending collapse.
+ * Zustand store holding the staged expansion/collapse handoffs.
  *
  * @type {import("zustand").UseBoundStore<import("zustand").StoreApi<ExpansionStore>>}
  */
-export const useExpansionStore = create((set, get) => ({
-  origin: null,
+export const useExpansionStore = create((set) => ({
+  entry: null,
   exit: null,
-  /** @param {ExpansionOrigin|null} origin */
-  setExpansionOrigin: (origin) => set({ origin }),
-  /** @returns {ExpansionOrigin|null} */
-  takeExpansionOrigin: () => {
-    const { origin } = get();
-    set({ origin: null });
-    return origin;
-  },
-  /** @param {StagedExit|null} exit */
-  setExitStage: (exit) => set({ exit }),
-  /** @returns {StagedExit|null} */
-  takeExitStage: () => {
-    const { exit } = get();
-    set({ exit: null });
-    return exit;
-  },
+  /** @param {StagedCover|null} cover */
+  setEntryStage: (cover) => set({ entry: cover }),
+  /** @param {StagedCover|null} cover */
+  setExitStage: (cover) => set({ exit: cover }),
   /** @returns {void} */
-  clearStages: () => set({ origin: null, exit: null })
+  clearStages: () => set({ entry: null, exit: null })
 }));
