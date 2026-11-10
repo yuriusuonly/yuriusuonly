@@ -4,6 +4,7 @@
 - **Source of truth for the UI direction:** the Dribbble shot ["Portfolio Website V1"](https://dribbble.com/shots/21766554-Portfolio-Website-V1) (id `21766554`; local reference copy: `.dribbble/portfolio-website-v1.png`, gitignored).
 - The shot is fetched via the workspace `dribbble` MCP server (`get-shot`) when a listing is available. **Verified limitation (2026-11-10):** Dribbble API v2 does not expose arbitrary shots — `GET /v2/shots/{id}` and `GET /v2/shots/popular` return `404 {"message":"Not found."}`; only `/v2/user/shots` (your own shots) works. `get_shot(21766554)` returns `404: Not found.`
 - The shot image is fetched from `cdn.dribbble.com` via HTTP and stored under `.dribbble/` (gitignored/dockerignored, see `.gitignore`, `.dockerignore`).
+- Figma design artifacts (local exports, screenshots, extracted design context) are written under `.figma/` (gitignored/dockerignored, see `.gitignore`, `.dockerignore`); the live design itself stays in Figma, accessed through the `figma` MCP server in `opencode.json`.
 - This is an **original implementation of the design language** (bento layout, palette, crop-mark accents), not a pixel clone: the shot's artwork/content (portrait, flamingo photo, Apple mark, "Jon Daniel" copy) is replaced by this project's own assets and `EXPO_PUBLIC_*` content. Stat numbers (251/156/172) are placeholder copy — wire real data before production.
 
 ## Layout (home, `src/app/index.js`)

@@ -4,4 +4,5 @@ build/
 .DS_Store
 *.log
 .dribbble/
+.figma/
 .env
