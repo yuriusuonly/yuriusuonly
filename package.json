@@ -6,6 +6,7 @@
     "expo:start:tunnel": "expo start --clear --tunnel",
     "expo:build": "expo export --platform web --output-dir build",
     "expo:serve": "set -a && . ./.env && set +a && expo serve build --port $PORT",
+    "opencode": "set -a && . ./.env && set +a && opencode",
     "caddy:run": "caddy run --config Caddyfile --envfile .env",
     "caddy:trust": "caddy trust",
     "docker:build": "docker compose build --no-cache",
