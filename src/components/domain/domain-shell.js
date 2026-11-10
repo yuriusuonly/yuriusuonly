@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated, Pressable, Text, View } from "react-native";
 import { useRouter } from "expo-router";
-import { pursue, useCatStore } from "../../shared/cat-store.js";
+import { pursue, useCatStore } from "../../stores/cat-store.js";
+import { useExpansionStore } from "../../stores/expansion-store.js";
 import { COLORS } from "../../shared/tokens.js";
 import AnimatedBackground from "../background/animated-background.js";
 import ScreenCat from "../pet/screen-cat.js";
@@ -33,7 +34,7 @@ import ScreenCat from "../pet/screen-cat.js";
  * Internal overture state: values for the mount (expand or collapse) animation.
  *
  * @typedef {object} OvertureState
- * @property {import("../../shared/cat-store.js").ExpansionOrigin} origin Pointer origin of this expansion or collapse.
+ * @property {import("../../stores/expansion-store.js").ExpansionOrigin} origin Pointer origin of this expansion or collapse.
  * @property {"expand"|"collapse"} mode Which overture to play on mount.
  * @property {string} accent Disc color (destination theme on expand; the leaving dimension's accent on collapse).
  * @property {Animated.Value} grow Disc scale driver.
@@ -53,10 +54,10 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
   const [leaving, setLeaving] = useState(false);
   const [overture] = useState(/** @type {OvertureState} */ (() => {
     // A staged exit means we are the previous screen re-opening in reverse.
-    const stagedExit = useCatStore.getState().takeExitStage();
+    const stagedExit = useExpansionStore.getState().takeExitStage();
     const origin = stagedExit
       ? stagedExit.origin
-      : useCatStore.getState().takeExpansionOrigin() ?? { x: 0.5, y: 0.5 };
+      : useExpansionStore.getState().takeExpansionOrigin() ?? { x: 0.5, y: 0.5 };
     return {
       origin,
       mode: stagedExit ? "collapse" : "expand",
@@ -154,7 +155,7 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
         }
       : { x: 0.5, y: 0.5 };
     // Stage the reverse overture for the next screen mount, then cover here.
-    useCatStore.getState().setExitStage({ origin: exitOrigin, accent: theme.accent });
+    useExpansionStore.getState().setExitStage({ origin: exitOrigin, accent: theme.accent });
     setLeaving(true);
     Animated.timing(exitGrow, { toValue: 1, duration: 340, useNativeDriver: true }).start(({ finished }) => {
       if (finished) {

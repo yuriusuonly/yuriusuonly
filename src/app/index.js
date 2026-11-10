@@ -1,6 +1,6 @@
 import { Image, Pressable, Text, View } from "react-native";
 import { useRouter } from "expo-router";
-import { useCatStore } from "../shared/cat-store.js";
+import { useExpansionStore } from "../stores/expansion-store.js";
 import config from "../shared/config.js";
 import { DIMENSIONS } from "../shared/tokens.js";
 import DomainShell from "../components/domain/domain-shell.js";
@@ -40,7 +40,7 @@ function CornerMark({ markClass = "border-white/90" }) {
 function expandTo(router, href, event) {
   const point = typeof event?.nativeEvent?.clientX === "number" ? event.nativeEvent : null;
   if (point && typeof window !== "undefined") {
-    useCatStore.getState().setExpansionOrigin({
+    useExpansionStore.getState().setExpansionOrigin({
       x: point.clientX / window.innerWidth,
       y: point.clientY / window.innerHeight
     });

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated, Text, View } from "react-native";
-import { useCatStore } from "../../shared/cat-store.js";
+import { useCatStore } from "../../stores/cat-store.js";
 import { COLORS } from "../../shared/tokens.js";
 
 /**
