@@ -1,7 +1,9 @@
 # Design guidelines
 
 ## Design reference
-- **Source of truth for the UI direction:** this project's own bento-grid identity in the TikTok-inspired palette (Tokens below) — a fully original design, iterated directly in the app source (`src/app/`). There is no external design reference file to fetch.
+- **Visual inspiration (design language):** [“Portfolio Website V1”](https://dribbble.com/shots/21766554-Portfolio-Website-V1) by [Jon Daniel](https://dribbble.com/jondaniel) on Dribbble (shot id `21766554`). This project’s bento layout, palette, and crop-mark accents are an original implementation inspired by that shot’s design language; the shot’s own artwork/content (e.g. portrait, flamingo photo, Apple mark, “Jon Daniel” copy) is not used — our assets and `EXPO_PUBLIC_*` content replace it.
+- **Local reference:** `.dribbble/README.md` records the source link/author; a local shot image may be stored as `.dribbble/portfolio-website-v1.png` (gitignored). The `.dribbble/` directory and its contents are local-only references (gitignored/dockerignored).
+- **Dribbble via Composio:** the workspace `composio` MCP server is configured in `opencode.json` (`https://connect.composio.dev/mcp`) for Dribbble toolkit access when needed. Dribbble API v2 exposes only the connected user’s own shots, so arbitrary public shots (including this reference) cannot be fetched through the toolkit; the link/author above and any local copy in `.dribbble/` are the canonical references.
 
 ## 2D & Motion (all screens)
 - **Structure:** every screen renders inside a `DomainShell` (`src/components/domain/domain-shell.js`) — themed animated background plus the DOM content layer. Themes live in `src/shared/tokens.js` (`DIMENSIONS` for `home`/`projects`/`awards`/`clients`, `VOID` for the 404), each with `accent`, `void` (backdrop), `shapes` (blob palette), and light colors. Do not redefine scene colors ad hoc; extend the token tables.

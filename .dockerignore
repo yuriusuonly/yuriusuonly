@@ -5,4 +5,5 @@ build/
 .github/
 .DS_Store
 *.log
+.dribbble/
 .env
