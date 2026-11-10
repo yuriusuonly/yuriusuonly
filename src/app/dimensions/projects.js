@@ -61,7 +61,7 @@ export default function ProjectsDimension() {
             251
           </Text>
           <Text className="font-outfit mt-3 md:mt-4 max-w-lg text-base md:text-xl text-white/80 leading-snug">
-            Shipped projects across brand, interface, and interactive work — each one a door this cat has walked through.
+            Shipped projects across brand, interface, and interactive work — each one worth opening a domain for.
           </Text>
 
           {/* Highlight tiles */}

@@ -1,22 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated, Pressable, Text, View } from "react-native";
 import { useRouter } from "expo-router";
-import { pursue, useCatStore } from "../../stores/cat-store.js";
 import { useExpansionStore } from "../../stores/expansion-store.js";
 import { COLORS } from "../../shared/tokens.js";
 import AnimatedBackground from "../background/animated-background.js";
-import ScreenCat from "../pet/screen-cat.js";
 
 /**
  * Domain shell: the full-screen frame for one "dimension".
  *
- * Layers the 2D animated background (`animated-background`), the Shimeji-style
- * screen cat (`screen-cat`), and the domain content. Tiles entering expand the
- * domain from their click point; the return portal plays the same animation in
- * reverse — the domain's accent disc grows to cover the screen, the previous
- * screen mounts still covered, and the disc shrinks back into the portal point
- * while fading (the collapse).
- * Every click anywhere is forwarded to the cat as a respawn target.
+ * Layers the 2D animated background (`animated-background`) and the domain
+ * content. Tiles entering expand the domain from their click point; the
+ * return portal plays the same animation in reverse — the domain's accent
+ * disc grows to cover the screen, the previous screen mounts still covered,
+ * and the disc shrinks back into the portal point while fading (the collapse).
  * @module components/domain/domain-shell
  */
 
@@ -43,7 +39,7 @@ import ScreenCat from "../pet/screen-cat.js";
 
 /**
  * Themed dimension shell with pointer-originated expansion, reverse collapse
- * on return, click-respawning cat, and portal exit.
+ * on return, and portal exit.
  *
  * @param {DomainShellProps} props - Component props.
  * @returns {JSX.Element} Full-screen themed stage + content layer.
@@ -73,7 +69,6 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
 
   // Mount overture: expand forward, or play the collapse in reverse.
   useEffect(() => {
-    pursue({ x: origin.x, y: origin.y * 0.6, teleport: true });
     if (typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setEntered(true);
       return undefined;
@@ -93,22 +88,6 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
     }
     return undefined;
   }, [mode, grow, fade, origin]);
-
-  // Forward every window click to the screen cat as a respawn target.
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return undefined;
-    }
-    /** @param {PointerEvent} event */
-    const onDown = (event) => {
-      pursue({
-        x: event.clientX / window.innerWidth,
-        y: event.clientY / window.innerHeight
-      });
-    };
-    window.addEventListener("pointerdown", onDown);
-    return () => window.removeEventListener("pointerdown", onDown);
-  }, []);
 
   /** Ongoing collapse on this screen, or the mount-time reverse overture. */
   const overtureDisc = (
@@ -168,9 +147,8 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
     <View className="flex-1" style={{ backgroundColor: theme.void }}>
       {/* 2D animated stage */}
       <AnimatedBackground theme={theme} blobCount={calm ? 4 : 8} />
-      <ScreenCat />
 
-      {/* Content layer stays hit-testable; the stage and cat pass clicks through */}
+      {/* Content layer stays hit-testable; the stage passes clicks through */}
       <View className="flex-1" pointerEvents="box-none">
         {children}
 

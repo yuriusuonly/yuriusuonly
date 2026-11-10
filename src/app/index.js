@@ -11,7 +11,7 @@ import logo from "../../png/logo.png";
  * Home route (`src/app/index.js`): 2D interactive bento-grid portfolio layout
  * following DESIGN.md (bento layout, TikTok palette + typography tokens).
  * Bento tiles are portals: pressing one expands its domain from the click —
- * the Shimeji-style screen cat drops into a themed dimension page there.
+ * the overture opens a themed dimension page there.
  * @module app/index
  */
 

@@ -5,7 +5,7 @@
 
 A web-only Expo Router app styled with NativeWind/Tailwind (React Native Web + NativeWind v4 + Tailwind v3, React 19). Static web export with server-rendered API routes; deployable via Expo Hosting (EAS), Node (expo serve) + Caddy, or Docker.
 
-**2D interactive portfolio (Shimeji-style)** — a screen-pet chibi cat wanders independently, follows your clicks, and can be picked up and dragged anywhere; pressing a bento tile expands its "domain" from the exact click point into a themed dimension page (Projects / Awards / Clients) with an animated background and pointer-tilted tiles (state via `zustand`, no WebGL). Details in [DESIGN.md](./DESIGN.md).
+**2D interactive portfolio** — pressing a bento tile expands its "domain" from the exact click point into a themed dimension page (Projects / Awards / Clients) with an animated drifting-blob background, pointer-tilted tiles, and a reverse "collapse" when you head home (state via `zustand`, no WebGL). Details in [DESIGN.md](./DESIGN.md).
 
 Repository: `git@github.com:yuriusuonly/yuriusuonly.git` (default branch: `portfolio`, the only branch).
 

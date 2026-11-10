@@ -1,7 +1,7 @@
 /**
  * Canonical design tokens for non-Tailwind consumers (the 3D scene, motion, and
  * overlay layers). Tailwind classes remain the styling source for markup; these
- * values mirror DESIGN.md so the animated backgrounds and pet overlays stay on
+ * values mirror DESIGN.md so the animated background and expansion overlay layers stay on
  * the same TikTok-inspired palette.
  * @module shared/tokens
  */
@@ -29,9 +29,8 @@ export const COLORS = {
 };
 
 /**
- * One interactive "dimension" — the themed world the chibi cat jumps into when
- * a bento tile expands its domain. Ordered across a tile's accent colors and
- * the void backdrop the scene paints behind it.
+ * One interactive "dimension" — the themed world a tile's domain expansion
+ * opens into, ordered across the tile's accent colors and the void backdrop
  *
  * @typedef {object} DimensionTheme
  * @property {string} id Route identifier ("home", "projects", "awards", "clients", "void").
@@ -39,8 +38,7 @@ export const COLORS = {
  * @property {string} tagline Short copy used in scene overlays.
  * @property {string} accent Dominant brand color driving overlays and lights.
  * @property {string} void Canvas/fog backdrop color of the dimension.
- * @property {string} ground Ground-disc color the cat walks on.
- * @property {string[]} shapes Accent colors cycled by the floating geometry.
+ * * @property {string[]} shapes Accent colors cycled by the floating geometry.
  * @property {string} lightColor Primary fill-light color.
  * @property {string} rimColor Backlight/rim color.
  * @property {string} headlineClass Tailwind text-surface color class for headlines on the void.
@@ -56,7 +54,6 @@ export const DIMENSIONS = {
     tagline: "The stage dimension.",
     accent: COLORS.primary,
     void: "#EAF7F6",
-    ground: '"#DCEBE9"',
     shapes: [COLORS.primary, COLORS.secondary, COLORS.ink],
     lightColor: "#BDFCF8",
     rimColor: COLORS.secondary,
@@ -68,7 +65,6 @@ export const DIMENSIONS = {
     tagline: "251 shipped and counting.",
     accent: COLORS.primary,
     void: "#0B4F52",
-    ground: '"#073B3D"',
     shapes: [COLORS.primary, "#9BF9F5", COLORS.surface],
     lightColor: "#25F4EE",
     rimColor: "#FFFFFF",
@@ -80,7 +76,6 @@ export const DIMENSIONS = {
     tagline: "172 global design awards.",
     accent: COLORS.secondary,
     void: "#4A0A16",
-    ground: '"#380512"',
     shapes: [COLORS.secondary, "#FF8FA6", COLORS.primary],
     lightColor: "#FE2C55",
     rimColor: "#FFD2DB",
@@ -92,7 +87,6 @@ export const DIMENSIONS = {
     tagline: "156 collaborations worldwide.",
     accent: COLORS.ink,
     void: "#05060B",
-    ground: '"#02030A"',
     shapes: [COLORS.ink, "#3A3D52", COLORS.primary],
     lightColor: "#C9CCDD",
     rimColor: COLORS.primary,
@@ -112,7 +106,6 @@ export const VOID = {
   tagline: "Unmapped territory.",
   accent: COLORS.primary,
   void: "#E4ECF6",
-    ground: '"#D3DEED"',
   shapes: [COLORS.primary, COLORS.secondary, "#B9C6DE"],
   lightColor: "#9BF9F5",
   rimColor: COLORS.secondary,
