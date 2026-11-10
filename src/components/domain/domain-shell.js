@@ -46,7 +46,6 @@ import AnimatedBackground from "../background/animated-background.js";
  */
 export default function DomainShell({ theme, children, returnPortal = false, calm = false }) {
   const router = useRouter();
-  const [leaving, setLeaving] = useState(false);
 
   const [overture] = useState(/** @type {OvertureState} */ (() => {
     // Snapshot-read the staged covers (never consume in render: React
@@ -67,7 +66,6 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
   const [entered, setEntered] = useState(mode === "none");
   /** @type {{ current: boolean }} */
   const leavingRef = useRef(/** @type {boolean} */ (false));
-  const exitGrow = useRef(new Animated.Value(0)).current;
 
   // Mount overture: dissolve the staged cover, or play the collapse in reverse.
   useEffect(() => {
@@ -87,16 +85,16 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
       Animated.timing(fade, { toValue: 1, duration: 850, useNativeDriver: true }).start(() => setEntered(true));
       return undefined;
     }
-    // Collapse: still covered by the leaving dimension's accent disc —
-    // shrink back into the portal point while the cover fades away.
+    // Collapse: return plays the open animation in reverse — home mounts covered
+    // and the disc shrinks back into the "Collapse domain" press point.
     Animated.parallel([
-      Animated.timing(grow, { toValue: 0, duration: 800, useNativeDriver: true }),
-      Animated.timing(fade, { toValue: 1, duration: 800, useNativeDriver: true, delay: 260 })
+      Animated.timing(grow, { toValue: 0, duration: 700, useNativeDriver: true }),
+      Animated.timing(fade, { toValue: 1, duration: 700, useNativeDriver: true, delay: 220 })
     ]).start(() => setEntered(true));
     return undefined;
   }, [mode, grow, fade, origin]);
 
-  /** Ongoing collapse on this screen, or the mount-time reverse overture. */
+  /** Mount-time cover disc (uncover or reverse-collapse). */
   const overtureDisc = (
     <Animated.View
       style={[
@@ -111,19 +109,18 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
           marginLeft: -110,
           marginTop: -110
         },
-        leaving
-          ? // Forward part of the return: grow to cover before navigation.
-            { transform: [{ scale: exitGrow.interpolate({ inputRange: [0, 1], outputRange: [0.05, 32] }) }], opacity: 1 }
-          : {
-              transform: [{ scale: grow.interpolate({ inputRange: [0, 1], outputRange: [0.05, 32] }) }],
-              opacity: fade.interpolate({ inputRange: [0, 0.8, 1], outputRange: [1, 1, 0] })
-            }
+        {
+          transform: [{ scale: grow.interpolate({ inputRange: [0, 1], outputRange: [0.05, 32] }) }],
+          opacity: fade.interpolate({ inputRange: [0, 0.8, 1], outputRange: [1, 1, 0] })
+        }
       ]}
     />
   );
 
   /**
-   * Return portal press: cover this screen with the collapsing disc, then go.
+   * Return portal press: stage the reverse animation at the pointer and go home.
+   * Home mounts covered and plays the open animation in reverse, ending at this
+   * press point (single animation, no intermediate grow on this screen).
    *
    * @param {import("react-native").GestureResponderEvent} event Portal press event.
    * @returns {void}
@@ -140,18 +137,9 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
           y: point.clientY / window.innerHeight
         }
       : { x: 0.5, y: 0.5 };
-    // Stage the reverse overture for the next screen mount, then cover here.
+    // Stage the reverse overture for home at this press point, then navigate.
     useExpansionStore.getState().setExitStage({ origin: exitOrigin, accent: theme.accent });
-    setLeaving(true);
-    if (typeof window !== "undefined" && typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      router.push("/");
-      return;
-    }
-    Animated.timing(exitGrow, { toValue: 1, duration: 340, useNativeDriver: true }).start(({ finished }) => {
-      if (finished) {
-        router.push("/");
-      }
-    });
+    router.push("/");
   };
 
   return (
@@ -163,8 +151,8 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
       <View className="flex-1" pointerEvents="box-none">
         {children}
 
-        {/* Domain-expansion / collapse overlay (kept while leaving for the cover phase) */}
-        {(!entered || leaving) && (
+        {/* Domain-expansion / collapse overlay */}
+        {!entered && (
           <View pointerEvents="none" className="absolute inset-0">
             {overtureDisc}
           </View>
