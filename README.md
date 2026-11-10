@@ -1,5 +1,8 @@
 # Portfolio
 
+[![Expo Hosting deploy](https://img.shields.io/github/actions/workflow/status/yuriusuonly/yuriusuonly/.github%2Fworkflows%2Fdeployment.yml?branch=portfolio&label=Expo%20Hosting%20deploy)](https://github.com/yuriusuonly/yuriusuonly/actions/workflows/deployment.yml)
+[![Expo SDK 58](https://img.shields.io/badge/Expo%20SDK-58-000000?logo=expo&logoColor=white)](https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough.md)
+
 A web-only Expo Router app styled with NativeWind/Tailwind (React Native Web + NativeWind v4 + Tailwind v3, React 19). Static web export with server-rendered API routes; deployable via Expo Hosting (EAS), Node (expo serve) + Caddy, or Docker.
 
 Repository: `git@github.com:yuriusuonly/yuriusuonly.git` (default branch: `portfolio`, the only branch).
