@@ -21,7 +21,7 @@
 - Motion stack: React Native `Animated` + DOM pointer events only — no WebGL (`three` was removed; keep the 2D approach); `zustand` for expansion overture state.
 - API/special routes follow Expo Router web conventions in filenames: `src/app/api/health+api.js`, `manifest.json+api.js`, `robots.txt+api.js`, `service-worker.js+api.js`.
 - Shared app config: `src/shared/config.js` reads `EXPO_PUBLIC_*` env vars; `app.config.js` derives app name/version from `EXPO_PUBLIC_TITLE`/`EXPO_PUBLIC_VERSION` and the Expo/EAS slug from `EAS_PROJECT_SLUG`.
-- Assets: `png/`, `svg/`, `ttf/` (custom font `Outfit` loaded in `src/app/_layout.js` from `ttf/Outfit-VariableFont_wght.ttf`). Local design references live under `.dribbble/` (gitignored); the Dribbble design inspiration and author are documented in `DESIGN.md`.
+- Assets: `png/`, `svg/`, `ttf/` (custom font `Outfit` loaded in `src/app/_layout.js` from `ttf/Outfit-VariableFont_wght.ttf`). Local design references (e.g. `.dribbble/portfolio-website-v1.png`, gitignored) may live under `.dribbble/`; the Dribbble shot link and author are documented in `DESIGN.md`.
 - MCP: `opencode.json` configures the remote Composio MCP server (`https://connect.composio.dev/mcp`) for toolkit access (including Dribbble) when needed; it authenticates via browser OAuth, not `.env`.
 
 ## Runtime & deployment notes
