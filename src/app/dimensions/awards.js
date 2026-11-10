@@ -1,5 +1,22 @@
 import { ScrollView, Text, View } from "react-native";
-import { DIMENSIONS } from "../../shared/theme.js";
+import { COLORS } from "../../shared/theme.js";
+
+/**
+ * Awards dimension theme composed locally from base color tokens.
+ *
+ * @type {import("../../shared/theme.js").DimensionTheme}
+ */
+const AWARDS_THEME = {
+  id: "awards",
+  name: "Awards",
+  tagline: "172 global design awards.",
+  accent: COLORS.secondary,
+  void: "#4A0A16",
+  shapes: [COLORS.secondary, "#FF8FA6", COLORS.primary],
+  lightColor: "#FE2C55",
+  rimColor: "#FFD2DB",
+  headlineClass: "text-white"
+};
 import DomainShell from "../../components/domain/domain-shell.js";
 import TiltCard from "../../components/motion/tilt-card.js";
 
@@ -48,7 +65,7 @@ function HighlightTile({ number, label, tileClass, textClass, dark }) {
  * @returns {JSX.Element} The themed awards dimension with a return portal.
  */
 export default function AwardsDimension() {
-  const theme = DIMENSIONS.awards;
+  const theme = AWARDS_THEME;
   return (
     <DomainShell theme={theme} returnPortal>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>

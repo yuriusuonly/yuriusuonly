@@ -33,6 +33,5 @@
     "react-native-web": "^0.21.4",
     "tailwindcss": "^3.4.17",
     "zustand": "^5.1.0"
-  },
-  "devDependencies": {}
+  }
 }

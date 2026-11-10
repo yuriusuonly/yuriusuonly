@@ -3,7 +3,24 @@ import { Animated, Image, Pressable, ScrollView, Text, View } from "react-native
 import { useFocusEffect, useRouter } from "expo-router";
 import { useExpansionStore } from "../stores/expansion-store.js";
 import config from "../shared/config.js";
-import { COLORS, DIMENSIONS } from "../shared/theme.js";
+import { COLORS } from "../shared/theme.js";
+
+/**
+ * Home dimension theme composed locally from base color tokens.
+ *
+ * @type {import("../shared/theme.js").DimensionTheme}
+ */
+const HOME_THEME = {
+  id: "home",
+  name: "Home",
+  tagline: "The stage dimension.",
+  accent: COLORS.primary,
+  void: "#EAF7F6",
+  shapes: [COLORS.primary, COLORS.secondary, COLORS.ink],
+  lightColor: "#BDFCF8",
+  rimColor: COLORS.secondary,
+  headlineClass: "text-[#161823]"
+};
 import DomainShell from "../components/domain/domain-shell.js";
 import TiltCard from "../components/motion/tilt-card.js";
 import logo from "../../png/logo.png";
@@ -150,7 +167,7 @@ export default function Index() {
   };
 
   return (
-    <DomainShell theme={DIMENSIONS.home}>
+    <DomainShell theme={HOME_THEME}>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-4 md:p-10">
           <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 flex-col md:flex-row gap-4 md:gap-6">

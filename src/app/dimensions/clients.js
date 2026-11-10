@@ -1,5 +1,22 @@
 import { ScrollView, Text, View } from "react-native";
-import { DIMENSIONS } from "../../shared/theme.js";
+import { COLORS } from "../../shared/theme.js";
+
+/**
+ * Clients dimension theme composed locally from base color tokens.
+ *
+ * @type {import("../../shared/theme.js").DimensionTheme}
+ */
+const CLIENTS_THEME = {
+  id: "clients",
+  name: "Clients",
+  tagline: "156 collaborations worldwide.",
+  accent: COLORS.ink,
+  void: "#05060B",
+  shapes: [COLORS.ink, "#3A3D52", COLORS.primary],
+  lightColor: "#C9CCDD",
+  rimColor: COLORS.primary,
+  headlineClass: "text-white"
+};
 import DomainShell from "../../components/domain/domain-shell.js";
 import TiltCard from "../../components/motion/tilt-card.js";
 
@@ -48,7 +65,7 @@ function ClientTile({ sector, note, tileClass, textClass, dark }) {
  * @returns {JSX.Element} The themed clients dimension with a return portal.
  */
 export default function ClientsDimension() {
-  const theme = DIMENSIONS.clients;
+  const theme = CLIENTS_THEME;
   return (
     <DomainShell theme={theme} returnPortal>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>

@@ -1,6 +1,24 @@
 import { ScrollView, Text, View } from "react-native";
 import config from "../shared/config.js";
-import { VOID } from "../shared/theme.js";
+import { COLORS } from "../shared/theme.js";
+
+/**
+ * Void dimension theme for the not-found screen, composed locally from base
+ * color tokens.
+ *
+ * @type {import("../shared/theme.js").DimensionTheme}
+ */
+const VOID_THEME = {
+  id: "void",
+  name: "Void",
+  tagline: "Unmapped territory.",
+  accent: COLORS.primary,
+  void: "#E4ECF6",
+  shapes: [COLORS.primary, COLORS.secondary, "#B9C6DE"],
+  lightColor: "#9BF9F5",
+  rimColor: COLORS.secondary,
+  headlineClass: "text-[#161823]"
+};
 import DomainShell from "../components/domain/domain-shell.js";
 
 /**
@@ -29,7 +47,7 @@ function CornerMark({ markClass = "border-white/90", positionClass = "right-2 to
  */
 export default function NotFound() {
   return (
-    <DomainShell theme={VOID} calm returnPortal>
+    <DomainShell theme={VOID_THEME} calm returnPortal>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-4 pb-28 md:p-10 md:pb-32">
           <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 items-center">

@@ -1,5 +1,22 @@
 import { ScrollView, Text, View } from "react-native";
-import { DIMENSIONS } from "../../shared/theme.js";
+import { COLORS } from "../../shared/theme.js";
+
+/**
+ * Projects dimension theme composed locally from base color tokens.
+ *
+ * @type {import("../../shared/theme.js").DimensionTheme}
+ */
+const PROJECTS_THEME = {
+  id: "projects",
+  name: "Projects",
+  tagline: "251 shipped and counting.",
+  accent: COLORS.primary,
+  void: "#0B4F52",
+  shapes: [COLORS.primary, "#9BF9F5", COLORS.surface],
+  lightColor: "#25F4EE",
+  rimColor: "#FFFFFF",
+  headlineClass: "text-white"
+};
 import DomainShell from "../../components/domain/domain-shell.js";
 import TiltCard from "../../components/motion/tilt-card.js";
 
@@ -48,7 +65,7 @@ function HighlightTile({ number, label, tileClass, textClass, dark }) {
  * @returns {JSX.Element} The themed projects dimension with a return portal.
  */
 export default function ProjectsDimension() {
-  const theme = DIMENSIONS.projects;
+  const theme = PROJECTS_THEME;
   return (
     <DomainShell theme={theme} returnPortal>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
