@@ -10,6 +10,7 @@ on:
   push:
     branches:
       - deployment
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -44,4 +45,4 @@ jobs:
           git diff --cached --quiet || git commit -m "(chore) $(date -u +%Y%m%dT%H%M%SZ) [skip ci]"
 
       - name: Push the build output
-        run: git push origin deployment
+        run: git push origin HEAD:deployment
