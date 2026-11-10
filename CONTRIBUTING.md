@@ -3,7 +3,7 @@
 ## Prerequisites
 - Node.js/npm (Docker image uses Node 22)
 - Docker + Compose for containerized runs
-- `eas-cli` is a devDependency for the `eas` deploy script (Expo Hosting); `gh` (GitHub CLI) remains a system tool, used by `npm run ci:secrets` (authenticated via the `GH_TOKEN` key in `.env`); Caddy is bundled in the Docker runtime, so for local Caddy commands use a local Caddy install
+- `eas-cli` is a devDependency for the `eas:deploy` script (Expo Hosting); `gh` (GitHub CLI) remains a system tool, used by `npm run github:secrets` and `npm run github:deploy` (authenticated via the `GH_TOKEN` key in `.env`); Caddy is bundled in the Docker runtime, so for local Caddy commands use a local Caddy install
 
 ## Setup
 1. `npm ci`
@@ -90,5 +90,5 @@ flowchart TD
   - `(fix)` — bug and hot fixes
   - `(refactor)` — optimizations and code quality
 - Format: a one-line short descriptive title after the tag, followed by a multi-line bulleted list of the individual changes. For example, a feature addition with three changes would read: the `(feature)` tag, the title, and then `-` bullets — one per change.
-- Commit automatically as work completes: apply the tagged types and the message format above to every commit, at least one commit per cohesive change, without waiting for an explicit commit request. **Never push automatically** — pushing to the remote is always a deliberate, explicit action; deploys run through the push-to-deploy workflow (`README.md` → Deployment), and an explicit deployment push should use `npm run git:deploy` (refreshes the `DOT_ENV` secret first, then pushes `portfolio`).
+- Commit automatically as work completes: apply the tagged types and the message format above to every commit, at least one commit per cohesive change, without waiting for an explicit commit request. **Never push automatically** — pushing to the remote is always a deliberate, explicit action; deploys run through the push-to-deploy workflow (`README.md` → Deployment), and an explicit deployment push should use `npm run github:deploy` (refreshes the `DOT_ENV` secret first, then pushes `portfolio`).
 - Keep changes focused; include manual verification steps in the list when relevant. Repository URL and default branch are listed in `README.md`.
