@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "dribbble": {
+        "type": "local",
+        "command": [
+          "node",
+          "--env-file",
+          ".env",
+          "node_modules/dribbble-mcp/dist/index.js"
+        ],
+        "cwd": "."
+      }
+    }
+  }
+}
