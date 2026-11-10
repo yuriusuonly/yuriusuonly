@@ -4,7 +4,7 @@
     "servers": {
       "dribbble": {
         "type": "local",
-        "command": ["bash", "-lc", "set -a && . ./.env && set +a && npx -y dribbble-mcp"]
+        "command": ["sh", "-c", "set -a && . ./.env && set +a && exec npx -y dribbble-mcp"]
       }
     }
   }
