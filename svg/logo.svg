@@ -1,11 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Portfolio app logo">
-  <!-- Blue bento tile (primary) -->
-  <rect width="1024" height="1024" rx="224" fill="#25F4EE"/>
-  <!-- Heavy geometric letter P (even-odd: outer shape + bowl counter) -->
-  <path fill-rule="evenodd"
-        d="M296 288 H560 A136 136 0 0 1 560 560 H400 V760 H296 Z
-           M400 392 H500 A40 40 0 0 1 500 472 H400 Z"
-        fill="#FFFFFF"/>
+  <!-- Dark background -->
+  <rect width="1024" height="1024" rx="224" fill="#161823"/>
+  <!-- TikTok-style highlighted letter Y -->
+  <g fill-rule="evenodd">
+    <!-- Red highlight -->
+    <path transform="translate(-26 18)"
+          d="M240 220 L390 220 L512 400 L634 220 L784 220 L592 520 L592 800 L432 800 L432 520 Z"
+          fill="#FE2C55"/>
+    <!-- Cyan highlight -->
+    <path transform="translate(26 -18)"
+          d="M240 220 L390 220 L512 400 L634 220 L784 220 L592 520 L592 800 L432 800 L432 520 Z"
+          fill="#25F4EE"/>
+    <!-- White foreground -->
+    <path d="M240 220 L390 220 L512 400 L634 220 L784 220 L592 520 L592 800 L432 800 L432 520 Z"
+          fill="#FFFFFF"/>
+  </g>
   <!-- Corner crop-mark chevron accent -->
   <path d="M812 216 H856 V260" fill="none" stroke="#FFFFFF" stroke-width="20" stroke-linecap="square"/>
 </svg>
