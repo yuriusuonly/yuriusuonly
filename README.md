@@ -32,6 +32,7 @@ Docs:
 | `EXPO_TOKEN` | Expo access token consumed by `eas-cli` through the sourced `.env` (locally and in CI); create at expo.dev → Account settings → Access tokens; keep secret. |
 | `EAS_PROJECT_ID` | Expo Hosting project id printed by `npm run eas:init`; consumed by `app.config.js` (`extra.eas.projectId`). |
 | `EAS_PROJECT_SLUG` | Expo/EAS project slug (`yuriusuonly`) — must match the remote project; consumed by `app.config.js` (`expo.slug`). |
+| `GIT_REPO_URL` | HTTPS push URL of the GitHub repository (`https://github.com/yuriusuonly/yuriusuonly.git`), used by `npm run git:deploy`. |
 | `GH_TOKEN` | GitHub PAT used by the `ci:secrets` script (`gh` reads it automatically from the sourced environment); keep secret. |
 
 Notes:
@@ -76,7 +77,7 @@ npm run eas         # packages the project and runs .eas/workflows/deploy.yml on
 ```
 
 - **Pipeline:** `.eas/workflows/deploy.yml` is an Expo Workflows file with a `deploy` job — the web build and production Expo Hosting publish execute **on EAS servers**; `npm run eas` (`eas workflow:run`, sourced with `EXPO_TOKEN` from `.env`) only packages the project source, uploads it, and waits for the EAS-side run. The repo's local `build/` is untouched.
-- **Automated:** the GitHub Actions workflow `.github/workflows/deployment.yml` runs on push to `portfolio` (or manual dispatch): it restores `.env` from the `DOT_ENV` repository secret, then runs `npm run eas`. Nothing is committed or pushed back to the repository. Update/push are manual via `npm run git:deploy` — it refreshes the `DOT_ENV` secret first (requires `gh`, authenticated via `GH_TOKEN` in `.env`), then pushes `portfolio`, so the workflow always reads a fresh `.env` snapshot.
+- **Automated:** the GitHub Actions workflow `.github/workflows/deployment.yml` runs on push to `portfolio` (or manual dispatch): it restores `.env` from the `DOT_ENV` repository secret, then runs `npm run eas`. Nothing is committed or pushed back to the repository. Update/push are manual via `npm run git:deploy` — it refreshes the `DOT_ENV` secret first, then pushes `portfolio` to the `GIT_REPO_URL` `.env` value with the gh credential helper (`credential.helper=!gh auth git-credential`, authenticated via `GH_TOKEN` in `.env`), so the workflow always reads a fresh `.env` snapshot.
 - **EAS Dashboard environment:** the packaged upload honors `.gitignore`, so `.env` is not sent to EAS — re-create the config-derived variables (`EXPO_PUBLIC_TITLE`, `EXPO_PUBLIC_DESCRIPTION`, `EXPO_PUBLIC_VERSION`, `EAS_PROJECT_ID`, `EAS_PROJECT_SLUG`) in the EAS project's environment or the EAS-side export fails while evaluating `app.config.js`.
 - `eas-cli` (devDependency) authenticates with only the `EXPO_TOKEN` access token in `.env` (no interactive login — create at expo.dev → Account settings → Access tokens); `app.config.js` supplies the linked project via `extra.eas.projectId` (from `EAS_PROJECT_ID` in `.env` — the config is fully env-derived and cannot be written to by the CLI), and its `slug` comes from `EAS_PROJECT_SLUG` in `.env` (must match the remote EAS project).
 - Keep the EAS GitHub integration disconnected while the GitHub Actions workflow is the push trigger (the workflow file's `on.push` would double-run otherwise).

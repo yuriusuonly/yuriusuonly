@@ -13,7 +13,7 @@
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
     "ci:secrets": "set -a && . ./.env && set +a && gh secret set DOT_ENV < .env",
-    "git:deploy": "set -a && . ./.env && set +a && npm run ci:secrets && git push https://x-access-token:${GH_TOKEN}@github.com/yuriusuonly/yuriusuonly.git portfolio:portfolio",
+    "git:deploy": "set -a && . ./.env && set +a && npm run ci:secrets && git -c \"credential.helper=!gh auth git-credential\" push \"$GIT_REPO_URL\" portfolio:portfolio",
     "eas:init": "set -a && . ./.env && set +a && eas init",
     "eas": "set -a && . ./.env && set +a && eas workflow:run .eas/workflows/deploy.yml --non-interactive --wait"
   },
