@@ -1,6 +1,6 @@
 # Push-to-deploy for Expo Hosting: restores `.env` from the DOT_ENV secret and
 # runs the `eas` deploy pipeline (static export, then a non-interactive
-# production `eas-cli deploy` authenticated by the `EXPO_TOKEN` inside `.env`).
+# production `eas deploy` authenticated by the `EXPO_TOKEN` inside `.env`).
 # Nothing is committed or pushed back to the repository, so no `[skip ci]`
 # guard is required. Required repository secret (see README.md → Deployment):
 # - DOT_ENV — full `.env` file contents (EXPO_PUBLIC_*, PORT, EXPO_TOKEN,
