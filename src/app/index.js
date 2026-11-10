@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Animated, Image, Pressable, Text, View } from "react-native";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { useExpansionStore } from "../stores/expansion-store.js";
 import config from "../shared/config.js";
 import { COLORS, DIMENSIONS } from "../shared/tokens.js";
@@ -101,6 +101,16 @@ export default function Index() {
   const router = useRouter();
   const [leaving, setLeaving] = useState(/** @type {{ href: string, origin: import("../stores/expansion-store.js").ExpansionOrigin, accent: string }|null} */ (null));
   const coverGrow = useRef(new Animated.Value(0)).current;
+
+  // Clear any stale forward cover when Home is (re)focused so returning here
+  // only shows the shell's closing (collapse) animation, never a replayed open.
+  useFocusEffect(
+    useCallback(() => {
+      coverGrow.stopAnimation();
+      coverGrow.setValue(0);
+      setLeaving(null);
+    }, [coverGrow])
+  );
 
   // Pressed-card cover: grow the tile accent disc from the click, then stage
   // the destination handoff and navigate.
