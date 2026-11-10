@@ -17,7 +17,7 @@
 - **No absolute paths anywhere in the project** (source, configs, docs). Use workspace-relative paths; exception: `node_modules/` internals (e.g. an installed package's own config) may do what the tooling requires.
 - Routing uses Expo Router file-based routes under `src/app/` (e.g. `_layout.js`, `index.js`, `+not-found.js`, `+html.js`).
 - API/special routes follow Expo Router web conventions in filenames: `src/app/api/health+api.js`, `manifest.json+api.js`, `robots.txt+api.js`, `service-worker.js+api.js`.
-- Shared app config: `src/shared/config.js` reads `EXPO_PUBLIC_*` env vars; `app.config.js` derives app name/slug/scheme/version from `EXPO_PUBLIC_TITLE`/`EXPO_PUBLIC_VERSION`.
+- Shared app config: `src/shared/config.js` reads `EXPO_PUBLIC_*` env vars; `app.config.js` derives app name/scheme/version from `EXPO_PUBLIC_TITLE`/`EXPO_PUBLIC_VERSION` and the Expo/EAS slug from `EAS_PROJECT_SLUG`.
 - Assets: `png/`, `svg/`, `ttf/` (custom font `Outfit` loaded in `src/app/_layout.js` from `ttf/Outfit-VariableFont_wght.ttf`).
 
 ## Runtime & deployment notes

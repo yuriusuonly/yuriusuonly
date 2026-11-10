@@ -15,7 +15,7 @@ Docs:
 
 | Key | Purpose |
 | --- | --- |
-| `EXPO_PUBLIC_TITLE` | App/site title (client-visible). Used for Expo app `name`/`scheme` in `app.config.js` (slug is a fixed identity constant matching the EAS project), UI/config (`src/shared/config.js`), document title/meta, and PWA manifest. |
+| `EXPO_PUBLIC_TITLE` | App/site title (client-visible). Used for Expo app `name`/`scheme` in `app.config.js`, UI/config (`src/shared/config.js`), document title/meta, and PWA manifest. |
 | `EXPO_PUBLIC_DESCRIPTION` | App/site description (client-visible). Used in shared config, HTML meta description, and PWA manifest. |
 | `EXPO_PUBLIC_VERSION` | App version string (client-visible). Used for Expo app `version` in `app.config.js` and exposed via shared config. |
 | `PROTOCOL` | Protocol for the app/service environment (e.g. `https`). |
@@ -28,6 +28,7 @@ Docs:
 | `DRIBBBLE_CLIENT_SECRET` | OAuth app Client Secret for the local `dribbble` MCP server; keep secret. |
 | `EXPO_TOKEN` | Expo access token consumed by `eas-cli` through the sourced `.env` (locally and in CI); create at expo.dev → Account settings → Access tokens; keep secret. |
 | `EAS_PROJECT_ID` | Expo Hosting project id printed by `npm run eas:init`; consumed by `app.config.js` (`extra.eas.projectId`). |
+| `EAS_PROJECT_SLUG` | Expo/EAS project slug (`yuriusuonly`) — must match the remote project; consumed by `app.config.js` (`expo.slug`). |
 | `GH_TOKEN` | GitHub PAT used by the `ci:secrets` script (`gh` reads it automatically from the sourced environment); keep secret. |
 
 Notes:
@@ -73,8 +74,8 @@ npm run eas         # packages the project and runs .eas/workflows/deploy.yml on
 
 - **Pipeline:** `.eas/workflows/deploy.yml` is an Expo Workflows file with a `deploy` job — the web build and production Expo Hosting publish execute **on EAS servers**; `npm run eas` (`eas workflow:run`, sourced with `EXPO_TOKEN` from `.env`) only packages the project source, uploads it, and waits for the EAS-side run. The repo's local `build/` is untouched.
 - **Automated:** the GitHub Actions workflow `.github/workflows/deployment.yml` runs on push to `portfolio` (or manual dispatch): it restores `.env` from the `DOT_ENV` repository secret, then runs `npm run eas`. Nothing is committed or pushed back to the repository. Provision/refresh the secret with `npm run ci:secrets` (requires `gh`, authenticated via `GH_TOKEN` in `.env`).
-- **EAS Dashboard environment:** the packaged upload honors `.gitignore`, so `.env` is not sent to EAS — the project configuration variables (`EXPO_PUBLIC_TITLE`, `EXPO_PUBLIC_DESCRIPTION`, `EXPO_PUBLIC_VERSION`) must be re-created in the EAS project's environment, or the EAS-side export fails on the title-derived config.
-- `eas-cli` (devDependency) authenticates with only the `EXPO_TOKEN` access token in `.env` (no interactive login — create at expo.dev → Account settings → Access tokens); `app.config.js` supplies the linked project via `extra.eas.projectId` (from `EAS_PROJECT_ID` in `.env` — the config is fully env-derived and cannot be written to by the CLI), and its `slug` is a fixed identity constant matching the remote EAS project (`yuriusuonly`).
+- **EAS Dashboard environment:** the packaged upload honors `.gitignore`, so `.env` is not sent to EAS — re-create the config-derived variables (`EXPO_PUBLIC_TITLE`, `EXPO_PUBLIC_DESCRIPTION`, `EXPO_PUBLIC_VERSION`, `EAS_PROJECT_ID`, `EAS_PROJECT_SLUG`) in the EAS project's environment or the EAS-side export fails while evaluating `app.config.js`.
+- `eas-cli` (devDependency) authenticates with only the `EXPO_TOKEN` access token in `.env` (no interactive login — create at expo.dev → Account settings → Access tokens); `app.config.js` supplies the linked project via `extra.eas.projectId` (from `EAS_PROJECT_ID` in `.env` — the config is fully env-derived and cannot be written to by the CLI), and its `slug` comes from `EAS_PROJECT_SLUG` in `.env` (must match the remote EAS project).
 - Keep the EAS GitHub integration disconnected while the GitHub Actions workflow is the push trigger (the workflow file's `on.push` would double-run otherwise).
 - The local `web.output: "static"` export still drives the Node/Docker runtime; hosted API routes would need the `server` output mode on Expo Hosting instead.
 
