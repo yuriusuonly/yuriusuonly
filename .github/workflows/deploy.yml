@@ -4,7 +4,7 @@
 # only the finished build/ artifact to EAS for production Hosting. Nothing is
 # pushed back to the repository, and EAS runs no builds (no CI/CD-minute cost).
 # Required repository secret (see README.md → Deployment):
-# - DOT_ENV — full `.env` file contents (EXPO_TOKEN sources EAS auth;
+# - DOT_ENV — full `.env` file contents (EAS_TOKEN sources EAS auth;
 #   EAS_PROJECT_ID/EAS_PROJECT_SLUG link the project; Expo CLI loads the rest
 #   at export time)
 

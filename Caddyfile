@@ -3,7 +3,7 @@
 	# local CA root. Disabling it breaks `npm run caddy:trust` with
 	# "dial tcp [::1]:2019: connect: connection refused".
 	# Disable the automatic HTTP→HTTPS redirect server (it binds :80,
-	# which needs root). TLS is served on {$HTTPS_PORT} only.
+	# which needs root). TLS is served on {$URL_PROXY_PORT} only.
 	auto_https disable_redirects
 	# Never install Caddy's local CA into the system trust store.
 	# Service Workers require a trusted cert — trust the local CA via
@@ -11,6 +11,6 @@
 	#skip_install_trust
 }
 
-https://localhost:{$HTTPS_PORT} {
-	reverse_proxy {$BACKEND_HOST:localhost}:{$PORT}
+https://localhost:{$URL_PROXY_PORT} {
+	reverse_proxy {$BACKEND_HOST:localhost}:{$URL_PORT}
 }

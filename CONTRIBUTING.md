@@ -30,7 +30,7 @@ Use **Mermaid** for diagrams/flowcharts in docs. Example: local dev/proxy runtim
 
 ```mermaid
 flowchart LR
-  A["Browser / Client"] -->|"HTTPS :HTTPS_PORT"| B["Caddy"]
+  A["Browser / Client"] -->|"HTTPS :URL_PROXY_PORT"| B["Caddy"]
   B -->|"reverse_proxy localhost:PORT"| C["Expo Router app (expo serve / dev server)"]
   C --> D["Static web output"]
   C --> E["API routes (/api/health, /manifest.json, /robots.txt, /service-worker.js)"]

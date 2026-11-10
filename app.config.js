@@ -25,7 +25,6 @@ export default function App({ config }) {
     // Must match the slug of the remote Expo/EAS project; sourced from `.env`
     // alongside the rest of the configuration.
     slug: process.env.EAS_PROJECT_SLUG,
-    scheme: process.env.EXPO_PUBLIC_TITLE.toLowerCase(),
     version: process.env.EXPO_PUBLIC_VERSION,
     userInterfaceStyle: "automatic",
     platforms: [

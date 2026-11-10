@@ -13,10 +13,10 @@ RUN npm run expo:build
 FROM node:22-alpine
 
 # Build args from .env (via docker-compose `build.args`); consumed at runtime by
-# the Caddyfile's `{$PORT}`/`{$HTTPS_PORT}` placeholders.
-ARG PORT
-ARG HTTPS_PORT
-ENV PORT=${PORT} HTTPS_PORT=${HTTPS_PORT}
+# the Caddyfile's `{$URL_PORT}`/`{$URL_PROXY_PORT}` placeholders.
+ARG URL_PORT
+ARG URL_PROXY_PORT
+ENV URL_PORT=${URL_PORT} URL_PROXY_PORT=${URL_PROXY_PORT}
 
 # Caddy binary from the official image
 COPY --from=caddy:2-alpine /usr/bin/caddy /usr/local/bin/caddy

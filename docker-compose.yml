@@ -2,18 +2,18 @@
 x-build: &build
   context: .
   args:
-    PORT: ${PORT}
-    HTTPS_PORT: ${HTTPS_PORT}
+    URL_PORT: ${URL_PORT}
+    URL_PROXY_PORT: ${URL_PROXY_PORT}
 
 services:
   server:
     build: *build
-    # `expo serve` ignores the `PORT` env var, so compose interpolates the port
-    # from .env into this argv (no shell):
-    command: ["./node_modules/.bin/expo", "serve", "build", "--port", "${PORT}"]
+    # `expo serve` ignores the `URL_PORT` env var, so compose interpolates the
+    # port from .env into this argv (no shell):
+    command: ["./node_modules/.bin/expo", "serve", "build", "--port", "${URL_PORT}"]
     healthcheck:
       # wget busybox binary present in node:22-alpine; port interpolated from .env
-      test: ["CMD", "wget", "-qO-", "http://localhost:${PORT}/api/health"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:${URL_PORT}/api/health"]
       interval: 10s
       timeout: 5s
       start_period: 10s
@@ -27,7 +27,7 @@ services:
     environment:
       BACKEND_HOST: server
     ports:
-      - "${HTTPS_PORT}:${HTTPS_PORT}"
+      - "${URL_PROXY_PORT}:${URL_PROXY_PORT}"
     depends_on:
       server:
         condition: service_healthy
