@@ -3,7 +3,7 @@
 ## Prerequisites
 - Node.js/npm (Docker image uses Node 22)
 - Docker + Compose for containerized runs
-- `eas-cli` is a devDependency for the `eas` deploy script (Expo Hosting); `gh` (GitHub CLI) remains a system tool for ad-hoc repo admin; Caddy is bundled in the Docker runtime, so for local Caddy commands use a local Caddy install
+- `eas-cli` is a devDependency for the `eas` deploy script (Expo Hosting); `gh` (GitHub CLI) remains a system tool, used by `npm run ci:secrets` (authenticated via the `GH_TOKEN` key in `.env`); Caddy is bundled in the Docker runtime, so for local Caddy commands use a local Caddy install
 
 ## Setup
 1. `npm ci`
@@ -75,7 +75,7 @@ flowchart TD
 - Never include the `@example` tag in JSDoc.
 
 ## Verification
-- No lint/test/typecheck scripts are configured and no hosted CI runs on the repo; deployment is manual via `npm run eas` (`README.md` → Deployment). Manually verify changes: `npm run expo:build` and/or `npm run expo:start` (and `npm run docker:build` if touching container/runtime config).
+- No lint/test/typecheck scripts are configured; the only CI is the push-to-deploy Expo Hosting workflow (`.github/workflows/deployment.yml`, documented under `README.md` → Deployment). Manually verify changes: `npm run expo:build` and/or `npm run expo:start` (and `npm run docker:build` if touching container/runtime config).
 - `/api/health` returns `{ status: "ok", timestamp, uptime }` with `Cache-Control: no-store` (used by Docker healthcheck).
 
 ## Documentation maintenance

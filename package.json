@@ -12,6 +12,7 @@
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
+    "ci:secrets": "set -a && . ./.env && set +a && gh secret set DOT_ENV < .env",
     "eas:init": "set -a && . ./.env && set +a && eas-cli init",
     "eas": "set -a && . ./.env && set +a && npm run expo:build && eas-cli deploy --non-interactive --prod --export-dir build"
   },
