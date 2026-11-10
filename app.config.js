@@ -34,6 +34,13 @@ export default function App({ config }) {
       bundler: "metro",
       favicon: "png/logo.png"
     },
+    extra: {
+      eas: {
+        // Expo/Hosting project id (from `eas:init`, stored in `.env` because
+        // this config is fully derived from it and cannot be written to).
+        projectId: process.env.EAS_PROJECT_ID
+      }
+    },
     plugins: [
       [
         "expo-router",

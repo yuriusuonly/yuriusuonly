@@ -1,8 +1,8 @@
 # Portfolio
 
-A web-only Expo Router app styled with NativeWind/Tailwind (React Native Web + NativeWind v4 + Tailwind v3, React 19). Static web export with server-rendered API routes; deployable via Node (expo serve) + Caddy or Docker.
+A web-only Expo Router app styled with NativeWind/Tailwind (React Native Web + NativeWind v4 + Tailwind v3, React 19). Static web export with server-rendered API routes; deployable via Expo Hosting (EAS), Node (expo serve) + Caddy, or Docker.
 
-Repository: `git@github.com:yuriusuonly/yuriusuonly.git` (default branch: `portfolio`).
+Repository: `git@github.com:yuriusuonly/yuriusuonly.git` (default branch: `portfolio`, the only branch).
 
 Docs:
 - [CONTRIBUTING.md](./CONTRIBUTING.md) — rules, conventions, structure, workflows
@@ -26,9 +26,9 @@ Docs:
 | `API_URL` | API base/path value for the project (project-level config value). |
 | `DRIBBBLE_CLIENT_ID` | OAuth app Client ID for the local `dribbble` MCP server (`opencode.json` tooling; placeholder until registered at dribbble.com/account/applications/new). |
 | `DRIBBBLE_CLIENT_SECRET` | OAuth app Client Secret for the local `dribbble` MCP server; keep secret. |
-| `GIT_AUTHOR_NAME` | Commit author `user.name` (e.g. `Yuriusu`) — source for the `ci:secrets:name` script and the `DOT_ENV` CI secret. |
-| `GIT_AUTHOR_EMAIL` | Commit author `user.email` (e.g. `yuriusu.dev@gmail.com`) — source for the `ci:secrets:email` script and the `DOT_ENV` CI secret. |
-| `GH_TOKEN` | GitHub PAT used by the `ci:secrets` scripts (`gh` reads it automatically from the sourced environment); keep secret — needed for repository secret provisioning. |
+| `EXPO_TOKEN` | Expo access token used by the `eas:deploy` script (`eas-cli` reads it automatically from the sourced environment); create at expo.dev → Account settings → Access tokens; keep secret. |
+| `EAS_PROJECT_ID` | Expo Hosting project id printed by `npm run eas:init`; consumed by `app.config.js` (`extra.eas.projectId`). |
+| `GH_TOKEN` | GitHub PAT for ad-hoc `gh` CLI commands; keep secret. |
 
 Notes:
 - Keep `.env` **POSIX-compatible** (simple `KEY=value` lines): every consumer loads it natively — `set -a` sourcing in `expo:start`/`expo:serve`, Caddy's `--envfile` in `caddy:run`, and Node's `--env-file` in `opencode.json`.
@@ -64,14 +64,17 @@ npm run caddy:trust  # trust local CA in system (needed for SW in some browsers)
 - Caddyfile admin endpoint stays enabled (`localhost:2019`) because `caddy:trust` needs it; disabling it breaks `caddy:trust`.
 - The automatic HTTP→HTTPS redirect server is disabled (binds `:80`, needs root); TLS serves on `$HTTPS_PORT` only.
 
-## Continuous integration
-- GitHub Actions workflow `.github/workflows/deployment.yml` runs on push to the `portfolio` branch (or via manual dispatch): it restores `.env`, builds the static web export (with `EXPO_BASE_URL` set to the repository subpath for GitHub Pages), and **force-publishes the staged output** (`build/client` assets + `build/server/index.html` prerendered as `index.html`/`404.html`) as one orphan commit — the entire content of the `deployment` branch — with a `(chore)` message whose title is a UTC timestamp (`date -u +%Y%m%dT%H%M%SZ`, e.g. `(chore) 20261110T093000Z`) plus `[skip ci]`.
-- Branch model: `portfolio` is the default branch and holds all source code; `deployment` is a generated artifact branch served by GitHub Pages (source: `deployment`, path `/`) — never edit or push it manually, changes are overwritten on the next run. Server-only API routes (`/api/health`, `/manifest.json`, `/robots.txt`, `/service-worker.js`) need the Node (`expo serve`) + Caddy or Docker runtime instead and are not part of the Pages output.
-- Required repository **secrets** (Settings → Secrets and variables → Actions → New repository secret):
-  - `GIT_AUTHOR_NAME` — commit author `user.name` (e.g. `Yuriusu`)
-  - `GIT_AUTHOR_EMAIL` — commit author `user.email` (e.g. `yuriusu.dev@gmail.com`)
-  - `DOT_ENV` — the full `.env` file contents (`.env` is gitignored, so CI recreates it from this secret; Expo CLI loads it during the build)
-- Provision them with `npm run ci:secrets` (both steps), or individually: `ci:secrets:name` → `GIT_AUTHOR_NAME`, `ci:secrets:email` → `GIT_AUTHOR_EMAIL`, `ci:secrets:env` → `DOT_ENV`. `ci:secrets:author` bundles the two author steps. All values read from `.env` (see the table above); authentication uses the `GH_TOKEN` variable in `.env` (no `gh auth login` needed).
+## Deployment (Expo Hosting)
+
+```bash
+npm run eas:login   # one-time: sign in to your Expo account (or set EXPO_TOKEN in .env instead)
+npm run eas:init    # one-time: link the project; paste the printed Project ID into .env (EAS_PROJECT_ID)
+npm run eas:deploy  # exports to build/ then deploys to production (loads .env; EXPO_TOKEN auth)
+```
+
+- `eas-cli` is a devDependency; `app.config.js` supplies the linked project via `extra.eas.projectId` (from `EAS_PROJECT_ID` in `.env` — the config is fully env-derived and cannot be written to by the CLI).
+- The current `web.output` is `static`, so the deployed site serves the statically rendered pages; the API routes (`/api/health`, `/manifest.json`, `/robots.txt`, `/service-worker.js`) stay local/Node/Docker features. Switching `web.output` to `server` replaces this Docker `expo serve` model with full hosted API routes.
+- `build/` is regenerated by `eas:deploy` every time (the CLI requires a fresh export; `--export-dir build` matches `expo:build`'s output dir).
 
 ## Docker
 
@@ -103,9 +106,6 @@ npm run docker:down  # stop containers
 ```text
 ./
 ├── AGENTS.md
-├── .github/
-│   └── workflows/
-│       └── deployment.yml
 ├── Caddyfile
 ├── README.md
 ├── CONTRIBUTING.md
