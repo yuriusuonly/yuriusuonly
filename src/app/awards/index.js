@@ -21,10 +21,10 @@ import DomainShell from "../../components/domain/domain-shell.js";
 import TiltCard from "../../components/motion/tilt-card.js";
 
 /**
- * Awards dimension route (`src/app/dimensions/awards.js`): red-void world
+ * Awards dimension route (`src/app/awards/index.js`): red-void world
  * opened from the Awards stat and 172-Global-Design-Awards portals.
  * Stat placeholder copy — wire real data before production.
- * @module app/dimensions/awards
+ * @module app/awards
  */
 
 /**

@@ -21,10 +21,10 @@ import DomainShell from "../../components/domain/domain-shell.js";
 import TiltCard from "../../components/motion/tilt-card.js";
 
 /**
- * Projects dimension route (`src/app/dimensions/projects.js`): home-theme
+ * Projects dimension route (`src/app/projects/index.js`): home-theme
  * cyan-void world opened from the featured/logo and Projects portals.
  * Stat placeholder copy — wire real data before production.
- * @module app/dimensions/projects
+ * @module app/projects
  */
 
 /**

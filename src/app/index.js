@@ -211,7 +211,7 @@ export default function Index() {
               <Text className="font-outfit text-base md:text-lg font-semibold">About Me</Text>
             </View>
             <View className="h-56 flex-row gap-3 md:flex-1 md:h-auto md:gap-4">
-              <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/dimensions/clients", COLORS.ink, e)} className="flex-1 active:opacity-90">
+              <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/clients", COLORS.ink, e)} className="flex-1 active:opacity-90">
                 <TiltCard style={{ flex: 1 }} maxTilt={10}>
                   <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
                     <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
@@ -225,8 +225,8 @@ export default function Index() {
                 </TiltCard>
               </Pressable>
               <View className="flex-col gap-3 md:gap-4 w-24 md:w-40">
-                <StatTile number="251" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/dimensions/projects" onOpen={openDimension} />
-                <StatTile number="156" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/dimensions/awards" onOpen={openDimension} />
+                <StatTile number="251" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/projects" onOpen={openDimension} />
+                <StatTile number="156" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/awards" onOpen={openDimension} />
               </View>
             </View>
           </View>

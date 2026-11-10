@@ -104,7 +104,10 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 
 | Route | Source | Purpose |
 | --- | --- | --- |
-| `/` | `src/app/index.js` | Home page: title, description, and app logo |
+| `/` | `src/app/index.js` | Home page: bento-grid portfolio with portal tiles to dimension screens |
+| `/projects` | `src/app/projects/index.js` | Projects dimension page (themed highlights + return portal) |
+| `/awards` | `src/app/awards/index.js` | Awards dimension page (themed highlights + return portal) |
+| `/clients` | `src/app/clients/index.js` | Clients dimension page (themed highlights + return portal) |
 | `404` (fallback) | `src/app/+not-found.js` | Not-found screen for unmatched routes |
 | document shell | `src/app/+html.js` | Custom HTML document (charset/viewport/meta/manifest link) |
 | `/api/health` | `src/app/api/health+api.js` | JSON `{status, timestamp, uptime}`; `Cache-Control: no-store`; used by Docker healthcheck |
@@ -148,6 +151,12 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   ├── index.js
 │   │   ├── api/
 │   │   │   └── health+api.js
+│   │   ├── awards/
+│   │   │   └── index.js
+│   │   ├── clients/
+│   │   │   └── index.js
+│   │   ├── projects/
+│   │   │   └── index.js
 │   │   ├── manifest.json+api.js
 │   │   ├── robots.txt+api.js
 │   │   └── service-worker.js+api.js

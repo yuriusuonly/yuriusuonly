@@ -21,10 +21,10 @@ import DomainShell from "../../components/domain/domain-shell.js";
 import TiltCard from "../../components/motion/tilt-card.js";
 
 /**
- * Clients dimension route (`src/app/dimensions/clients.js`): ink-void world
+ * Clients dimension route (`src/app/clients/index.js`): ink-void world
  * opened from the Clients portal. Client-row placeholder copy — wire real
  * data before production.
- * @module app/dimensions/clients
+ * @module app/clients
  */
 
 /**

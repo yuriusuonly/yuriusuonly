@@ -16,7 +16,7 @@
 
 ## Project structure / conventions
 - **No absolute paths anywhere in the project** (source, configs, docs). Use workspace-relative paths; exception: `node_modules/` internals (e.g. an installed package's own config) may do what the tooling requires.
-- Routing uses Expo Router file-based routes under `src/app/` (e.g. `_layout.js`, `index.js`, `+not-found.js`, `+html.js`, and dimension pages under `src/app/dimensions/`).
+- Routing uses Expo Router file-based routes under `src/app/` (e.g. `_layout.js`, `index.js`, `+not-found.js`, `+html.js`, and dimension pages under `src/app/{projects,awards,clients}/index.js`).
 - Shared modules live under `src/shared/` (`config.js` reads `EXPO_PUBLIC_*` env vars; `theme.js` exports base color tokens and the `DimensionTheme` shape only — screens compose their own dimension themes internally from `COLORS`). Zustand stores live under `src/stores/` (`expansion-store.js` — overture origins + collapse exits). Reusable components live under `src/components/` (`motion/tilt-card.js`, `background/animated-background.js`, `domain/domain-shell.js`).
 - Motion stack: React Native `Animated` + DOM pointer events only — no WebGL (`three` was removed; keep the 2D approach); `zustand` for expansion overture state.
 - API/special routes follow Expo Router web conventions in filenames: `src/app/api/health+api.js`, `manifest.json+api.js`, `robots.txt+api.js`, `service-worker.js+api.js`.
