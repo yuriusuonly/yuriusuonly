@@ -3,7 +3,7 @@
 ## Prerequisites
 - Node.js/npm (Docker image uses Node 22)
 - Docker + Compose for containerized runs
-- `eas-cli` is a devDependency for the `eas:deploy` script (Expo Hosting); `gh` (GitHub CLI) remains a system tool, used by `npm run github:secrets` and `npm run github:deploy` (authenticated via the `GH_TOKEN` key in `.env`); Caddy is bundled in the Docker runtime, so for local Caddy commands use a local Caddy install
+- `eas-cli` is invoked on demand via `npx` by the `eas:*` scripts (Expo Hosting); `gh` (GitHub CLI) remains a system tool, used by `npm run github:secrets` and `npm run github:deploy` (authenticated via the `GH_TOKEN` key in `.env`); Caddy is bundled in the Docker runtime, so for local Caddy commands use a local Caddy install
 
 ## Setup
 1. `npm ci`
@@ -16,7 +16,7 @@
 - Dev server: `npm run expo:start` (requires `PORT` in `.env`). Tunnel: `npm run expo:start:tunnel`.
 - Add convenience/repeatable project commands as scripts in `package.json`; do not create a `scripts/` directory for them. Treat `package.json` scripts as the single source of truth for how to run and configure the project.
 - Keep `package.json` dependencies entries limited to what is actually imported/used in the entire project — source code (`src/`), root configs (`app.config.js`, `babel.config.js`, `metro.config.js`, `tailwind.config.js`, etc.), and packages referenced in `package.json` scripts (e.g. the `expo` CLI invoked by the `expo:*` scripts). Do not list unused dependencies. List explicitly imported packages even if they are also a dependency of another package.
-- `devDependencies` holds workspace-local tooling that is not imported by the app (e.g. `eas-cli`).
+- `devDependencies` holds workspace-local tooling that is not imported by the app.
 
 ## Guides
 

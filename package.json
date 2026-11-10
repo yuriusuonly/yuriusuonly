@@ -17,8 +17,8 @@
     "github:secrets": "set -a && . ./.env && set +a && gh secret set DOT_ENV --repo \"$GH_REPO\" < .env",
     "github:remote": "set -a && . ./.env && set +a && git remote add origin \"$GH_REPO\"",
     "github:deploy": "set -a && . ./.env && set +a && npm run github:secrets && git -c \"credential.helper=!gh auth git-credential\" push origin HEAD",
-    "eas:initialize": "set -a && . ./.env && set +a && export EXPO_TOKEN=\"$EAS_TOKEN\" && eas init",
-    "eas:deploy": "set -a && . ./.env && set +a && export EXPO_TOKEN=\"$EAS_TOKEN\" && npm run expo:build && eas deploy --non-interactive --prod --export-dir build"
+    "eas:initialize": "set -a && . ./.env && set +a && export EXPO_TOKEN=\"$EAS_TOKEN\" && npx --yes eas-cli init",
+    "eas:deploy": "set -a && . ./.env && set +a && export EXPO_TOKEN=\"$EAS_TOKEN\" && npm run expo:build && npx --yes eas-cli deploy --non-interactive --prod --export-dir build"
   },
   "dependencies": {
     "babel-preset-expo": "~58.0.24",
@@ -34,7 +34,5 @@
     "tailwindcss": "^3.4.17",
     "zustand": "^5.1.0"
   },
-  "devDependencies": {
-    "eas-cli": "^27.6.0"
-  }
+  "devDependencies": {}
 }
