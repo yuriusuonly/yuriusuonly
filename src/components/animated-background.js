@@ -30,8 +30,8 @@ function Blob({ left, top, size, color, driftMs }) {
   useEffect(() => {
     const drift = Animated.loop(
       Animated.sequence([
-        Animated.timing(anim, { toValue: 1, duration: driftMs, useNativeDriver: true }),
-        Animated.timing(anim, { toValue: 0, duration: driftMs, useNativeDriver: true })
+        Animated.timing(anim, { toValue: 1, duration: driftMs, useNativeDriver: false }),
+        Animated.timing(anim, { toValue: 0, duration: driftMs, useNativeDriver: false })
       ])
     );
     drift.start();

@@ -82,14 +82,14 @@ export default function DomainShell({ theme, children, returnPortal = false, cal
     if (mode === "uncover") {
       // Expansion end: arrive still covered by the pressed tile's accent
       // disc, then dissolve the cover into the new environment.
-      Animated.timing(fade, { toValue: 1, duration: 850, useNativeDriver: true }).start(() => setEntered(true));
+      Animated.timing(fade, { toValue: 1, duration: 850, useNativeDriver: false }).start(() => setEntered(true));
       return undefined;
     }
     // Collapse: return plays the open animation in reverse — home mounts covered
     // and the disc shrinks back into the "Collapse domain" press point.
     Animated.parallel([
-      Animated.timing(grow, { toValue: 0, duration: 700, useNativeDriver: true }),
-      Animated.timing(fade, { toValue: 1, duration: 700, useNativeDriver: true, delay: 220 })
+      Animated.timing(grow, { toValue: 0, duration: 700, useNativeDriver: false }),
+      Animated.timing(fade, { toValue: 1, duration: 700, useNativeDriver: false, delay: 220 })
     ]).start(() => setEntered(true));
     return undefined;
   }, [mode, grow, fade, origin]);

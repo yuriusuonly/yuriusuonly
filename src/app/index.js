@@ -141,7 +141,7 @@ export default function Index() {
       router.push(leaving.href);
       return undefined;
     }
-    Animated.timing(coverGrow, { toValue: 1, duration: COVER_MS, useNativeDriver: true }).start(({ finished }) => {
+    Animated.timing(coverGrow, { toValue: 1, duration: COVER_MS, useNativeDriver: false }).start(({ finished }) => {
       if (!finished) {
         return;
       }
