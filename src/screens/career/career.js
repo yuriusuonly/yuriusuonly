@@ -96,8 +96,8 @@ function CareerCard({ career, halfWidth = false }) {
         <View className="flex-row items-center gap-3">
           <Image
             source={icon}
-            className="!h-10 !w-10 rounded-full border border-white/20"
-            resizeMode="cover"
+            className="!h-10 !w-10"
+            resizeMode="contain"
             accessibilityLabel={`${name} icon`}
           />
           <Text className="flex-1 font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#C9CCDD]">{name}</Text>
