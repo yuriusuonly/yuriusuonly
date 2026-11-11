@@ -137,7 +137,7 @@ export default function ResumeDimension() {
               </SectionRow>
 
               <SectionRow label="Career">
-                <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Lifesaver Medicords for Doctor • Junior Mobile Developer</Text>
+                <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Lifesaver Medicords Inc. • Junior Mobile Developer</Text>
                 <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2026 • Aurora Blvd, Cubao, Quezon City</Text>
                 <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
                   A SaaS startup, digitalizes medical records with online consultations.
