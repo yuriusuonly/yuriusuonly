@@ -12,6 +12,8 @@ import mojisumi from "../projects/mojisumi.js";
 import cs50x from "../awards/cs50x.js";
 
 const avatar = require("../../../jpg/avatar.jpg");
+const qcuIcon = require("../../../png/qcu-icon.png");
+const lccIcon = require("../../../png/lcc-icon.png");
 
 /**
  * Resume dimension theme composed locally from base color tokens (neutral paper
@@ -241,16 +243,22 @@ export default function ResumeDimension() {
               </SectionRow>
 
               <SectionRow label="Education">
-                <View>
-                  <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Bachelor of Science in Information Technology • Quezon City Polytechnic University</Text>
-                  <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2017 • Sinagtala St, corner Batasan Rd, Batasan Hills, Quezon City</Text>
+                <View className="flex-row items-start gap-3">
+                  <Image source={qcuIcon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel="Quezon City Polytechnic University icon" />
+                  <View className="flex-1">
+                    <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Bachelor of Science in Information Technology • Quezon City Polytechnic University</Text>
+                    <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2017 • Sinagtala St, corner Batasan Rd, Batasan Hills, Quezon City</Text>
+                  </View>
                 </View>
-                <View className="mt-4">
-                  <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Bachelor of Science in Information Systems • La Concepcion College</Text>
-                  <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2014 - 2016 • Kaypian Road, corner Quirino St, San Jose del Monte, Bulacan</Text>
-                  <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
-                    Learned C, C++, and Java programming languages.
-                  </Text>
+                <View className="mt-4 flex-row items-start gap-3">
+                  <Image source={lccIcon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel="La Concepcion College icon" />
+                  <View className="flex-1">
+                    <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Bachelor of Science in Information Systems • La Concepcion College</Text>
+                    <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2014 - 2016 • Kaypian Road, corner Quirino St, San Jose del Monte, Bulacan</Text>
+                    <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
+                      Learned C, C++, and Java programming languages.
+                    </Text>
+                  </View>
                 </View>
               </SectionRow>
 

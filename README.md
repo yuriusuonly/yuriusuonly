@@ -151,7 +151,9 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   ├── superchat-icon.png
 │   ├── mojisumi-icon.png
 │   ├── cs50x-icon.png
-│   └── lifesaver-icon.png
+│   ├── lifesaver-icon.png
+│   ├── qcu-icon.png
+│   └── lcc-icon.png
 ├── src/
 │   ├── app/
 │   │   ├── _layout.js
