@@ -23,7 +23,6 @@ const HOME_THEME = {
 };
 import DomainShell from "../components/domain-shell.js";
 import TiltCard from "../components/tilt-card.js";
-import logo from "../../png/logo.png";
 import avatar from "../../jpg/avatar.jpg";
 
 /**
@@ -111,9 +110,9 @@ function originOf(event) {
 }
 
 /**
- * Landing screen rendered at `/`: left identity card + right pane (large black
- * projects portal and two stacked stat portals beside it), staged inside the
- * home-themed 2D dimension.
+ * Landing screen rendered at `/`: left identity card + right pane (three
+ * equal-height stat portals — Experience, Projects, Awards), staged inside
+ * the home-themed 2D dimension.
  *
  * @returns {JSX.Element} The 2D bento-grid portfolio layout.
  */
@@ -206,26 +205,14 @@ export default function Index() {
             </View>
           </View>
 
-          {/* Right: large black projects card with the two stat cards stacked below it */}
+          {/* Right: three equal stat portals (Experience, Projects, Awards) */}
           <View className="flex-1 flex-col gap-3 md:gap-4">
             <View className="hidden md:flex flex-row items-center gap-2 opacity-0" pointerEvents="none">
               <Text className="text-base">❖</Text>
               <Text className="font-outfit text-base md:text-lg font-semibold">About Me</Text>
             </View>
             <View className="h-56 md:h-auto md:flex-1">
-              <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/clients", COLORS.ink, e)} className="flex-1 active:opacity-90">
-                <TiltCard style={{ flex: 1 }} maxTilt={10}>
-                  <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
-                    <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
-                    <Image
-                      source={logo}
-                      className="!h-full !w-full"
-                      resizeMode="contain"
-                      accessibilityLabel={`${config.title} clients`}
-                    />
-                  </View>
-                </TiltCard>
-              </Pressable>
+              <StatTile number="1" label="Experience" tileClass="bg-[#161823]" accent={COLORS.ink} numberClass="text-white" href="/clients" onOpen={openDimension} />
             </View>
             <View className="flex-row gap-3 md:flex-1 md:gap-4">
               <View className="h-24 flex-1 md:h-auto md:flex-1">
