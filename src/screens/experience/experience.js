@@ -25,9 +25,9 @@ import lifesaverMedicords from "./lifesaver-medicords.js";
  * Experience dimension screen (`src/screens/experience/experience.js`):
  * ink-void world opened from the Experience portal, rendered by the
  * `/experience` route (`src/app/experience/index.js`). Features the experience
- * cards from this folder (Lifesaver Medicords) — icon avatar, title, role,
- * description, highlight bullets, stack, period · location, and App Store /
- * Play Store link chips.
+ * cards from this folder (Lifesaver Medicords Inc.) — icon avatar, title, role,
+ * description, highlight bullets, stack, period · location, and live site /
+ * App Store / Play Store link chips.
  * @module screens/experience/experience
  */
 
@@ -56,6 +56,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  * @property {string} location Engagement location.
  * @property {string} stack Stack line rendered above the period · location meta.
  * @property {string[]} highlights Highlight bullets rendered between the description and the stack.
+ * @property {string} [liveUrl] Company live site URL; the chip renders only when set.
  * @property {string} [appStoreUrl] Apple App Store URL; the chip renders only when set.
  * @property {string} [playStoreUrl] Google Play Store URL; the chip renders only when set.
  * @property {import("react-native").ImageSourcePropType} icon Card icon asset.
@@ -65,7 +66,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  * Props for {@link ExperienceCard} — content from this folder plus row placement.
  *
  * @typedef {object} ExperienceCardProps
- * @property {ExperienceCardData} experience Experience content, outbound store links, and icon asset.
+ * @property {ExperienceCardData} experience Experience content, outbound live site/store links, and icon asset.
  * @property {boolean} [halfWidth] Render the card at half width on desktop rows.
  */
 
@@ -73,10 +74,10 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  * Experience card inside the experience dimension.
  *
  * @param {ExperienceCardProps} props - Component props.
- * @returns {JSX.Element} A tilting experience card with App Store / Play Store links.
+ * @returns {JSX.Element} A tilting experience card with live site / store links.
  */
 function ExperienceCard({ experience, halfWidth = false }) {
-  const { name, role, description, period, location, stack, highlights, appStoreUrl, playStoreUrl, icon } = experience;
+  const { name, role, description, period, location, stack, highlights, liveUrl, appStoreUrl, playStoreUrl, icon } = experience;
   /**
    * Open an outbound link (new tab on web, external app on native).
    *
@@ -114,6 +115,16 @@ function ExperienceCard({ experience, halfWidth = false }) {
         <Text className="mt-2 font-outfit text-[10px] md:text-xs text-white/50">{stack}</Text>
         <Text className="font-outfit text-[10px] md:text-xs text-white/50">{period} · {location}</Text>
         <View className="mt-4 flex-row flex-wrap gap-3">
+          {liveUrl ? (
+            <Pressable
+              accessibilityRole="link"
+              accessibilityLabel={`Open the ${name} live site`}
+              onPress={() => openLink(liveUrl)}
+              className="rounded-full bg-[#C9CCDD] px-4 py-2 active:opacity-80"
+            >
+              <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">Live site ↗</Text>
+            </Pressable>
+          ) : null}
           {appStoreUrl ? (
             <Pressable
               accessibilityRole="link"
