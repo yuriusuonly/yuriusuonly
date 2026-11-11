@@ -174,8 +174,8 @@ export default function ResumeDimension() {
                 <View className="flex-row items-start gap-3">
                   <Image
                     source={lifesaverMedicords.icon}
-                    className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20"
-                    resizeMode="cover"
+                    className="!h-8 !w-8 md:!h-10 md:!w-10"
+                    resizeMode="contain"
                     accessibilityLabel={`${lifesaverMedicords.name} icon`}
                   />
                   <View className="flex-1">
@@ -209,7 +209,7 @@ export default function ResumeDimension() {
 
               <SectionRow label="Projects">
                 <View className="flex-row items-start gap-3">
-                  <Image source={tiptap.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${tiptap.name} icon`} />
+                  <Image source={tiptap.icon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel={`${tiptap.name} icon`} />
                   <View className="flex-1">
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{tiptap.name}</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{tiptap.stack.replace(/ · /g, " • ")}</Text>
@@ -217,7 +217,7 @@ export default function ResumeDimension() {
                   </View>
                 </View>
                 <View className="mt-4 flex-row items-start gap-3">
-                  <Image source={dinoDash.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${dinoDash.name} icon`} />
+                  <Image source={dinoDash.icon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel={`${dinoDash.name} icon`} />
                   <View className="flex-1">
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{dinoDash.name}</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{dinoDash.stack.replace(/ · /g, " • ")}</Text>
@@ -225,7 +225,7 @@ export default function ResumeDimension() {
                   </View>
                 </View>
                 <View className="mt-4 flex-row items-start gap-3">
-                  <Image source={superchat.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${superchat.name} icon`} />
+                  <Image source={superchat.icon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel={`${superchat.name} icon`} />
                   <View className="flex-1">
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{superchat.name}</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{superchat.stack.replace(/ · /g, " • ")}</Text>
@@ -233,7 +233,7 @@ export default function ResumeDimension() {
                   </View>
                 </View>
                 <View className="mt-4 flex-row items-start gap-3">
-                  <Image source={mojisumi.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${mojisumi.name} icon`} />
+                  <Image source={mojisumi.icon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel={`${mojisumi.name} icon`} />
                   <View className="flex-1">
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{mojisumi.name}</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{mojisumi.stack.replace(/ · /g, " • ")}</Text>
@@ -244,14 +244,14 @@ export default function ResumeDimension() {
 
               <SectionRow label="Education">
                 <View className="flex-row items-start gap-3">
-                  <Image source={qcuIcon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel="Quezon City Polytechnic University icon" />
+                  <Image source={qcuIcon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel="Quezon City Polytechnic University icon" />
                   <View className="flex-1">
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Bachelor of Science in Information Technology • Quezon City Polytechnic University</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2017 • Sinagtala St, corner Batasan Rd, Batasan Hills, Quezon City</Text>
                   </View>
                 </View>
                 <View className="mt-4 flex-row items-start gap-3">
-                  <Image source={lccIcon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel="La Concepcion College icon" />
+                  <Image source={lccIcon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel="La Concepcion College icon" />
                   <View className="flex-1">
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Bachelor of Science in Information Systems • La Concepcion College</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2014 - 2016 • Kaypian Road, corner Quirino St, San Jose del Monte, Bulacan</Text>
@@ -264,7 +264,7 @@ export default function ResumeDimension() {
 
               <SectionRow label="Certificates" divider={false}>
                 <View className="flex-row items-start gap-3">
-                  <Image source={cs50x.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${cs50x.name} icon`} />
+                  <Image source={cs50x.icon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel={`${cs50x.name} icon`} />
                   <View className="flex-1">
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">CS50x: Introduction to Computer Science and the Art of Programming • Harvard University</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">October 2023 • 09fecdac-ae64-42eb-8274-0cc99808d52e</Text>
