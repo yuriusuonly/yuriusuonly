@@ -109,7 +109,7 @@ export default function ResumeDimension() {
                   <Text className="mt-2 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
                 </View>
                 <View className="flex-1 border-b border-[#161823]/30 pb-3">
-                  <Text className="resume-name mt-[4.5rem] md:mt-[5.5rem] font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
+                  <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
                   <Text className="mt-1 font-outfit text-xs md:text-sm text-[#161823]/70">2271 Church Backyard, Barracks Rd, Malaria, Tala, Caloocan City</Text>
                   <View className="mt-2 flex-row flex-wrap items-center">
                     {SOCIAL_LINKS.map((link, index) => (
