@@ -135,7 +135,7 @@ export default function ProjectsDimension() {
               <ProjectCard
                 name="DinoRun"
                 description="A 2D pixel-art adventure game built with the Flutter Flame engine — run, jump, bite, and dash through a post-apocalyptic dino world."
-                stack="Flutter · Flame · Google Fonts"
+                stack="Flutter · Flame Engine"
                 repoUrl="https://github.com/yuriusuonly/dinorun"
                 liveUrl="https://yuriusuonly.itch.io/dinodash"
                 liveLabel="Play"
