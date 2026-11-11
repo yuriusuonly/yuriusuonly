@@ -98,7 +98,7 @@ export default function ResumeDimension() {
               {/* Header */}
               <View className="flex-row">
                 <View className="w-32 md:w-48 pr-6 md:pr-10 items-start">
-                  <View className="resume-avatar h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full border-2 border-[#161823]">
+                  <View className="resume-avatar h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full">
                     <Image
                       source={avatar}
                       className="!h-full !w-full"
