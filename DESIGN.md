@@ -55,7 +55,7 @@
 - Lifesaver Medicords career icon: `png/lifesaver-icon.png` (the Lifesaver logo from lifesaver.care; shown as an icon on the /career career card and /resume career entry).
 - QCU education icon: `png/qcu-icon.png` (cropped QCU logo from qcu.edu.ph; shown as an avatar on the /resume education entry).
 - LCC education icon: `png/lcc-icon.png` (La Concepcion College blavatar from laconcepcioncollege.com; shown as an avatar on the /resume education entry).
-- Home avatar photo: `jpg/avatar.jpg` (the owner's profile photo, 640×640; shown inside the pink avatar circle on the home About Me card). The `png/logo.png` Y mark is no longer rendered on the home screen (the right-pane Experience tile now shows the `1 Experience` count); it remains used by `manifest.json+api.js`/favicon config.
+- Home avatar photo: `jpg/avatar.jpg` (the owner's profile photo, 640×640; shown inside the pink avatar circle on the home About Me card). The `png/logo.png` Y mark is no longer rendered on the home screen (the right-pane Career tile now shows the `1 Career` count); it remains used by `manifest.json+api.js`/favicon config.
 - Favicon configured in `app.config.js` (`web.favicon: "png/logo.png"`).
 - App name/description come from `EXPO_PUBLIC_TITLE`/`EXPO_PUBLIC_DESCRIPTION` and propagate via config to the HTML `<title>`, meta description, and PWA manifest — they are not rendered on the home card, whose identity is the owner's display name (`OWNER_NAME`).
 

@@ -138,7 +138,7 @@ function originOf(event) {
 
 /**
  * Landing screen rendered at `/`: left identity card + right pane (three
- * equal-height stat portals — Experience, Projects, Awards), staged inside
+ * equal-height stat portals — Career, Projects, Awards), staged inside
  * the home-themed 2D dimension.
  *
  * @returns {JSX.Element} The 2D bento-grid portfolio layout.
@@ -253,7 +253,7 @@ export default function Index() {
             </Pressable>
           </View>
 
-          {/* Right: three equal stat portals (Experience, Projects, Awards) */}
+          {/* Right: three equal stat portals (Career, Projects, Awards) */}
           <View className="flex-1 flex-col gap-3 md:gap-4">
             <View className="hidden md:flex flex-row items-center gap-2 opacity-0" pointerEvents="none">
               <Text className="text-base">❖</Text>
