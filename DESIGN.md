@@ -52,7 +52,7 @@
 - Superchat project icon: `png/superchat-icon.png` (rasterized from the repository's `source/icon.svg` onto a white badge; shown as an avatar on the /projects project card).
 - Mojisumi project icon: `png/mojisumi-icon.png` (the repository's `web/icons/Icon-512.png` — the default Flutter app icon, as the project has no custom logo; shown as an avatar on the /projects project card).
 - CS50x award icon: `png/cs50x-icon.png` (the Harvard VERITAS crest from CS50's official favicon — the certificate PDF has no reusable logo; shown as an avatar on the /awards award card).
-- Lifesaver Medicords career icon: `png/lifesaver-icon.png` (the official App Store icon of "Lifesaver for Doctors" by Lifesaver Medicords Inc., downscaled to 128px; shown as an avatar on the /career career card).
+- Lifesaver Medicords career icon: `png/lifesaver-icon.png` (the Lifesaver logo from lifesaver.care; shown as an icon on the /career career card and /resume career entry).
 - QCU education icon: `png/qcu-icon.png` (cropped QCU logo from qcu.edu.ph; shown as an avatar on the /resume education entry).
 - LCC education icon: `png/lcc-icon.png` (La Concepcion College blavatar from laconcepcioncollege.com; shown as an avatar on the /resume education entry).
 - Home avatar photo: `jpg/avatar.jpg` (the owner's profile photo, 640×640; shown inside the pink avatar circle on the home About Me card). The `png/logo.png` Y mark is no longer rendered on the home screen (the right-pane Experience tile now shows the `1 Experience` count); it remains used by `manifest.json+api.js`/favicon config.
