@@ -105,7 +105,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 | Route | Source | Purpose |
 | --- | --- | --- |
 | `/` | `src/app/index.js` | Home page: bento-grid portfolio with portal tiles to dimension screens |
-| `/projects` | `src/app/projects/index.js` | Projects dimension page (project cards + Back portal) |
+| `/projects` | `src/app/projects/index.js` → `src/screens/projects/projects.js` | Projects dimension screen (project cards + Back portal) |
 | `/awards` | `src/app/awards/index.js` | Awards dimension page (themed highlights + Back portal) |
 | `/clients` | `src/app/clients/index.js` | Clients dimension page (themed highlights + Back portal) |
 | `404` (fallback) | `src/app/+not-found.js` | Not-found screen for unmatched routes |
@@ -166,11 +166,14 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   └── service-worker.js+api.js
 │   ├── shared/
 │   │   ├── config.js
-│   │   ├── theme.js
-│   │   ├── tiptap.js
-│   │   ├── dino-dash.js
-│   │   ├── superchat.js
-│   │   └── mojisumi.js
+│   │   └── theme.js
+│   ├── screens/
+│   │   └── projects/
+│   │       ├── projects.js
+│   │       ├── tiptap.js
+│   │       ├── dino-dash.js
+│   │       ├── superchat.js
+│   │       └── mojisumi.js
 │   └── stylesheets/
 │       └── global.css
 ├── svg/

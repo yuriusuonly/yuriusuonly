@@ -1,8 +1,8 @@
-import tiptapIcon from "../../png/tiptap-icon.png";
+import tiptapIcon from "../../../png/tiptap-icon.png";
 
 /**
  * TipTap project card content for the /projects dimension.
- * @module shared/tiptap
+ * @module screens/projects/tiptap
  */
 
 /** @type {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType }} */

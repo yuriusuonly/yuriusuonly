@@ -1,8 +1,8 @@
-import superchatIcon from "../../png/superchat-icon.png";
+import superchatIcon from "../../../png/superchat-icon.png";
 
 /**
  * Superchat project card content for the /projects dimension.
- * @module shared/superchat
+ * @module screens/projects/superchat
  */
 
 /** @type {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType }} */

@@ -1,8 +1,8 @@
-import mojisumiIcon from "../../png/mojisumi-icon.png";
+import mojisumiIcon from "../../../png/mojisumi-icon.png";
 
 /**
  * Mojisumi project card content for the /projects dimension.
- * @module shared/mojisumi
+ * @module screens/projects/mojisumi
  */
 
 /** @type {{ name: string, description: string, stack: string, repoUrl: string, liveUrl?: string, liveLabel?: string, icon: import("react-native").ImageSourcePropType }} */

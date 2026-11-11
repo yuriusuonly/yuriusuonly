@@ -1,8 +1,8 @@
-import dinoDashIcon from "../../png/dinorun-icon.png";
+import dinoDashIcon from "../../../png/dinorun-icon.png";
 
 /**
  * Dino Dash project card content for the /projects dimension.
- * @module shared/dino-dash
+ * @module screens/projects/dino-dash
  */
 
 /** @type {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType }} */
