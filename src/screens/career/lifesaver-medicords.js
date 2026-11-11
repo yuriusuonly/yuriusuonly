@@ -8,7 +8,7 @@ import lifesaverIcon from "../../../png/lifesaver-icon.png";
 /** @type {{ name: string, description: string, period: string, location: string, stack: { label: string, items: string[] }, highlights: string[], liveUrl: string, appStoreUrl: string, playStoreUrl: string, icon: import("react-native").ImageSourcePropType }} */
 const lifesaverMedicords = {
   name: "Lifesaver Medicords Inc.",
-  description: "Junior Mobile Developer at a SaaS startup that digitalizes medical records with online consultations.",
+  description: "Junior Mobile Developer at Lifesaver. Digitalizes medical records through online consultations.",
   period: "May 2026",
   location: "Aurora Blvd, Cubao, Quezon City",
   stack: {
