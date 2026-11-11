@@ -141,7 +141,7 @@ export default function ResumeDimension() {
               {/* Header */}
               <View className="flex-row items-end">
                 <View className="w-32 md:w-48 pr-6 md:pr-10 items-start">
-                  {/* Avatar: shown only on the printable page */}
+                  {/* Avatar and title: shown only on the printable page */}
                   <View className="print-only resume-avatar h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full">
                     <Image
                       source={avatar}
@@ -150,10 +150,11 @@ export default function ResumeDimension() {
                       accessibilityLabel="Jullius Chua Pajanustan avatar"
                     />
                   </View>
+                  <Text className="print-only mt-2 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
                 </View>
                 <View className="flex-1">
                   <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
-                  <Text className="mt-1 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
+                  <Text className="no-print mt-1 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
                   {/* Address and direct contacts: shown only on the printable page */}
                   <Text className="print-only mt-1 font-outfit text-xs md:text-sm text-[#161823]/70">2271 Church Backyard, Barracks Rd, Malaria, Tala, Caloocan City</Text>
                   <View className="print-only mt-1 flex-row flex-wrap items-center">
