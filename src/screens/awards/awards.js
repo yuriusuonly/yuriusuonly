@@ -26,7 +26,7 @@ import cs50x from "./cs50x.js";
  * opened from the Awards stat and 172-Global-Design-Awards portals, rendered
  * by the `/awards` route (`src/app/awards/index.js`).
  * Features the award cards from this folder (CS50x) — icon avatar, title,
- * description, issuer · year, and a certificate link chip.
+ * description, issuer · year, and a credential link chip.
  * @module screens/awards/awards
  */
 
@@ -68,7 +68,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  * Award card inside the awards dimension.
  *
  * @param {AwardCardProps} props - Component props.
- * @returns {JSX.Element} A tilting award card with a certificate link.
+ * @returns {JSX.Element} A tilting award card with a credential link.
  */
 function AwardCard({ award, halfWidth = false }) {
   const { name, description, issuer, year, url, icon } = award;
@@ -101,11 +101,11 @@ function AwardCard({ award, halfWidth = false }) {
         <View className="mt-4 flex-row flex-wrap gap-3">
           <Pressable
             accessibilityRole="link"
-            accessibilityLabel={`Open the ${name} certificate`}
+            accessibilityLabel={`Open the ${name} credential`}
             onPress={() => openLink(url)}
             className="rounded-full bg-[#FE2C55] px-4 py-2 active:opacity-80"
           >
-            <Text className="font-outfit text-xs md:text-sm font-semibold text-white">Certificate ↗</Text>
+            <Text className="font-outfit text-xs md:text-sm font-semibold text-white">Credential ↗</Text>
           </Pressable>
         </View>
         </View>

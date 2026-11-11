@@ -311,7 +311,7 @@ export default function ResumeDimension() {
                     <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
                       Learned the Linux command-line interface, C, Python, SQL (SQLite), and standard Web technologies (HTML, CSS, and JavaScript).
                     </Text>
-                    <BulletLinks links={[{ label: "Certificate", url: cs50x.url }]} />
+                    <BulletLinks links={[{ label: "Credential", url: cs50x.url }]} />
                   </View>
                 </View>
               </SectionRow>
