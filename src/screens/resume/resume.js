@@ -1,0 +1,161 @@
+import { ScrollView, Text, View } from "react-native";
+import Head from "expo-router/head";
+import DomainShell from "../../components/domain-shell.js";
+import { COLORS } from "../../shared/theme.js";
+import config from "../../shared/config.js";
+import tiptap from "../projects/tiptap.js";
+import dinoDash from "../projects/dino-dash.js";
+import superchat from "../projects/superchat.js";
+import mojisumi from "../projects/mojisumi.js";
+
+/**
+ * Resume dimension theme composed locally from base color tokens (neutral paper
+ * on a dark void, mirroring the other dimension screens).
+ * @type {import("../../shared/theme.js").DimensionTheme}
+ */
+const RESUME_THEME = {
+  id: "resume",
+  name: "Resume",
+  tagline: "Curriculum vitae.",
+  accent: COLORS.surface,
+  void: "#05060B",
+  shapes: [COLORS.surface, "#C9CCDD", COLORS.primary],
+  lightColor: "#FFFFFF",
+  rimColor: "#C9CCDD",
+  headlineClass: "text-white"
+};
+
+const PRINT_CSS = `
+@page { size: Letter; margin: 0.6in; }
+@media print {
+  .no-print { display: none !important; }
+  .page-break { page-break-before: always; break-before: page; }
+  body { background: #ffffff; }
+}
+`;
+
+/**
+ * Section heading for the resume document.
+ *
+ * @param {{ children: import("react").ReactNode }} props - Section title.
+ * @returns {JSX.Element} The section heading.
+ */
+function Section({ children }) {
+  return (
+    <View className="mt-5 border-b border-[#161823]/30 pb-1">
+      <Text className="font-outfit text-sm md:text-base font-extrabold uppercase tracking-wider text-[#161823]">
+        {children}
+      </Text>
+    </View>
+  );
+}
+
+/**
+ * Bullet row used inside sections.
+ *
+ * @param {{ children: import("react").ReactNode }} props - Bullet text.
+ * @returns {JSX.Element} The bullet row.
+ */
+function Bullet({ children }) {
+  return (
+    <View className="mt-1 flex-row gap-2">
+      <Text className="font-outfit text-xs md:text-sm leading-snug text-[#161823]">•</Text>
+      <Text className="flex-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{children}</Text>
+    </View>
+  );
+}
+
+/**
+ * Resume dimension screen: a single-page, Letter-size printable curriculum
+ * vitae rendered with native components and augmented with the portfolio's
+ * project content. Content flows as one page and breaks onto further Letter
+ * pages when printed.
+ *
+ * @returns {JSX.Element} The themed resume dimension.
+ */
+export default function ResumeDimension() {
+  return (
+    <DomainShell theme={RESUME_THEME} homePortal>
+      <Head>
+        <title>Resume — {config.title}</title>
+        <style>{PRINT_CSS}</style>
+      </Head>
+      <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
+        <View className="flex-grow items-center justify-center p-4 pb-28 md:p-8 md:pb-32">
+          <Text className="no-print mb-4 font-outfit text-lg md:text-xl font-semibold text-white">Curriculum Vitae</Text>
+
+          {/* Paper page (Letter width) */}
+          <View className="w-full max-w-[816px] bg-white rounded-lg shadow-2xl p-6 md:p-10">
+            {/* Header */}
+            <View>
+              <Text className="font-outfit text-2xl md:text-3xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
+              <Text className="mt-1 font-outfit text-sm md:text-base font-semibold text-[#161823]/80">Junior Developer</Text>
+            </View>
+
+            <Section>Skills</Section>
+            <Text className="mt-2 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
+              Strong grasp of programming logic, project management, and problem-solving. Experience integrating code into automated build and deployment workflows. Proactive in self-education, as evidenced by completing rigorous external certifications in modern computing.
+            </Text>
+
+            <Section>Experience</Section>
+
+            <View className="mt-2">
+              <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Lifesaver Medicords for Doctor / Junior Mobile Developer</Text>
+              <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2026 · Aurora Blvd, Cubao, Quezon City</Text>
+              <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
+                A SaaS startup, digitalizes medical records with online consultations.
+              </Text>
+              <Text className="mt-1 font-outfit text-xs md:text-sm font-semibold text-[#161823]">Tech stack: Dart/Flutter, Go, Redis, MySQL, Amazon AWS</Text>
+              <Bullet>Integrated peer-to-peer live video calling and chat feature using WebRTC and WebSocket connection</Bullet>
+              <Bullet>Handled deployment for both Apple App Store Connect and Google Play Developer Console for iOS and Android platforms</Bullet>
+              <Bullet>Using collaboration tools, end-to-end testing, and automation setup with Claude Code for agentic workflow, Trello MCP, and Git/GitHub version control</Bullet>
+            </View>
+
+            {/* Page break for printing */}
+            <View className="page-break" />
+
+            <Section>Projects</Section>
+            <View className="mt-2">
+              <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{tiptap.name}</Text>
+              <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{tiptap.stack}</Text>
+              <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{tiptap.description}</Text>
+            </View>
+            <View className="mt-4">
+              <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{dinoDash.name}</Text>
+              <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{dinoDash.stack}</Text>
+              <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{dinoDash.description}</Text>
+            </View>
+            <View className="mt-4">
+              <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{superchat.name}</Text>
+              <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{superchat.stack}</Text>
+              <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{superchat.description}</Text>
+            </View>
+            <View className="mt-4">
+              <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{mojisumi.name}</Text>
+              <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{mojisumi.stack}</Text>
+              <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{mojisumi.description}</Text>
+            </View>
+
+            <Section>Education</Section>
+            <View className="mt-2">
+              <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">B.S in Information Systems / La Concepcion College</Text>
+              <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2015 - 2016 · Kaypian Road, corner Quirino St, SJDM, 3023</Text>
+              <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
+                Learned C, C++, and Java programming languages.
+              </Text>
+            </View>
+
+            <Section>Certificates</Section>
+            <View className="mt-2">
+              <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">CS50x: Introduction to Computer Science and the Art of Programming / Harvard University</Text>
+              <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">October 2023 · 09fecdac-ae64-42eb-8274-0cc99808d52e</Text>
+              <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
+                Learned the Linux command-line interface, C, Python, SQL (SQLite), and standard Web technologies (HTML, CSS, and JavaScript).
+              </Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </DomainShell>
+  );
+}

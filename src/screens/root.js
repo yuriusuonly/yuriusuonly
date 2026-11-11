@@ -206,7 +206,12 @@ export default function Index() {
               <Text className="text-base text-[#161823]">❖</Text>
               <Text className="font-outfit text-base md:text-lg font-semibold text-[#161823]">About Me</Text>
             </View>
-            <View className="relative flex-1 bg-[#25F4EE] rounded-3xl p-5 md:p-6 items-center justify-center">
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Open the resume"
+              onPress={(event) => openDimension("/resume", COLORS.surface, event)}
+              className="relative flex-1 bg-[#25F4EE] rounded-3xl p-5 md:p-6 items-center justify-center active:opacity-95"
+            >
               <CornerMark markClass="border-[#161823]/90" positionClass="right-5 top-5 md:right-6 md:top-6" />
               {/* Avatar photo with dark ring */}
               <View className="h-32 w-32 md:h-40 md:w-40 overflow-hidden rounded-full border-2 border-[#161823]">
@@ -234,7 +239,11 @@ export default function Index() {
                       key={link.label}
                       accessibilityRole="link"
                       accessibilityLabel={link.hint ?? `Open the ${link.label} profile`}
-                      onPress={() => Linking.openURL(link.url).catch(() => {})}
+                      onPress={(e) => {
+                        e?.stopPropagation?.();
+                        e?.nativeEvent?.stopPropagation?.();
+                        Linking.openURL(link.url).catch(() => {});
+                      }}
                       className="active:opacity-70"
                     >
                       <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823] underline">{link.label} ↗</Text>
@@ -242,7 +251,7 @@ export default function Index() {
                   ))}
                 </View>
               </View>
-            </View>
+            </Pressable>
           </View>
 
           {/* Right: three equal stat portals (Experience, Projects, Awards) */}

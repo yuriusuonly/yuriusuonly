@@ -108,6 +108,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 | `/projects` | `src/app/projects/index.js` → `src/screens/projects/projects.js` | Projects dimension screen (project cards + Back portal) |
 | `/awards` | `src/app/awards/index.js` → `src/screens/awards/awards.js` | Awards dimension screen (award cards + Back portal) |
 | `/experience` | `src/app/experience/index.js` → `src/screens/experience/experience.js` | Experience dimension screen (experience cards + Back portal) |
+| `/resume` | `src/app/resume/index.js` → `src/screens/resume/resume.js` | Resume dimension screen (single-page printable curriculum vitae) |
 | `404` (fallback) | `src/app/+not-found.js` | Not-found screen for unmatched routes |
 | document shell | `src/app/+html.js` | Custom HTML document (charset/viewport/meta/manifest link) |
 | `/api/health` | `src/app/api/health+api.js` | JSON `{status, timestamp, uptime}`; `Cache-Control: no-store`; used by Docker healthcheck |
@@ -165,6 +166,8 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   │   └── index.js
 │   │   ├── projects/
 │   │   │   └── index.js
+│   │   ├── resume/
+│   │   │   └── index.js
 │   │   ├── manifest.json+api.js
 │   │   ├── robots.txt+api.js
 │   │   └── service-worker.js+api.js
@@ -179,6 +182,8 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   ├── experience/
 │   │   │   ├── experience.js
 │   │   │   └── lifesaver-medicords.js
+│   │   ├── resume/
+│   │   │   └── resume.js
 │   │   └── projects/
 │   │       ├── projects.js
 │   │       ├── tiptap.js
