@@ -60,7 +60,7 @@ const SOCIAL_LINKS = [
 function SectionRow({ label, children, divider = true }) {
   return (
     <View className="flex-row mt-4">
-      <View className="w-28 md:w-40 pr-4 md:pr-6">
+      <View className="w-32 md:w-48 pr-6 md:pr-10">
         <Text className="font-outfit text-xs md:text-sm font-bold uppercase tracking-wide text-[#161823]">{label}</Text>
       </View>
       <View className={`flex-1 ${divider ? "border-b border-[#161823]/30 pb-3" : "pb-1"}`}>
@@ -97,7 +97,7 @@ export default function ResumeDimension() {
             <View className="resume-paper w-full bg-white rounded-lg shadow-2xl p-6 md:p-10">
               {/* Header */}
               <View className="flex-row">
-                <View className="w-28 md:w-40 pr-4 md:pr-6 items-start">
+                <View className="w-32 md:w-48 pr-6 md:pr-10 items-start">
                   <View className="resume-avatar h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full border-2 border-[#161823]">
                     <Image
                       source={avatar}
