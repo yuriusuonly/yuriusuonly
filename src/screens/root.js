@@ -227,7 +227,7 @@ export default function Index() {
               </Pressable>
               <View className="flex-col gap-3 md:gap-4 w-24 md:w-40">
                 <StatTile number="4" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/projects" onOpen={openDimension} />
-                <StatTile number="156" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/awards" onOpen={openDimension} />
+                <StatTile number="1" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/awards" onOpen={openDimension} />
               </View>
             </View>
           </View>
