@@ -1,11 +1,11 @@
-import tiptapIcon from "../../../png/tiptap-icon.png";
+import tiptapIcon from "../../png/tiptap-icon.png";
 
 /**
  * TipTap project card content for the /projects dimension.
- * @module shared/projects/tiptap
+ * @module shared/tiptap
  */
 
-/** @type {import("./index.js").ProjectCardData} */
+/** @type {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType }} */
 const tiptap = {
   name: "TipTap",
   description: "A cross-platform Flutter app that turns knowledge into a fast, vertical feed of short, verified facts — science, history, nature, space, and culture.",

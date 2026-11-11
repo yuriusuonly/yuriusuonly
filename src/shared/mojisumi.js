@@ -1,11 +1,11 @@
-import mojisumiIcon from "../../../png/mojisumi-icon.png";
+import mojisumiIcon from "../../png/mojisumi-icon.png";
 
 /**
  * Mojisumi project card content for the /projects dimension.
- * @module shared/projects/mojisumi
+ * @module shared/mojisumi
  */
 
-/** @type {import("./index.js").ProjectCardData} */
+/** @type {{ name: string, description: string, stack: string, repoUrl: string, liveUrl?: string, liveLabel?: string, icon: import("react-native").ImageSourcePropType }} */
 const mojisumi = {
   name: "Mojisumi",
   description: "A Nihongo writing practice app — interactive, stroke-by-stroke drawing for Hiragana, Katakana, and Kanji.",

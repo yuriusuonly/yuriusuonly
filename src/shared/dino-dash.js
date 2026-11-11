@@ -1,11 +1,11 @@
-import dinoDashIcon from "../../../png/dinorun-icon.png";
+import dinoDashIcon from "../../png/dinorun-icon.png";
 
 /**
  * Dino Dash project card content for the /projects dimension.
- * @module shared/projects/dino-dash
+ * @module shared/dino-dash
  */
 
-/** @type {import("./index.js").ProjectCardData} */
+/** @type {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType }} */
 const dinoDash = {
   name: "Dino Dash",
   description: "A 2D pixel-art adventure game built with the Flutter Flame engine — run, jump, bite, and dash through a post-apocalyptic dino world.",

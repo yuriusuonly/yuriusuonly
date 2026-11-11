@@ -1,11 +1,11 @@
-import superchatIcon from "../../../png/superchat-icon.png";
+import superchatIcon from "../../png/superchat-icon.png";
 
 /**
  * Superchat project card content for the /projects dimension.
- * @module shared/projects/superchat
+ * @module shared/superchat
  */
 
-/** @type {import("./index.js").ProjectCardData} */
+/** @type {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType }} */
 const superchat = {
   name: "Superchat",
   description: "A realtime chat app built with React and Firebase — sign in, send messages, and watch them sync live across clients.",

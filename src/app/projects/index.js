@@ -19,12 +19,15 @@ const PROJECTS_THEME = {
 };
 import DomainShell from "../../components/domain-shell.js";
 import TiltCard from "../../components/tilt-card.js";
-import PROJECTS from "../../shared/projects/index.js";
+import tiptap from "../../shared/tiptap.js";
+import dinoDash from "../../shared/dino-dash.js";
+import superchat from "../../shared/superchat.js";
+import mojisumi from "../../shared/mojisumi.js";
 
 /**
  * Projects dimension route (`src/app/projects/index.js`): home-theme
  * cyan-void world opened from the featured/logo and Projects portals.
- * Features the project cards from `src/shared/projects` (TipTap, Dino Dash,
+ * Features the project cards from `src/shared` (TipTap, Dino Dash,
  * Superchat, Mojisumi) — icon avatar, title, description, stack, and
  * GitHub/live links (live chip only when a live URL exists).
  * @module app/projects
@@ -45,10 +48,23 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 }
 
 /**
- * Props for {@link ProjectCard} — content from `src/shared/projects` plus row placement.
+ * Content for a single project card, as exported by `src/shared/*.js`.
+ *
+ * @typedef {object} ProjectCardData
+ * @property {string} name Card title (project name).
+ * @property {string} description Card description.
+ * @property {string} stack Stack line rendered under the description.
+ * @property {string} repoUrl GitHub repository URL (GitHub chip).
+ * @property {string} [liveUrl] Deployed site URL; the live chip renders only when set.
+ * @property {string} [liveLabel] Live chip label (defaults to "Live site" in the card).
+ * @property {import("react-native").ImageSourcePropType} icon Card icon asset.
+ */
+
+/**
+ * Props for {@link ProjectCard} — content from `src/shared` plus row placement.
  *
  * @typedef {object} ProjectCardProps
- * @property {import("../../shared/projects/index.js").ProjectCardData} project Project content, outbound links, and icon asset.
+ * @property {ProjectCardData} project Project content, outbound links, and icon asset.
  * @property {boolean} [halfWidth] Render the card at half width on desktop rows.
  */
 
@@ -131,7 +147,7 @@ export default function ProjectsDimension() {
 
           {/* Project cards: two per row on desktop */}
           <View className="mt-6 md:mt-10 flex-col gap-3 md:gap-4">
-            {[PROJECTS.slice(0, 2), PROJECTS.slice(2)].map((/** @type {import("../../shared/projects/index.js").ProjectCardData[]} */ row) => (
+            {[[tiptap, dinoDash], [superchat, mojisumi]].map((/** @type {ProjectCardData[]} */ row) => (
               <View key={row[0].name} className="flex-col gap-3 md:flex-row md:gap-4 md:h-64">
                 {row.map((project) => (
                   <ProjectCard key={project.name} project={project} halfWidth />

@@ -166,12 +166,11 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   └── service-worker.js+api.js
 │   ├── shared/
 │   │   ├── config.js
-│   │   └── projects/
-│   │       ├── index.js
-│   │       ├── tiptap.js
-│   │       ├── dino-dash.js
-│   │       ├── superchat.js
-│   │       └── mojisumi.js
+│   │   ├── theme.js
+│   │   ├── tiptap.js
+│   │   ├── dino-dash.js
+│   │   ├── superchat.js
+│   │   └── mojisumi.js
 │   └── stylesheets/
 │       └── global.css
 ├── svg/
