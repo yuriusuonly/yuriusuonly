@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Animated, Image, Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useExpansionStore } from "../stores/expansion-store.js";
-import config from "../shared/config.js";
 import { COLORS } from "../shared/theme.js";
 
 /**
@@ -37,6 +36,13 @@ import avatar from "../../jpg/avatar.jpg";
 
 /** Duration (ms) of the pressed-card cover before navigation. */
 const COVER_MS = 340;
+
+/**
+ * Owner display name shown as the home card's identity. The site title
+ * (`EXPO_PUBLIC_TITLE`) stays untouched — it feeds the `<title>` tag, meta
+ * description, and PWA manifest.
+ */
+const OWNER_NAME = "Jullius Chua Pajanustan";
 
 /**
  * Social profile link shown under the home description.
@@ -208,18 +214,17 @@ export default function Index() {
                   source={avatar}
                   className="!h-full !w-full"
                   resizeMode="cover"
-                  accessibilityLabel={`${config.title} avatar`}
+                  accessibilityLabel={`${OWNER_NAME} avatar`}
                 />
               </View>
               {/* Identity */}
               <View className="mt-4 md:mt-6 self-start">
-                <Text className="font-outfit text-2xl md:text-4xl font-semibold text-[#161823]">{config.title}</Text>
+                <Text className="font-outfit text-2xl md:text-4xl font-semibold text-[#161823]">{OWNER_NAME}</Text>
               </View>
-              {/* Contact + social links + spinning badge row */}
+              {/* Social links + spinning badge row */}
               <View className="mt-4 md:mt-6 self-stretch flex-row items-end justify-between gap-2">
                 <View className="flex-1 border-b border-dashed border-[#161823]/70 pb-2">
-                  <Text className="font-outfit text-xs md:text-sm text-[#161823]">{config.description}</Text>
-                  <View className="mt-2 flex-row flex-wrap gap-x-3 gap-y-1">
+                  <View className="flex-row flex-wrap gap-x-3 gap-y-1">
                     {SOCIAL_LINKS.map((link) => (
                       <Pressable
                         key={link.label}

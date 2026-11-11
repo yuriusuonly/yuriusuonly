@@ -1,5 +1,4 @@
 import { ScrollView, Text, View } from "react-native";
-import config from "../shared/config.js";
 import { COLORS } from "../shared/theme.js";
 
 /**
@@ -64,7 +63,7 @@ export default function NotFound() {
             <CornerMark markClass="border-[#161823]/90" positionClass="right-5 top-5 md:right-6 md:top-6" />
             <Text className="font-outfit text-2xl md:text-3xl font-semibold text-[#161823]">Hmm...</Text>
             <Text className="font-outfit mt-2 text-base md:text-lg text-[#161823] leading-snug">
-              The page you are looking for is not part of {config.title}.
+              The page you are looking for is not part of this site.
             </Text>
             <View className="mt-4 md:mt-5 border-b border-dashed border-[#161823]/70 pb-2 self-stretch">
               <Text className="font-outfit text-xs md:text-sm text-[#161823]">Check the URL or head back home.</Text>
