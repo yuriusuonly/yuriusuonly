@@ -35,9 +35,11 @@ const RESUME_THEME = {
 
 const PRINT_CSS = `
 @page { size: Letter; margin: 0.5in; }
+.print-only { display: none !important; }
 @media print {
   html, body, #root, #root > div, #root > div > div { background: #ffffff !important; height: auto !important; overflow: visible !important; }
   .no-print { display: none !important; }
+  .print-only { display: flex !important; }
   .page-break { page-break-before: always; break-before: page; }
   .resume-paper { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; }
   .resume-scroll { overflow: visible !important; height: auto !important; }
@@ -151,7 +153,8 @@ export default function ResumeDimension() {
                 <View className="flex-1">
                   <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
                   <Text className="mt-1 font-outfit text-xs md:text-sm text-[#161823]/70">2271 Church Backyard, Barracks Rd, Malaria, Tala, Caloocan City</Text>
-                  <View className="mt-1 flex-row flex-wrap items-center">
+                  {/* Direct contacts: shown only on the printable page */}
+                  <View className="print-only mt-1 flex-row flex-wrap items-center">
                     {DIRECT_CONTACTS.map((link, index) => (
                       <View key={link.label} className="flex-row items-center">
                         {index > 0 ? (
@@ -175,7 +178,8 @@ export default function ResumeDimension() {
                 labelClassName="font-outfit text-xs md:text-sm font-semibold text-[#161823]/80"
                 className="mt-1"
               >
-                <View className="flex-row flex-wrap items-center">
+                {/* Profile/portfolio links: shown only on the printable page */}
+                <View className="print-only flex-row flex-wrap items-center">
                   {CONTACT_LINKS.map((link, index) => (
                     <View key={link.label} className="flex-row items-center">
                       {index > 0 ? (
