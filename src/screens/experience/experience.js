@@ -19,6 +19,7 @@ const EXPERIENCE_THEME = {
 };
 import DomainShell from "../../components/domain-shell.js";
 import TiltCard from "../../components/tilt-card.js";
+import { List, ListItem } from "../../components/list.js";
 import lifesaverMedicords from "./lifesaver-medicords.js";
 
 /**
@@ -102,28 +103,20 @@ function ExperienceCard({ experience, halfWidth = false }) {
           <Text className="flex-1 font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#C9CCDD]">{name}</Text>
         </View>
         <Text className="mt-3 font-outfit text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
-        {highlights.map((highlight) => (
-          <View key={highlight} className="mt-2 flex-row gap-2">
-            <Text className="text-[9px] leading-[3px]" style={{ color: "#C9CCDD" }}>❖</Text>
-            <Text className="flex-1 font-outfit text-[10px] md:text-xs text-white/60 leading-snug">{highlight}</Text>
-          </View>
-        ))}
-        {stack ? (
-          <View className="mt-2">
-            <View className="flex-row gap-2">
-              <Text className="text-[9px] leading-[3px]" style={{ color: "#C9CCDD" }}>❖</Text>
-              <Text className="flex-1 font-outfit text-[10px] md:text-xs text-white/60 leading-snug">{stack.label}</Text>
-            </View>
-            <View className="ml-5 mt-1 flex-col gap-1">
-              {stack.items.map((item) => (
-                <View key={item} className="flex-row gap-2">
-                  <Text className="text-[10px] leading-[13px]" style={{ color: "#C9CCDD" }}>–</Text>
-                  <Text className="flex-1 font-outfit text-[10px] md:text-xs text-white/60 leading-snug">{item}</Text>
-                </View>
-              ))}
-            </View>
-          </View>
-        ) : null}
+        <List className="mt-2">
+          {highlights.map((highlight) => (
+            <ListItem key={highlight} label={highlight} />
+          ))}
+          {stack ? (
+            <ListItem label={stack.label}>
+              <List inset>
+                {stack.items.map((item) => (
+                  <ListItem key={item} label={item} marker="–" />
+                ))}
+              </List>
+            </ListItem>
+          ) : null}
+        </List>
         <Text className="mt-2 font-outfit text-[10px] md:text-xs text-white/50">{period} · {location}</Text>
         <View className="mt-4 flex-row flex-wrap gap-3">
           {liveUrl ? (

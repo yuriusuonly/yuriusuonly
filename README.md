@@ -185,6 +185,11 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │       ├── dino-dash.js
 │   │       ├── superchat.js
 │   │       └── mojisumi.js
+│   ├── components/
+│   │   ├── animated-background.js
+│   │   ├── domain-shell.js
+│   │   ├── list.js
+│   │   └── tilt-card.js
 │   └── stylesheets/
 │       └── global.css
 ├── svg/
