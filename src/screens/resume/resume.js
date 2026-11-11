@@ -4,10 +4,12 @@ import DomainShell from "../../components/domain-shell.js";
 import { List, ListItem } from "../../components/list.js";
 import { COLORS } from "../../shared/theme.js";
 import config from "../../shared/config.js";
+import lifesaverMedicords from "../career/lifesaver-medicords.js";
 import tiptap from "../projects/tiptap.js";
 import dinoDash from "../projects/dino-dash.js";
 import superchat from "../projects/superchat.js";
 import mojisumi from "../projects/mojisumi.js";
+import cs50x from "../awards/cs50x.js";
 
 const avatar = require("../../../jpg/avatar.jpg");
 
@@ -37,13 +39,16 @@ const PRINT_CSS = `
   .resume-paper { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; }
   .resume-scroll { overflow: visible !important; height: auto !important; }
   .resume-avatar, .resume-avatar * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .resume-paper img, .resume-paper image { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 `;
 
 const CONTACT_LINKS = [
   { label: "Portfolio", url: "https://yuriusuonly.expo.app" },
   { label: "GitHub", url: "https://github.com/yuriusuonly" },
-  { label: "LinkedIn", url: "https://linkedin.com/in/yuriusuonly" }
+  { label: "LinkedIn", url: "https://linkedin.com/in/yuriusuonly" },
+  { label: "itch.io", url: "https://yuriusuonly.itch.io" },
+  { label: "Instagram", url: "https://www.instagram.com/yuriusuonly" }
 ];
 
 const DIRECT_CONTACTS = [
@@ -164,26 +169,36 @@ export default function ResumeDimension() {
               </SectionRow>
 
               <SectionRow label="Career">
-                <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Lifesaver Medicords Inc. • Junior Mobile Developer</Text>
-                <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2026 • Aurora Blvd, Cubao, Quezon City</Text>
-                <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
-                  A SaaS startup, digitalizes medical records with online consultations.
-                </Text>
-                <View className="mt-2">
-                  <List>
-                    <ListItem label="Integrated peer-to-peer live video calling and chat feature using WebRTC and WebSocket connection" markerClass="text-[#161823]" textClass="text-[#161823]" />
-                    <ListItem label="Handled deployment for both Apple App Store Connect and Google Play Developer Console for iOS and Android platforms" markerClass="text-[#161823]" textClass="text-[#161823]" />
-                    <ListItem label="Using collaboration tools, end-to-end testing, and automation setup with Claude Code for agentic workflow, Trello MCP, and Git/GitHub version control" markerClass="text-[#161823]" textClass="text-[#161823]" />
-                    <ListItem label="Tech stack we use:" markerClass="text-[#161823]" textClass="text-[#161823]">
-                      <List inset>
-                        <ListItem label="Dart/Flutter" markerClass="text-[#161823]" textClass="text-[#161823]" />
-                        <ListItem label="Go" markerClass="text-[#161823]" textClass="text-[#161823]" />
-                        <ListItem label="Redis" markerClass="text-[#161823]" textClass="text-[#161823]" />
-                        <ListItem label="MySQL" markerClass="text-[#161823]" textClass="text-[#161823]" />
-                        <ListItem label="Amazon AWS" markerClass="text-[#161823]" textClass="text-[#161823]" />
+                <View className="flex-row items-start gap-3">
+                  <Image
+                    source={lifesaverMedicords.icon}
+                    className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20"
+                    resizeMode="cover"
+                    accessibilityLabel={`${lifesaverMedicords.name} icon`}
+                  />
+                  <View className="flex-1">
+                    <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Lifesaver Medicords Inc. • Junior Mobile Developer</Text>
+                    <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2026 • Aurora Blvd, Cubao, Quezon City</Text>
+                    <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
+                      A SaaS startup, digitalizes medical records with online consultations.
+                    </Text>
+                    <View className="mt-2">
+                      <List>
+                        <ListItem label="Integrated peer-to-peer live video calling and chat feature using WebRTC and WebSocket connection" markerClass="text-[#161823]" textClass="text-[#161823]" />
+                        <ListItem label="Handled deployment for both Apple App Store Connect and Google Play Developer Console for iOS and Android platforms" markerClass="text-[#161823]" textClass="text-[#161823]" />
+                        <ListItem label="Using collaboration tools, end-to-end testing, and automation setup with Claude Code for agentic workflow, Trello MCP, and Git/GitHub version control" markerClass="text-[#161823]" textClass="text-[#161823]" />
+                        <ListItem label="Tech stack we use:" markerClass="text-[#161823]" textClass="text-[#161823]">
+                          <List inset>
+                            <ListItem label="Dart/Flutter" markerClass="text-[#161823]" textClass="text-[#161823]" />
+                            <ListItem label="Go" markerClass="text-[#161823]" textClass="text-[#161823]" />
+                            <ListItem label="Redis" markerClass="text-[#161823]" textClass="text-[#161823]" />
+                            <ListItem label="MySQL" markerClass="text-[#161823]" textClass="text-[#161823]" />
+                            <ListItem label="Amazon AWS" markerClass="text-[#161823]" textClass="text-[#161823]" />
+                          </List>
+                        </ListItem>
                       </List>
-                    </ListItem>
-                  </List>
+                    </View>
+                  </View>
                 </View>
               </SectionRow>
 
@@ -191,25 +206,37 @@ export default function ResumeDimension() {
               <View className="page-break" />
 
               <SectionRow label="Projects">
-                <View>
-                  <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{tiptap.name}</Text>
-                  <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{tiptap.stack.replace(/ · /g, " • ")}</Text>
-                  <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{tiptap.description}</Text>
+                <View className="flex-row items-start gap-3">
+                  <Image source={tiptap.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${tiptap.name} icon`} />
+                  <View className="flex-1">
+                    <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{tiptap.name}</Text>
+                    <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{tiptap.stack.replace(/ · /g, " • ")}</Text>
+                    <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{tiptap.description}</Text>
+                  </View>
                 </View>
-                <View className="mt-4">
-                  <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{dinoDash.name}</Text>
-                  <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{dinoDash.stack.replace(/ · /g, " • ")}</Text>
-                  <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{dinoDash.description}</Text>
+                <View className="mt-4 flex-row items-start gap-3">
+                  <Image source={dinoDash.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${dinoDash.name} icon`} />
+                  <View className="flex-1">
+                    <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{dinoDash.name}</Text>
+                    <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{dinoDash.stack.replace(/ · /g, " • ")}</Text>
+                    <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{dinoDash.description}</Text>
+                  </View>
                 </View>
-                <View className="mt-4">
-                  <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{superchat.name}</Text>
-                  <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{superchat.stack.replace(/ · /g, " • ")}</Text>
-                  <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{superchat.description}</Text>
+                <View className="mt-4 flex-row items-start gap-3">
+                  <Image source={superchat.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${superchat.name} icon`} />
+                  <View className="flex-1">
+                    <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{superchat.name}</Text>
+                    <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{superchat.stack.replace(/ · /g, " • ")}</Text>
+                    <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{superchat.description}</Text>
+                  </View>
                 </View>
-                <View className="mt-4">
-                  <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{mojisumi.name}</Text>
-                  <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{mojisumi.stack.replace(/ · /g, " • ")}</Text>
-                  <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{mojisumi.description}</Text>
+                <View className="mt-4 flex-row items-start gap-3">
+                  <Image source={mojisumi.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${mojisumi.name} icon`} />
+                  <View className="flex-1">
+                    <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{mojisumi.name}</Text>
+                    <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{mojisumi.stack.replace(/ · /g, " • ")}</Text>
+                    <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{mojisumi.description}</Text>
+                  </View>
                 </View>
               </SectionRow>
 
@@ -228,11 +255,16 @@ export default function ResumeDimension() {
               </SectionRow>
 
               <SectionRow label="Certificates" divider={false}>
-                <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">CS50x: Introduction to Computer Science and the Art of Programming • Harvard University</Text>
-                <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">October 2023 • 09fecdac-ae64-42eb-8274-0cc99808d52e</Text>
-                <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
-                  Learned the Linux command-line interface, C, Python, SQL (SQLite), and standard Web technologies (HTML, CSS, and JavaScript).
-                </Text>
+                <View className="flex-row items-start gap-3">
+                  <Image source={cs50x.icon} className="!h-8 !w-8 md:!h-10 md:!w-10 rounded-full border border-[#161823]/20" resizeMode="cover" accessibilityLabel={`${cs50x.name} icon`} />
+                  <View className="flex-1">
+                    <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">CS50x: Introduction to Computer Science and the Art of Programming • Harvard University</Text>
+                    <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">October 2023 • 09fecdac-ae64-42eb-8274-0cc99808d52e</Text>
+                    <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
+                      Learned the Linux command-line interface, C, Python, SQL (SQLite), and standard Web technologies (HTML, CSS, and JavaScript).
+                    </Text>
+                  </View>
+                </View>
               </SectionRow>
             </View>
           </View>
