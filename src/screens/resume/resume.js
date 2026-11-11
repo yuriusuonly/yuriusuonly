@@ -141,7 +141,7 @@ export default function ResumeDimension() {
             <Section>Education</Section>
             <View className="mt-2">
               <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">B.S in Information Systems • La Concepcion College</Text>
-              <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2015 - 2016 • Kaypian Road, corner Quirino St, SJDM, 3023</Text>
+              <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2014 - 2016 • Kaypian Road, corner Quirino St, SJDM, 3023</Text>
               <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
                 Learned C, C++, and Java programming languages.
               </Text>
