@@ -1,4 +1,4 @@
-import { Linking, Pressable, ScrollView, Text, View } from "react-native";
+import { Image, Linking, Pressable, ScrollView, Text, View } from "react-native";
 import Head from "expo-router/head";
 import DomainShell from "../../components/domain-shell.js";
 import { List, ListItem } from "../../components/list.js";
@@ -8,6 +8,8 @@ import tiptap from "../projects/tiptap.js";
 import dinoDash from "../projects/dino-dash.js";
 import superchat from "../projects/superchat.js";
 import mojisumi from "../projects/mojisumi.js";
+
+const avatar = require("../../../jpg/avatar.jpg");
 
 /**
  * Resume dimension theme composed locally from base color tokens (neutral paper
@@ -94,10 +96,19 @@ export default function ResumeDimension() {
             <View className="resume-paper w-full bg-white rounded-lg shadow-2xl p-6 md:p-10">
               {/* Header */}
               <View className="flex-row">
-                <View className="w-28 md:w-40 pr-4 md:pr-6" />
+                <View className="w-28 md:w-40 pr-4 md:pr-6 items-start">
+                  <View className="h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full border-2 border-[#161823]">
+                    <Image
+                      source={avatar}
+                      className="!h-full !w-full"
+                      resizeMode="cover"
+                      accessibilityLabel="Jullius Chua Pajanustan avatar"
+                    />
+                  </View>
+                  <Text className="mt-2 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
+                </View>
                 <View className="flex-1 border-b border-[#161823]/30 pb-3">
                   <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
-                  <Text className="mt-1 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
                   <Text className="mt-1 font-outfit text-xs md:text-sm text-[#161823]/70">2271 Church Backyard, Barracks Rd, Malaria, Tala, Caloocan City</Text>
                   <View className="mt-2 flex-row flex-wrap items-center">
                     {SOCIAL_LINKS.map((link, index) => (
