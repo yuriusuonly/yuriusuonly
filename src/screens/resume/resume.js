@@ -42,6 +42,7 @@ const PRINT_CSS = `
   .resume-scroll { overflow: visible !important; height: auto !important; }
   .resume-paper, .resume-paper * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   .resume-paper img { display: inline-block !important; visibility: visible !important; }
+  .resume-paper .flex-row > .w-32.md\\:w-48 { width: 12rem !important; padding-right: 2.5rem !important; }
 }
 `;
 
