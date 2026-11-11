@@ -27,7 +27,7 @@ import mojisumiIcon from "../../../png/mojisumi-icon.png";
 /**
  * Projects dimension route (`src/app/projects/index.js`): home-theme
  * cyan-void world opened from the featured/logo and Projects portals.
- * Features project cards (TipTap, DinoRun, Superchat, Mojisumi) — icon
+ * Features project cards (TipTap, Dino Dash, Superchat, Mojisumi) — icon
  * avatar, title, description, stack, and GitHub/live links (live chip only
  * when a live URL exists).
  * @module app/projects
@@ -137,7 +137,7 @@ export default function ProjectsDimension() {
                 halfWidth
               />
               <ProjectCard
-                name="DinoRun"
+                name="Dino Dash"
                 description="A 2D pixel-art adventure game built with the Flutter Flame engine — run, jump, bite, and dash through a post-apocalyptic dino world."
                 stack="Flutter · Flame Engine"
                 repoUrl="https://github.com/yuriusuonly/dinorun"
@@ -161,7 +161,7 @@ export default function ProjectsDimension() {
               <ProjectCard
                 name="Mojisumi"
                 description="A Nihongo writing practice app — interactive, stroke-by-stroke drawing for Hiragana, Katakana, and Kanji."
-                stack="Flutter · go_router"
+                stack="Flutter"
                 repoUrl="https://github.com/yuriusuonly/shodoshi"
                 icon={mojisumiIcon}
                 halfWidth
