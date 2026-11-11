@@ -36,6 +36,7 @@ const PRINT_CSS = `
   .page-break { page-break-before: always; break-before: page; }
   .resume-paper { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; }
   .resume-scroll { overflow: visible !important; height: auto !important; }
+  .resume-avatar { width: 1in !important; height: 1in !important; }
 }
 `;
 
@@ -45,7 +46,7 @@ const SOCIAL_LINKS = [
   { label: "LinkedIn", url: "https://linkedin.com/in/yuriusuonly" },
   { label: "itch.io", url: "https://yuriusuonly.itch.io" },
   { label: "Instagram", url: "https://www.instagram.com/yuriusuonly" },
-  { label: "Email", url: "mailto:yuriusu.dev@gmail.com" },
+  { label: "yuriusu.dev@gmail.com", url: "mailto:yuriusu.dev@gmail.com" },
   { label: "+63-9762869430", url: "tel:+639762869430" }
 ];
 
@@ -97,7 +98,7 @@ export default function ResumeDimension() {
               {/* Header */}
               <View className="flex-row">
                 <View className="w-28 md:w-40 pr-4 md:pr-6 items-start">
-                  <View className="h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full border-2 border-[#161823]">
+                  <View className="resume-avatar h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full border-2 border-[#161823]">
                     <Image
                       source={avatar}
                       className="!h-full !w-full"
@@ -108,7 +109,7 @@ export default function ResumeDimension() {
                   <Text className="mt-2 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
                 </View>
                 <View className="flex-1 border-b border-[#161823]/30 pb-3">
-                  <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
+                  <Text className="resume-name mt-[4.5rem] md:mt-[5.5rem] font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
                   <Text className="mt-1 font-outfit text-xs md:text-sm text-[#161823]/70">2271 Church Backyard, Barracks Rd, Malaria, Tala, Caloocan City</Text>
                   <View className="mt-2 flex-row flex-wrap items-center">
                     {SOCIAL_LINKS.map((link, index) => (
