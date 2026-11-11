@@ -22,12 +22,14 @@ import TiltCard from "../../components/tilt-card.js";
 import tiptapIcon from "../../../png/tiptap-icon.png";
 import dinorunIcon from "../../../png/dinorun-icon.png";
 import superchatIcon from "../../../png/superchat-icon.png";
+import mojisumiIcon from "../../../png/mojisumi-icon.png";
 
 /**
  * Projects dimension route (`src/app/projects/index.js`): home-theme
  * cyan-void world opened from the featured/logo and Projects portals.
- * Features project cards (TipTap, DinoRun, Superchat) — icon avatar,
- * title, description, stack, and GitHub/live links.
+ * Features project cards (TipTap, DinoRun, Superchat, Mojisumi) — icon
+ * avatar, title, description, stack, and GitHub/live links (live chip only
+ * when a live URL exists).
  * @module app/projects
  */
 
@@ -48,10 +50,10 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 /**
  * Project card inside the projects dimension.
  *
- * @param {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType, halfWidth?: boolean }} props - Project content, outbound links, icon asset, and desktop row width.
+ * @param {{ name: string, description: string, stack: string, repoUrl: string, liveUrl?: string, liveLabel?: string, icon: import("react-native").ImageSourcePropType, halfWidth?: boolean }} props - Project content, outbound links, icon asset, and desktop row width. The live chip renders only when `liveUrl` is set.
  * @returns {JSX.Element} A tilting project card with GitHub/live links.
  */
-function ProjectCard({ name, description, stack, repoUrl, liveUrl, liveLabel, icon, halfWidth = false }) {
+function ProjectCard({ name, description, stack, repoUrl, liveUrl, liveLabel = "Live site", icon, halfWidth = false }) {
   /**
    * Open an outbound link (new tab on web, external app on native).
    *
@@ -87,14 +89,16 @@ function ProjectCard({ name, description, stack, repoUrl, liveUrl, liveLabel, ic
           >
             <Text className="font-outfit text-xs md:text-sm text-white">GitHub ↗</Text>
           </Pressable>
-          <Pressable
-            accessibilityRole="link"
-            accessibilityLabel={`Open the ${name} ${liveLabel.toLowerCase()} page`}
-            onPress={() => openLink(liveUrl)}
-            className="rounded-full bg-[#25F4EE] px-4 py-2 active:opacity-80"
-          >
-            <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">{liveLabel} ↗</Text>
-          </Pressable>
+          {liveUrl ? (
+            <Pressable
+              accessibilityRole="link"
+              accessibilityLabel={`Open the ${name} ${liveLabel.toLowerCase()} page`}
+              onPress={() => openLink(liveUrl)}
+              className="rounded-full bg-[#25F4EE] px-4 py-2 active:opacity-80"
+            >
+              <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">{liveLabel} ↗</Text>
+            </Pressable>
+          ) : null}
         </View>
         </View>
       </TiltCard>
@@ -119,7 +123,7 @@ export default function ProjectsDimension() {
             <Text className="font-outfit text-base md:text-lg font-semibold text-white">Projects</Text>
           </View>
 
-          {/* Project cards: two per row on desktop, the last card on its own row */}
+          {/* Project cards: two per row on desktop */}
           <View className="mt-6 md:mt-10 flex-col gap-3 md:gap-4">
             <View className="flex-col gap-3 md:flex-row md:gap-4 md:h-64">
               <ProjectCard
@@ -152,6 +156,14 @@ export default function ProjectsDimension() {
                 liveUrl="https://yuriusu-superchat.firebaseapp.com"
                 liveLabel="Live site"
                 icon={superchatIcon}
+                halfWidth
+              />
+              <ProjectCard
+                name="Mojisumi"
+                description="A Nihongo writing practice app — interactive, stroke-by-stroke drawing for Hiragana, Katakana, and Kanji."
+                stack="Flutter · go_router"
+                repoUrl="https://github.com/yuriusuonly/shodoshi"
+                icon={mojisumiIcon}
                 halfWidth
               />
             </View>
