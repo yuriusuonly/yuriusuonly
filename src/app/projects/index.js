@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { COLORS } from "../../shared/theme.js";
 
 /**
@@ -23,7 +23,8 @@ import TiltCard from "../../components/tilt-card.js";
 /**
  * Projects dimension route (`src/app/projects/index.js`): home-theme
  * cyan-void world opened from the featured/logo and Projects portals.
- * Stat placeholder copy — wire real data before production.
+ * Features the TipTap project card — title, tagline, description, and
+ * GitHub/live links.
  * @module app/projects
  */
 
@@ -42,18 +43,48 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 }
 
 /**
- * Single highlight tile inside the projects dimension.
+ * TipTap project card inside the projects dimension.
  *
- * @param {{ number: string, label: string, tileClass: string, textClass: string, dark?: boolean }} props - Content and surface classes.
- * @returns {JSX.Element} A tilting bento tile.
+ * @param {{ name: string, tagline: string, description: string, stack: string, repoUrl: string, liveUrl: string }} props - Project content and outbound links.
+ * @returns {JSX.Element} A tilting project card with GitHub/live links.
  */
-function HighlightTile({ number, label, tileClass, textClass, dark }) {
+function ProjectCard({ name, tagline, description, stack, repoUrl, liveUrl }) {
+  /**
+   * Open an outbound link (new tab on web, external app on native).
+   *
+   * @param {string} url - Destination URL.
+   * @returns {void}
+   */
+  const openLink = (url) => {
+    Linking.openURL(url).catch(() => {});
+  };
+
   return (
     <TiltCard style={{ flex: 1 }} maxTilt={9}>
-      <View className={`relative h-full flex-1 items-center justify-center rounded-2xl ${tileClass}`}>
-        <CornerMark dark={dark} positionClass="right-4 top-4 md:right-5 md:top-5" />
-        <Text className={`font-outfit text-3xl md:text-5xl font-extrabold leading-none ${textClass}`}>{number}</Text>
-        <Text className={`font-outfit mt-2 text-sm md:text-base leading-tight ${textClass}`}>{label}</Text>
+      <View className="relative h-full flex-1 rounded-2xl bg-[#161823] p-5 md:p-6">
+        <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
+        <Text className="font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#25F4EE]">{name}</Text>
+        <Text className="font-outfit mt-1 text-xs md:text-sm text-white/80">{tagline}</Text>
+        <Text className="font-outfit mt-3 max-w-md text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
+        <Text className="font-outfit mt-2 text-[10px] md:text-xs text-white/50">{stack}</Text>
+        <View className="mt-4 flex-row flex-wrap gap-3">
+          <Pressable
+            accessibilityRole="link"
+            accessibilityLabel={`Open the ${name} repository on GitHub`}
+            onPress={() => openLink(repoUrl)}
+            className="rounded-full border border-white/30 px-4 py-2 active:opacity-80"
+          >
+            <Text className="font-outfit text-xs md:text-sm text-white">GitHub ↗</Text>
+          </Pressable>
+          <Pressable
+            accessibilityRole="link"
+            accessibilityLabel={`Open the ${name} live site`}
+            onPress={() => openLink(liveUrl)}
+            className="rounded-full bg-[#25F4EE] px-4 py-2 active:opacity-80"
+          >
+            <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">Live site ↗</Text>
+          </Pressable>
+        </View>
       </View>
     </TiltCard>
   );
@@ -82,11 +113,16 @@ export default function ProjectsDimension() {
             Shipped projects across brand, interface, and interactive work — each one worth opening a domain for.
           </Text>
 
-          {/* Highlight tiles */}
-          <View className="mt-6 md:mt-10 flex-col gap-3 md:flex-row md:gap-4 h-72 md:h-56">
-            <HighlightTile number="120" label="Product & UI" tileClass="bg-[#25F4EE]" textClass="text-[#161823]" dark />
-            <HighlightTile number="86" label="Brand & Logo" tileClass="bg-[#FE2C55]" textClass="text-white" />
-            <HighlightTile number="45" label="Interactive 3D" tileClass="bg-[#161823]" textClass="text-white" />
+          {/* Project card */}
+          <View className="mt-6 md:mt-10 flex-col gap-3 md:flex-row md:gap-4 h-72 md:h-64">
+            <ProjectCard
+              name="TipTap"
+              tagline="Tap. Learn. Impress."
+              description="A cross-platform Flutter app that turns knowledge into a fast, vertical feed of short, verified facts — science, history, nature, space, and culture."
+              stack="Flutter · Firebase · AdMob · In-App Purchases"
+              repoUrl="https://github.com/yuriusuonly/tiptap"
+              liveUrl="https://yuriusu-tiptap.firebaseapp.com"
+            />
           </View>
           </View>
         </View>
