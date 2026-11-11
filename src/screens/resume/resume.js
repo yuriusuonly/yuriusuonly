@@ -87,7 +87,7 @@ export default function ResumeDimension() {
               Strong grasp of programming logic, project management, and problem-solving. Experience integrating code into automated build and deployment workflows. Proactive in self-education, as evidenced by completing rigorous external certifications in modern computing.
             </Text>
 
-            <Section>Experience</Section>
+            <Section>Career</Section>
 
             <View className="mt-2">
               <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Lifesaver Medicords for Doctor • Junior Mobile Developer</Text>
