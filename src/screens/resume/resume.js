@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { Linking, Pressable, ScrollView, Text, View } from "react-native";
 import Head from "expo-router/head";
 import DomainShell from "../../components/domain-shell.js";
 import { List, ListItem } from "../../components/list.js";
@@ -36,6 +36,14 @@ const PRINT_CSS = `
   .resume-scroll { overflow: visible !important; height: auto !important; }
 }
 `;
+
+const SOCIAL_LINKS = [
+  { label: "GitHub", url: "https://github.com/yuriusuonly" },
+  { label: "LinkedIn", url: "https://linkedin.com/in/yuriusuonly" },
+  { label: "itch.io", url: "https://yuriusuonly.itch.io" },
+  { label: "Instagram", url: "https://www.instagram.com/yuriusuonly" },
+  { label: "Email", url: "mailto:yuriusu.dev@gmail.com" }
+];
 
 /**
  * Two-column resume section: label in the left column, content in the right
@@ -88,6 +96,22 @@ export default function ResumeDimension() {
                 <View className="flex-1 border-b border-[#161823]/30 pb-3">
                   <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
                   <Text className="mt-1 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
+                  <View className="mt-2 flex-row flex-wrap items-center">
+                    {SOCIAL_LINKS.map((link, index) => (
+                      <View key={link.label} className="flex-row items-center">
+                        {index > 0 ? (
+                          <Text className="mx-1 font-outfit text-xs md:text-sm text-[#161823]/60">•</Text>
+                        ) : null}
+                        <Pressable
+                          accessibilityRole="link"
+                          accessibilityLabel={`Open ${link.label}`}
+                          onPress={() => Linking.openURL(link.url).catch(() => {})}
+                        >
+                          <Text className="font-outfit text-xs md:text-sm text-[#161823] underline">{link.label}</Text>
+                        </Pressable>
+                      </View>
+                    ))}
+                  </View>
                 </View>
               </View>
 
