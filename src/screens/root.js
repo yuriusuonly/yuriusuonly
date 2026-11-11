@@ -212,7 +212,7 @@ export default function Index() {
               <Text className="font-outfit text-base md:text-lg font-semibold">About Me</Text>
             </View>
             <View className="h-56 md:h-auto md:flex-1">
-              <StatTile number="1" label="Experience" tileClass="bg-[#161823]" accent={COLORS.ink} numberClass="text-white" href="/clients" onOpen={openDimension} />
+              <StatTile number="1" label="Experience" tileClass="bg-[#161823]" accent={COLORS.ink} numberClass="text-white" href="/experience" onOpen={openDimension} />
             </View>
             <View className="flex-row gap-3 md:flex-1 md:gap-4">
               <View className="h-56 flex-1 md:h-auto md:flex-1">

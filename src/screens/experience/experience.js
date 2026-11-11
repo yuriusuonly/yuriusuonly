@@ -2,14 +2,14 @@ import { Image, Linking, Pressable, ScrollView, Text, View } from "react-native"
 import { COLORS } from "../../shared/theme.js";
 
 /**
- * Clients dimension theme composed locally from base color tokens.
+ * Experience dimension theme composed locally from base color tokens.
  *
  * @type {import("../../shared/theme.js").DimensionTheme}
  */
-const CLIENTS_THEME = {
-  id: "clients",
-  name: "Clients",
-  tagline: "156 collaborations worldwide.",
+const EXPERIENCE_THEME = {
+  id: "experience",
+  name: "Experience",
+  tagline: "Where I've worked.",
   accent: COLORS.ink,
   void: "#05060B",
   shapes: [COLORS.ink, "#3A3D52", COLORS.primary],
@@ -22,12 +22,13 @@ import TiltCard from "../../components/tilt-card.js";
 import lifesaverMedicords from "./lifesaver-medicords.js";
 
 /**
- * Clients dimension screen (`src/screens/clients/clients.js`): ink-void world
- * opened from the Clients portal, rendered by the `/clients` route
- * (`src/app/clients/index.js`). Features the experience cards from this folder
- * (Lifesaver Medicords) — icon avatar, title, role, description, highlight
- * bullets, stack, period · location, and App Store / Play Store link chips.
- * @module screens/clients/clients
+ * Experience dimension screen (`src/screens/experience/experience.js`):
+ * ink-void world opened from the Experience portal, rendered by the
+ * `/experience` route (`src/app/experience/index.js`). Features the experience
+ * cards from this folder (Lifesaver Medicords) — icon avatar, title, role,
+ * description, highlight bullets, stack, period · location, and App Store /
+ * Play Store link chips.
+ * @module screens/experience/experience
  */
 
 /**
@@ -69,7 +70,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  */
 
 /**
- * Experience card inside the clients dimension.
+ * Experience card inside the experience dimension.
  *
  * @param {ExperienceCardProps} props - Component props.
  * @returns {JSX.Element} A tilting experience card with App Store / Play Store links.
@@ -141,12 +142,12 @@ function ExperienceCard({ experience, halfWidth = false }) {
 }
 
 /**
- * Clients dimension page: experience highlights staged in the ink void.
+ * Experience dimension page: experience highlights staged in the ink void.
  *
- * @returns {JSX.Element} The themed clients dimension.
+ * @returns {JSX.Element} The themed experience dimension.
  */
-export default function ClientsDimension() {
-  const theme = CLIENTS_THEME;
+export default function ExperienceDimension() {
+  const theme = EXPERIENCE_THEME;
   return (
     <DomainShell theme={theme} homePortal>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
@@ -154,7 +155,7 @@ export default function ClientsDimension() {
           <View className="w-full max-w-5xl">
           <View className="flex-row items-center gap-2">
             <Text className="text-base" style={{ color: theme.lightColor }}>❖</Text>
-            <Text className="font-outfit text-base md:text-lg font-semibold text-white">Clients</Text>
+            <Text className="font-outfit text-base md:text-lg font-semibold text-white">Experience</Text>
           </View>
 
           {/* Experience cards: two per row on desktop */}

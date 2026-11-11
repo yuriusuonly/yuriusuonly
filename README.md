@@ -5,7 +5,7 @@
 
 A web-only Expo Router app styled with NativeWind/Tailwind (React Native Web + NativeWind v4 + Tailwind v3, React 19). Static web export with server-rendered API routes; deployable via Expo Hosting (EAS), Node (expo serve) + Caddy, or Docker.
 
-**2D interactive portfolio** — pressing a bento tile expands its "domain" from the exact click point into a themed dimension page (Projects / Awards / Clients) with an animated drifting-blob background, pointer-tilted tiles, and a reverse "collapse" when you head home (state via `zustand`, no WebGL). Details in [DESIGN.md](./DESIGN.md).
+**2D interactive portfolio** — pressing a bento tile expands its "domain" from the exact click point into a themed dimension page (Projects / Awards / Experience) with an animated drifting-blob background, pointer-tilted tiles, and a reverse "collapse" when you head home (state via `zustand`, no WebGL). Details in [DESIGN.md](./DESIGN.md).
 
 Repository: `git@github.com:yuriusuonly/yuriusuonly.git` (default branch: `portfolio`, the only branch).
 
@@ -107,7 +107,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 | `/` | `src/app/index.js` → `src/screens/root.js` | Home screen: bento-grid portfolio with portal tiles to dimension screens |
 | `/projects` | `src/app/projects/index.js` → `src/screens/projects/projects.js` | Projects dimension screen (project cards + Back portal) |
 | `/awards` | `src/app/awards/index.js` → `src/screens/awards/awards.js` | Awards dimension screen (award cards + Back portal) |
-| `/clients` | `src/app/clients/index.js` → `src/screens/clients/clients.js` | Clients dimension screen (experience cards + Back portal) |
+| `/experience` | `src/app/experience/index.js` → `src/screens/experience/experience.js` | Experience dimension screen (experience cards + Back portal) |
 | `404` (fallback) | `src/app/+not-found.js` | Not-found screen for unmatched routes |
 | document shell | `src/app/+html.js` | Custom HTML document (charset/viewport/meta/manifest link) |
 | `/api/health` | `src/app/api/health+api.js` | JSON `{status, timestamp, uptime}`; `Cache-Control: no-store`; used by Docker healthcheck |
@@ -161,7 +161,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   │   └── health+api.js
 │   │   ├── awards/
 │   │   │   └── index.js
-│   │   ├── clients/
+│   │   ├── experience/
 │   │   │   └── index.js
 │   │   ├── projects/
 │   │   │   └── index.js
@@ -176,8 +176,8 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   ├── awards/
 │   │   │   ├── awards.js
 │   │   │   └── cs50x.js
-│   │   ├── clients/
-│   │   │   ├── clients.js
+│   │   ├── experience/
+│   │   │   ├── experience.js
 │   │   │   └── lifesaver-medicords.js
 │   │   └── projects/
 │   │       ├── projects.js
