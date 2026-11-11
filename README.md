@@ -104,10 +104,10 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 
 | Route | Source | Purpose |
 | --- | --- | --- |
-| `/` | `src/app/index.js` | Home page: bento-grid portfolio with portal tiles to dimension screens |
+| `/` | `src/app/index.js` → `src/screens/root.js` | Home screen: bento-grid portfolio with portal tiles to dimension screens |
 | `/projects` | `src/app/projects/index.js` → `src/screens/projects/projects.js` | Projects dimension screen (project cards + Back portal) |
-| `/awards` | `src/app/awards/index.js` | Awards dimension page (themed highlights + Back portal) |
-| `/clients` | `src/app/clients/index.js` | Clients dimension page (themed highlights + Back portal) |
+| `/awards` | `src/app/awards/index.js` → `src/screens/awards/awards.js` | Awards dimension screen (themed highlights + Back portal) |
+| `/clients` | `src/app/clients/index.js` → `src/screens/clients/clients.js` | Clients dimension screen (themed highlights + Back portal) |
 | `404` (fallback) | `src/app/+not-found.js` | Not-found screen for unmatched routes |
 | document shell | `src/app/+html.js` | Custom HTML document (charset/viewport/meta/manifest link) |
 | `/api/health` | `src/app/api/health+api.js` | JSON `{status, timestamp, uptime}`; `Cache-Control: no-store`; used by Docker healthcheck |
@@ -168,6 +168,11 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   ├── config.js
 │   │   └── theme.js
 │   ├── screens/
+│   │   ├── root.js
+│   │   ├── awards/
+│   │   │   └── awards.js
+│   │   ├── clients/
+│   │   │   └── clients.js
 │   │   └── projects/
 │   │       ├── projects.js
 │   │       ├── tiptap.js
