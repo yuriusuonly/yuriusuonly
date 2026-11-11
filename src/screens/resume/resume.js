@@ -23,7 +23,7 @@ const lccIcon = require("../../../png/lcc-icon.png");
 const RESUME_THEME = {
   id: "resume",
   name: "Resume",
-  tagline: "Curriculum vitae.",
+  tagline: "Curriculum Vitae.",
   accent: COLORS.surface,
   void: "#05060B",
   shapes: [COLORS.surface, "#C9CCDD", COLORS.primary],
