@@ -19,17 +19,14 @@ const PROJECTS_THEME = {
 };
 import DomainShell from "../../components/domain-shell.js";
 import TiltCard from "../../components/tilt-card.js";
-import tiptapIcon from "../../../png/tiptap-icon.png";
-import dinorunIcon from "../../../png/dinorun-icon.png";
-import superchatIcon from "../../../png/superchat-icon.png";
-import mojisumiIcon from "../../../png/mojisumi-icon.png";
+import PROJECTS from "../../shared/projects/index.js";
 
 /**
  * Projects dimension route (`src/app/projects/index.js`): home-theme
  * cyan-void world opened from the featured/logo and Projects portals.
- * Features project cards (TipTap, Dino Dash, Superchat, Mojisumi) — icon
- * avatar, title, description, stack, and GitHub/live links (live chip only
- * when a live URL exists).
+ * Features the project cards from `src/shared/projects` (TipTap, Dino Dash,
+ * Superchat, Mojisumi) — icon avatar, title, description, stack, and
+ * GitHub/live links (live chip only when a live URL exists).
  * @module app/projects
  */
 
@@ -48,12 +45,21 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 }
 
 /**
+ * Props for {@link ProjectCard} — content from `src/shared/projects` plus row placement.
+ *
+ * @typedef {object} ProjectCardProps
+ * @property {import("../../shared/projects/index.js").ProjectCardData} project Project content, outbound links, and icon asset.
+ * @property {boolean} [halfWidth] Render the card at half width on desktop rows.
+ */
+
+/**
  * Project card inside the projects dimension.
  *
- * @param {{ name: string, description: string, stack: string, repoUrl: string, liveUrl?: string, liveLabel?: string, icon: import("react-native").ImageSourcePropType, halfWidth?: boolean }} props - Project content, outbound links, icon asset, and desktop row width. The live chip renders only when `liveUrl` is set.
+ * @param {ProjectCardProps} props - Component props.
  * @returns {JSX.Element} A tilting project card with GitHub/live links.
  */
-function ProjectCard({ name, description, stack, repoUrl, liveUrl, liveLabel = "Live site", icon, halfWidth = false }) {
+function ProjectCard({ project, halfWidth = false }) {
+  const { name, description, stack, repoUrl, liveUrl, liveLabel = "Live site", icon } = project;
   /**
    * Open an outbound link (new tab on web, external app on native).
    *
@@ -125,48 +131,13 @@ export default function ProjectsDimension() {
 
           {/* Project cards: two per row on desktop */}
           <View className="mt-6 md:mt-10 flex-col gap-3 md:gap-4">
-            <View className="flex-col gap-3 md:flex-row md:gap-4 md:h-64">
-              <ProjectCard
-                name="TipTap"
-                description="A cross-platform Flutter app that turns knowledge into a fast, vertical feed of short, verified facts — science, history, nature, space, and culture."
-                stack="Flutter · Firebase · AdMob · In-App Purchases"
-                repoUrl="https://github.com/yuriusuonly/tiptap"
-                liveUrl="https://yuriusu-tiptap.firebaseapp.com"
-                liveLabel="Live site"
-                icon={tiptapIcon}
-                halfWidth
-              />
-              <ProjectCard
-                name="Dino Dash"
-                description="A 2D pixel-art adventure game built with the Flutter Flame engine — run, jump, bite, and dash through a post-apocalyptic dino world."
-                stack="Flutter · Flame Engine"
-                repoUrl="https://github.com/yuriusuonly/dinorun"
-                liveUrl="https://yuriusuonly.itch.io/dinodash"
-                liveLabel="Play"
-                icon={dinorunIcon}
-                halfWidth
-              />
-            </View>
-            <View className="flex-col gap-3 md:flex-row md:gap-4 md:h-64">
-              <ProjectCard
-                name="Superchat"
-                description="A realtime chat app built with React and Firebase — sign in, send messages, and watch them sync live across clients."
-                stack="React · Firebase · ESBuild"
-                repoUrl="https://github.com/yuriusuonly/superchat"
-                liveUrl="https://yuriusu-superchat.firebaseapp.com"
-                liveLabel="Live site"
-                icon={superchatIcon}
-                halfWidth
-              />
-              <ProjectCard
-                name="Mojisumi"
-                description="A Nihongo writing practice app — interactive, stroke-by-stroke drawing for Hiragana, Katakana, and Kanji."
-                stack="Flutter"
-                repoUrl="https://github.com/yuriusuonly/shodoshi"
-                icon={mojisumiIcon}
-                halfWidth
-              />
-            </View>
+            {[PROJECTS.slice(0, 2), PROJECTS.slice(2)].map((/** @type {import("../../shared/projects/index.js").ProjectCardData[]} */ row) => (
+              <View key={row[0].name} className="flex-col gap-3 md:flex-row md:gap-4 md:h-64">
+                {row.map((project) => (
+                  <ProjectCard key={project.name} project={project} halfWidth />
+                ))}
+              </View>
+            ))}
           </View>
           </View>
         </View>

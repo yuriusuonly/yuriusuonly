@@ -142,7 +142,11 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 ├── .env
 ├── .gitignore
 ├── png/
-│   └── logo.png
+│   ├── logo.png
+│   ├── tiptap-icon.png
+│   ├── dinorun-icon.png
+│   ├── superchat-icon.png
+│   └── mojisumi-icon.png
 ├── src/
 │   ├── app/
 │   │   ├── _layout.js
@@ -161,7 +165,13 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   ├── robots.txt+api.js
 │   │   └── service-worker.js+api.js
 │   ├── shared/
-│   │   └── config.js
+│   │   ├── config.js
+│   │   └── projects/
+│   │       ├── index.js
+│   │       ├── tiptap.js
+│   │       ├── dino-dash.js
+│   │       ├── superchat.js
+│   │       └── mojisumi.js
 │   └── stylesheets/
 │       └── global.css
 ├── svg/
