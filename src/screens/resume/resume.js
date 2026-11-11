@@ -291,6 +291,9 @@ export default function ResumeDimension() {
                 </View>
               </SectionRow>
 
+              {/* Page break for printing */}
+              <View className="page-break" />
+
               <SectionRow label="Education">
                 <View className="flex-row items-start gap-3">
                   <Image source={qcuIcon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel="Quezon City Polytechnic University icon" />
