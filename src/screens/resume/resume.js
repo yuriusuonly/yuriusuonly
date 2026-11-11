@@ -1,4 +1,4 @@
-import { Image, Linking, Pressable, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import Head from "expo-router/head";
 import DomainShell from "../../components/domain-shell.js";
 import { List, ListItem } from "../../components/list.js";
@@ -45,7 +45,9 @@ const PRINT_CSS = `
   .resume-scroll { overflow: visible !important; height: auto !important; }
   .resume-paper, .resume-paper * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   .resume-paper img { display: inline-block !important; visibility: visible !important; }
-  .resume-paper .flex-row > .w-32.md\\:w-48 { width: 12rem !important; padding-right: 2.5rem !important; }
+  .resume-paper .resume-row, .resume-paper .resume-header { flex-direction: row !important; }
+  .resume-paper .resume-header { align-items: flex-end !important; }
+  .resume-paper .resume-row > .resume-col, .resume-paper .resume-header > .resume-col { width: 12rem !important; padding-right: 2.5rem !important; padding-bottom: 0 !important; }
 }
 `;
 
@@ -63,6 +65,28 @@ const DIRECT_CONTACTS = [
 ];
 
 /**
+ * Resume link rendered as a real anchor (`<a href>`) on web so the link stays
+ * clickable when the page is saved or printed as a PDF.
+ *
+ * @param {{ label: string, url: string }} props - Link props.
+ * @returns {JSX.Element} The underlined link text.
+ */
+function ResumeLink({ label, url }) {
+  const external = /^https?:\/\//i.test(url);
+  return (
+    <Text
+      href={url}
+      hrefAttrs={external ? { target: "_blank", rel: "noopener noreferrer" } : undefined}
+      accessibilityRole="link"
+      accessibilityLabel={`Open ${label}`}
+      className="font-outfit text-xs md:text-sm text-[#161823] underline"
+    >
+      {label}
+    </Text>
+  );
+}
+
+/**
  * Renders a horizontal bullet-separated list of links (same style as header links).
  * @param {{ links: Array<{ label: string, url: string }>, className?: string }} props - Link row props.
  * @returns {JSX.Element|null} The bullet link row, or null when no links.
@@ -76,13 +100,7 @@ function BulletLinks({ links, className = "mt-2" }) {
           {index > 0 ? (
             <Text className="mx-1 font-outfit text-xs md:text-sm text-[#161823]/60">•</Text>
           ) : null}
-          <Pressable
-            accessibilityRole="link"
-            accessibilityLabel={`Open ${link.label}`}
-            onPress={() => Linking.openURL(link.url).catch(() => {})}
-          >
-            <Text className="font-outfit text-xs md:text-sm text-[#161823] underline">{link.label}</Text>
-          </Pressable>
+          <ResumeLink label={link.label} url={link.url} />
         </View>
       ))}
     </View>
@@ -90,16 +108,17 @@ function BulletLinks({ links, className = "mt-2" }) {
 }
 
 /**
- * Two-column resume section: label in the left column, content in the right
- * column with an optional divider shown only on the right column.
+ * Resume section row: two columns (label left, content right) at `md+` and
+ * when printed, stacking into a single column with the label above the
+ * content on small screens. The divider stays on the content column.
  *
  * @param {{ label: string, children: import("react").ReactNode, divider?: boolean }} props - Section row props.
  * @returns {JSX.Element} The section row.
  */
 function SectionRow({ label, labelClassName = "font-outfit text-xs md:text-sm font-bold uppercase tracking-wide text-[#161823]", children, divider = true, className = "mt-4" }) {
   return (
-    <View className={`flex-row ${className}`}>
-      <View className="w-32 md:w-48 pr-6 md:pr-10">
+    <View className={`resume-row flex-col md:flex-row ${className}`}>
+      <View className="resume-col w-full pr-0 pb-1 md:w-48 md:pr-10 md:pb-0">
         {typeof label === "string" ? (
           <Text className={labelClassName}>{label}</Text>
         ) : (
@@ -139,8 +158,8 @@ export default function ResumeDimension() {
             {/* Paper page (Letter width) */}
             <View className="resume-paper w-full bg-white rounded-lg shadow-2xl p-6 md:p-10">
               {/* Header */}
-              <View className="flex-row items-end">
-                <View className="w-32 md:w-48 pr-6 md:pr-10 items-start">
+              <View className="resume-header flex-col items-stretch md:flex-row md:items-end">
+                <View className="resume-col w-full pr-0 items-start md:w-48 md:pr-10">
                   {/* Avatar: shown only on the printable page */}
                   <View className="print-only resume-avatar h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full">
                     <Image
@@ -162,13 +181,7 @@ export default function ResumeDimension() {
                         {index > 0 ? (
                           <Text className="mx-1 font-outfit text-xs md:text-sm text-[#161823]/60">•</Text>
                         ) : null}
-                        <Pressable
-                          accessibilityRole="link"
-                          accessibilityLabel={`Open ${link.label}`}
-                          onPress={() => Linking.openURL(link.url).catch(() => {})}
-                        >
-                          <Text className="font-outfit text-xs md:text-sm text-[#161823] underline">{link.label}</Text>
-                        </Pressable>
+                        <ResumeLink label={link.label} url={link.url} />
                       </View>
                     ))}
                   </View>
@@ -186,13 +199,7 @@ export default function ResumeDimension() {
                       {index > 0 ? (
                         <Text className="mx-1 font-outfit text-xs md:text-sm text-[#161823]/60">•</Text>
                       ) : null}
-                      <Pressable
-                        accessibilityRole="link"
-                        accessibilityLabel={`Open ${link.label}`}
-                        onPress={() => Linking.openURL(link.url).catch(() => {})}
-                      >
-                        <Text className="font-outfit text-xs md:text-sm text-[#161823] underline">{link.label}</Text>
-                      </Pressable>
+                      <ResumeLink label={link.label} url={link.url} />
                     </View>
                   ))}
                 </View>
