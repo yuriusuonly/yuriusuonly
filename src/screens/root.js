@@ -205,13 +205,13 @@ export default function Index() {
             </View>
           </View>
 
-          {/* Right: large black projects card and two smaller stat cards beside it */}
+          {/* Right: large black projects card with the two stat cards stacked below it */}
           <View className="flex-1 flex-col gap-3 md:gap-4">
             <View className="hidden md:flex flex-row items-center gap-2 opacity-0" pointerEvents="none">
               <Text className="text-base">❖</Text>
               <Text className="font-outfit text-base md:text-lg font-semibold">About Me</Text>
             </View>
-            <View className="h-56 flex-row gap-3 md:flex-1 md:h-auto md:gap-4">
+            <View className="h-56 md:h-64">
               <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/clients", COLORS.ink, e)} className="flex-1 active:opacity-90">
                 <TiltCard style={{ flex: 1 }} maxTilt={10}>
                   <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
@@ -219,16 +219,18 @@ export default function Index() {
                     <Image
                       source={logo}
                       className="!h-full !w-full"
-                      resizeMode="cover"
+                      resizeMode="contain"
                       accessibilityLabel={`${config.title} clients`}
                     />
                   </View>
                 </TiltCard>
               </Pressable>
-              <View className="flex-col gap-3 md:gap-4 w-24 md:w-40">
-                <StatTile number="4" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/projects" onOpen={openDimension} />
-                <StatTile number="1" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/awards" onOpen={openDimension} />
-              </View>
+            </View>
+            <View className="h-24 md:h-32">
+              <StatTile number="4" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/projects" onOpen={openDimension} />
+            </View>
+            <View className="h-24 md:h-32">
+              <StatTile number="1" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/awards" onOpen={openDimension} />
             </View>
           </View>
           </View>
