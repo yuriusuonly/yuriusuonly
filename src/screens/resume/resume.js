@@ -23,7 +23,7 @@ const lccIcon = require("../../../png/lcc-icon.png");
 const RESUME_THEME = {
   id: "resume",
   name: "Resume",
-  tagline: "Curriculum Vitae.",
+  tagline: "Resume.",
   accent: COLORS.surface,
   void: "#05060B",
   shapes: [COLORS.surface, "#C9CCDD", COLORS.primary],
@@ -129,7 +129,7 @@ export default function ResumeDimension() {
           <View className="w-full max-w-[816px]">
             <View className="no-print mb-4 flex-row items-center gap-2">
               <Text className="text-base" style={{ color: RESUME_THEME.lightColor }}>❖</Text>
-              <Text className="font-outfit text-base md:text-lg font-semibold text-white">Curriculum Vitae</Text>
+              <Text className="font-outfit text-base md:text-lg font-semibold text-white">Resume</Text>
             </View>
 
             {/* Paper page (Letter width) */}
