@@ -20,12 +20,13 @@ const PROJECTS_THEME = {
 import DomainShell from "../../components/domain-shell.js";
 import TiltCard from "../../components/tilt-card.js";
 import tiptapIcon from "../../../png/tiptap-icon.png";
+import dinorunIcon from "../../../png/dinorun-icon.png";
 
 /**
  * Projects dimension route (`src/app/projects/index.js`): home-theme
  * cyan-void world opened from the featured/logo and Projects portals.
- * Features the TipTap project card — title, tagline, description, and
- * GitHub/live links.
+ * Features project cards (TipTap, DinoRun) — icon avatar, title,
+ * description, stack, and GitHub/live links.
  * @module app/projects
  */
 
@@ -44,12 +45,12 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 }
 
 /**
- * TipTap project card inside the projects dimension.
+ * Project card inside the projects dimension.
  *
- * @param {{ name: string, tagline: string, description: string, stack: string, repoUrl: string, liveUrl: string, icon: import("react-native").ImageSourcePropType }} props - Project content, outbound links, and icon asset.
+ * @param {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType }} props - Project content, outbound links, and icon asset.
  * @returns {JSX.Element} A tilting project card with GitHub/live links.
  */
-function ProjectCard({ name, tagline, description, stack, repoUrl, liveUrl, icon }) {
+function ProjectCard({ name, description, stack, repoUrl, liveUrl, liveLabel, icon }) {
   /**
    * Open an outbound link (new tab on web, external app on native).
    *
@@ -61,23 +62,21 @@ function ProjectCard({ name, tagline, description, stack, repoUrl, liveUrl, icon
   };
 
   return (
-    <TiltCard style={{ flex: 1 }} maxTilt={9}>
-      <View className="relative h-full flex-1 rounded-2xl bg-[#161823] p-5 md:p-6">
+    <View className="h-64 md:h-full md:flex-1">
+      <TiltCard style={{ flex: 1 }} maxTilt={9}>
+        <View className="relative h-full flex-1 rounded-2xl bg-[#161823] p-5 md:p-6">
         <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
-        <View className="flex-row items-center gap-3 md:gap-4">
+        <View className="flex-row items-center gap-3">
           <Image
             source={icon}
-            className="!h-10 !w-10 md:!h-11 md:!w-11 rounded-full border border-white/20"
+            className="!h-10 !w-10 rounded-full border border-white/20"
             resizeMode="cover"
             accessibilityLabel={`${name} icon`}
           />
-          <View className="flex-1">
-            <Text className="font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#25F4EE]">{name}</Text>
-            <Text className="font-outfit mt-1 text-xs md:text-sm text-white/80">{tagline}</Text>
-          </View>
+          <Text className="flex-1 font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#25F4EE]">{name}</Text>
         </View>
-        <Text className="font-outfit mt-3 max-w-2xl text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
-        <Text className="font-outfit mt-2 text-[10px] md:text-xs text-white/50">{stack}</Text>
+        <Text className="mt-3 font-outfit text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
+        <Text className="mt-2 font-outfit text-[10px] md:text-xs text-white/50">{stack}</Text>
         <View className="mt-4 flex-row flex-wrap gap-3">
           <Pressable
             accessibilityRole="link"
@@ -89,15 +88,16 @@ function ProjectCard({ name, tagline, description, stack, repoUrl, liveUrl, icon
           </Pressable>
           <Pressable
             accessibilityRole="link"
-            accessibilityLabel={`Open the ${name} live site`}
+            accessibilityLabel={`Open the ${name} ${liveLabel.toLowerCase()} page`}
             onPress={() => openLink(liveUrl)}
             className="rounded-full bg-[#25F4EE] px-4 py-2 active:opacity-80"
           >
-            <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">Live site ↗</Text>
+            <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">{liveLabel} ↗</Text>
           </Pressable>
         </View>
-      </View>
-    </TiltCard>
+        </View>
+      </TiltCard>
+    </View>
   );
 }
 
@@ -118,16 +118,25 @@ export default function ProjectsDimension() {
             <Text className="font-outfit text-base md:text-lg font-semibold text-white">Projects</Text>
           </View>
 
-          {/* Project card */}
-          <View className="mt-6 md:mt-10 flex-col gap-3 md:flex-row md:gap-4 h-72 md:h-64">
+          {/* Project cards */}
+          <View className="mt-6 md:mt-10 flex-col gap-3 md:flex-row md:gap-4 md:h-64">
             <ProjectCard
               name="TipTap"
-              tagline="Tap. Learn. Impress."
               description="A cross-platform Flutter app that turns knowledge into a fast, vertical feed of short, verified facts — science, history, nature, space, and culture."
               stack="Flutter · Firebase · AdMob · In-App Purchases"
               repoUrl="https://github.com/yuriusuonly/tiptap"
               liveUrl="https://yuriusu-tiptap.firebaseapp.com"
+              liveLabel="Live site"
               icon={tiptapIcon}
+            />
+            <ProjectCard
+              name="DinoRun"
+              description="A 2D pixel-art adventure game built with the Flutter Flame engine — run, jump, bite, and dash through a post-apocalyptic dino world."
+              stack="Flutter · Flame · Google Fonts"
+              repoUrl="https://github.com/yuriusuonly/dinorun"
+              liveUrl="https://yuriusuonly.itch.io/dinodash"
+              liveLabel="Play"
+              icon={dinorunIcon}
             />
           </View>
           </View>

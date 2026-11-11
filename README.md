@@ -105,7 +105,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 | Route | Source | Purpose |
 | --- | --- | --- |
 | `/` | `src/app/index.js` | Home page: bento-grid portfolio with portal tiles to dimension screens |
-| `/projects` | `src/app/projects/index.js` | Projects dimension page (TipTap project card + return portal) |
+| `/projects` | `src/app/projects/index.js` | Projects dimension page (project cards + return portal) |
 | `/awards` | `src/app/awards/index.js` | Awards dimension page (themed highlights + return portal) |
 | `/clients` | `src/app/clients/index.js` | Clients dimension page (themed highlights + return portal) |
 | `404` (fallback) | `src/app/+not-found.js` | Not-found screen for unmatched routes |
