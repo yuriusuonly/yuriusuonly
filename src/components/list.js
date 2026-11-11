@@ -1,12 +1,65 @@
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { unstable_createElement } from "react-native-web";
 
 /**
- * Shared bulleted list primitives: `List` containers with real list semantics
- * (`role="list"`) and `ListItem` rows with a marker column, hanging indent,
- * and optional nested lists. Markers align with the item's first text line;
- * nested lists indent under the parent label.
+ * Shared list primitives that render real semantic markup: `List` mounts a
+ * `<ul>` and `ListItem` an `<li>`, so nested lists are genuine nested lists
+ * in the DOM. This is a web-only project whose tree mounts through react-dom
+ * (react-native-web renders via `createRoot`/`hydrateRoot`), which makes
+ * standard HTML elements valid host elements; `unstable_createElement`
+ * routes their props through the same DOM-prop/style pipeline as the core
+ * components. Markers are rendered glyphs (not CSS list markers) so they
+ * keep the app's font and colors.
  * @module components/list
  */
+
+/**
+ * Base layout for every `<ul>`: reset the user-agent list styles and lay
+ * items out as a flex column.
+ *
+ * @type {import("react-native").ViewStyle}
+ */
+const listBase = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 8,
+  listStyleType: "none",
+  margin: 0,
+  padding: 0
+};
+
+/**
+ * Extra layout for nested (inset) lists: indent one level under the parent
+ * label and tighten the spacing.
+ *
+ * @type {import("react-native").ViewStyle}
+ */
+const listInset = {
+  gap: 4,
+  marginLeft: 20,
+  marginTop: 4
+};
+
+/**
+ * Wraps a real `<ul>` DOM element, resolving props through the
+ * react-native-web DOM-prop pipeline (style arrays, class passthrough).
+ *
+ * @param {object} props Props forwarded to the element.
+ * @returns {JSX.Element} The `<ul>` element.
+ */
+function Ul(props) {
+  return unstable_createElement("ul", props);
+}
+
+/**
+ * Wraps a real `<li>` DOM element with the same prop pipeline as {@link Ul}.
+ *
+ * @param {object} props Props forwarded to the element.
+ * @returns {JSX.Element} The `<li>` element.
+ */
+function Li(props) {
+  return unstable_createElement("li", props);
+}
 
 /**
  * Props for {@link List}.
@@ -14,23 +67,19 @@ import { Text, View } from "react-native";
  * @typedef {object} ListProps
  * @property {import("react").ReactNode} [children] `ListItem` elements (or other nodes rendered as list content).
  * @property {boolean} [inset] Indent the whole list one level (for nesting under a parent item) and tighten row spacing.
- * @property {string} [className] Extra Tailwind classes merged onto the container (e.g. spacing against neighbors).
  */
 
 /**
- * Bulleted list container.
+ * Bulleted list container rendering a semantic `<ul>`.
  *
  * @param {ListProps} props - Component props.
- * @returns {JSX.Element} A `role="list"` column of items.
+ * @returns {JSX.Element} A `<ul>` column of items.
  */
-function List({ children, inset = false, className = "" }) {
+function List({ children, inset = false }) {
   return (
-    <View
-      role="list"
-      className={`flex-col ${inset ? "ml-5 mt-1 gap-1" : "gap-2"} ${className}`}
-    >
+    <Ul style={inset ? [listBase, listInset] : listBase}>
       {children}
-    </View>
+    </Ul>
   );
 }
 
@@ -40,21 +89,21 @@ function List({ children, inset = false, className = "" }) {
  * @typedef {object} ListItemProps
  * @property {string} label Item text.
  * @property {import("react").ReactNode} [children] Nested {@link List} rendered under the label.
- * @property {string} [marker] Bullet glyph ("•" disc by default; "–" reads as a sub-item marker).
+ * @property {string} [marker] Bullet glyph ("•" dot by default; pass a different glyph to restyle a level, e.g. "–").
  * @property {string} [markerClass] Tailwind classes for the marker glyph (defaults to the light ink tone).
  * @property {string} [textClass] Tailwind classes for the label (defaults to muted white).
  */
 
 /**
- * Single list row: marker column + label with a hanging indent, plus an
- * optional nested list aligned under the label.
+ * Single list row rendering a semantic `<li>`: marker column + label with a
+ * hanging indent, plus an optional nested list aligned under the label.
  *
  * @param {ListItemProps} props - Component props.
- * @returns {JSX.Element} A `role="listitem"` row.
+ * @returns {JSX.Element} An `<li>` row.
  */
 function ListItem({ label, children, marker = "•", markerClass = "text-[#C9CCDD]", textClass = "text-white/60" }) {
   return (
-    <View role="listitem">
+    <Li>
       <View className="flex-row gap-2">
         <Text className={`w-3 shrink-0 font-outfit text-[10px] md:text-xs leading-snug ${markerClass}`}>{marker}</Text>
         <Text className={`flex-1 font-outfit text-[10px] md:text-xs leading-snug ${textClass}`}>{label}</Text>
@@ -64,7 +113,7 @@ function ListItem({ label, children, marker = "•", markerClass = "text-[#C9CCD
           {children}
         </View>
       ) : null}
-    </View>
+    </Li>
   );
 }
 

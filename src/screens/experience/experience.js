@@ -103,20 +103,22 @@ function ExperienceCard({ experience, halfWidth = false }) {
           <Text className="flex-1 font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#C9CCDD]">{name}</Text>
         </View>
         <Text className="mt-3 font-outfit text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
-        <List className="mt-2">
-          {highlights.map((highlight) => (
-            <ListItem key={highlight} label={highlight} />
-          ))}
-          {stack ? (
-            <ListItem label={stack.label}>
-              <List inset>
-                {stack.items.map((item) => (
-                  <ListItem key={item} label={item} marker="–" />
-                ))}
-              </List>
-            </ListItem>
-          ) : null}
-        </List>
+        <View className="mt-2">
+          <List>
+            {highlights.map((highlight) => (
+              <ListItem key={highlight} label={highlight} />
+            ))}
+            {stack ? (
+              <ListItem label={stack.label}>
+                <List inset>
+                  {stack.items.map((item) => (
+                    <ListItem key={item} label={item} />
+                  ))}
+                </List>
+              </ListItem>
+            ) : null}
+          </List>
+        </View>
         <Text className="mt-2 font-outfit text-[10px] md:text-xs text-white/50">{period} · {location}</Text>
         <View className="mt-4 flex-row flex-wrap gap-3">
           {liveUrl ? (
