@@ -84,11 +84,10 @@ export default function ResumeDimension() {
             <View className="resume-paper w-full bg-white rounded-lg shadow-2xl p-6 md:p-10">
               {/* Header */}
               <View className="flex-row">
-                <View className="w-24 md:w-32 pr-3">
-                  <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
-                </View>
+                <View className="w-24 md:w-32 pr-3" />
                 <View className="flex-1 border-b border-[#161823]/30 pb-3">
-                  <Text className="font-outfit text-2xl md:text-3xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
+                  <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
+                  <Text className="mt-1 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
                 </View>
               </View>
 
