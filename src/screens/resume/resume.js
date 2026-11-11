@@ -56,9 +56,9 @@ const SOCIAL_LINKS = [
  * @param {{ label: string, children: import("react").ReactNode, divider?: boolean }} props - Section row props.
  * @returns {JSX.Element} The section row.
  */
-function SectionRow({ label, children, divider = true }) {
+function SectionRow({ label, children, divider = true, className = "mt-4" }) {
   return (
-    <View className="flex-row mt-4">
+    <View className={`flex-row ${className}`}>
       <View className="w-32 md:w-48 pr-6 md:pr-10">
         <Text className="font-outfit text-xs md:text-sm font-bold uppercase tracking-wide text-[#161823]">{label}</Text>
       </View>
@@ -129,7 +129,7 @@ export default function ResumeDimension() {
                 </View>
               </View>
 
-              <SectionRow label="Skills">
+              <SectionRow label="Skills" className="mt-8">
                 <Text className="font-outfit text-xs md:text-sm leading-snug text-[#161823]">
                   Strong grasp of programming logic, project management, and problem-solving. Experience integrating code into automated build and deployment workflows. Proactive in self-education, as evidenced by completing rigorous external certifications in modern computing.
                 </Text>
