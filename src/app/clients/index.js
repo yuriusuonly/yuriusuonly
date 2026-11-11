@@ -67,7 +67,7 @@ function ClientTile({ sector, note, tileClass, textClass, dark }) {
 export default function ClientsDimension() {
   const theme = CLIENTS_THEME;
   return (
-    <DomainShell theme={theme}>
+    <DomainShell theme={theme} homePortal>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-5 pb-28 md:p-10 md:pb-32">
           <View className="w-full max-w-5xl">

@@ -47,7 +47,7 @@ function CornerMark({ markClass = "border-white/90", positionClass = "right-2 to
  */
 export default function NotFound() {
   return (
-    <DomainShell theme={VOID_THEME} calm>
+    <DomainShell theme={VOID_THEME} calm homePortal>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-4 pb-28 md:p-10 md:pb-32">
           <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 items-center">
