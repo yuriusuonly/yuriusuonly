@@ -95,7 +95,7 @@ export default function ResumeDimension() {
             {/* Paper page (Letter width) */}
             <View className="resume-paper w-full bg-white rounded-lg shadow-2xl p-6 md:p-10">
               {/* Header */}
-              <View className="flex-row">
+              <View className="flex-row items-end">
                 <View className="w-32 md:w-48 pr-6 md:pr-10 items-start">
                   <View className="resume-avatar h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full">
                     <Image
