@@ -100,7 +100,7 @@ function CareerCard({ career, halfWidth = false }) {
             resizeMode="contain"
             accessibilityLabel={`${name} icon`}
           />
-          <Text className="flex-1 font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#C9CCDD]">{name}</Text>
+          <Text className="flex-1 font-outfit text-2xl md:text-3xl font-extrabold leading-none text-white">{name}</Text>
         </View>
         <Text className="mt-3 font-outfit text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
         <View className="mt-2">
