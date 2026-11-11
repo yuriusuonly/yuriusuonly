@@ -38,6 +38,7 @@ const PRINT_CSS = `
 `;
 
 const SOCIAL_LINKS = [
+  { label: "Portfolio", url: "https://yuriusuonly.expo.app" },
   { label: "GitHub", url: "https://github.com/yuriusuonly" },
   { label: "LinkedIn", url: "https://linkedin.com/in/yuriusuonly" },
   { label: "itch.io", url: "https://yuriusuonly.itch.io" },
