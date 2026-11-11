@@ -28,7 +28,7 @@ import lifesaverMedicords from "./lifesaver-medicords.js";
  * `/career` route (`src/app/career/index.js`). Features the career
  * cards from this folder (Lifesaver Medicords Inc.) — icon avatar, title,
  * description, highlight bullets, tech stack list, period · location, and
- * live site / App Store / Play Store link chips.
+ * Website / App Store / Play Store link chips.
  * @module screens/career/career
  */
 
@@ -56,7 +56,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  * @property {string} location Engagement location.
  * @property {{ label: string, items: string[] }|undefined} stack Tech stack group rendered after the highlights: a labeled bullet with indented sub-bullets.
  * @property {string[]} highlights Highlight bullets rendered between the description and the stack.
- * @property {string} [liveUrl] Company live site URL; the chip renders only when set.
+ * @property {string} [liveUrl] Company website URL; the chip renders only when set.
  * @property {string} [appStoreUrl] Apple App Store URL; the chip renders only when set.
  * @property {string} [playStoreUrl] Google Play Store URL; the chip renders only when set.
  * @property {import("react-native").ImageSourcePropType} icon Card icon asset.
@@ -66,7 +66,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  * Props for {@link CareerCard} — content from this folder plus row placement.
  *
  * @typedef {object} CareerCardProps
- * @property {CareerCardData} career Career content, outbound live site/store links, and icon asset.
+ * @property {CareerCardData} career Career content, outbound website/store links, and icon asset.
  * @property {boolean} [halfWidth] Render the card at half width on desktop rows.
  */
 
@@ -74,7 +74,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  * Career card inside the career dimension.
  *
  * @param {CareerCardProps} props - Component props.
- * @returns {JSX.Element} A tilting career card with live site / store links.
+ * @returns {JSX.Element} A tilting career card with website / store links.
  */
 function CareerCard({ career, halfWidth = false }) {
   const { name, description, period, location, stack, highlights, liveUrl, appStoreUrl, playStoreUrl, icon } = career;
@@ -124,11 +124,11 @@ function CareerCard({ career, halfWidth = false }) {
           {liveUrl ? (
             <Pressable
               accessibilityRole="link"
-              accessibilityLabel={`Open the ${name} live site`}
+              accessibilityLabel={`Open the ${name} website`}
               onPress={() => openLink(liveUrl)}
               className="rounded-full bg-white px-4 py-2 active:opacity-80"
             >
-              <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">Live site ↗</Text>
+              <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">Website ↗</Text>
             </Pressable>
           ) : null}
           {appStoreUrl ? (
