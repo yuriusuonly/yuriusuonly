@@ -1,4 +1,4 @@
-import { Linking, Pressable, ScrollView, Text, View } from "react-native";
+import { Image, Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { COLORS } from "../../shared/theme.js";
 
 /**
@@ -19,6 +19,7 @@ const PROJECTS_THEME = {
 };
 import DomainShell from "../../components/domain-shell.js";
 import TiltCard from "../../components/tilt-card.js";
+import tiptapIcon from "../../../png/tiptap-icon.png";
 
 /**
  * Projects dimension route (`src/app/projects/index.js`): home-theme
@@ -45,10 +46,10 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 /**
  * TipTap project card inside the projects dimension.
  *
- * @param {{ name: string, tagline: string, description: string, stack: string, repoUrl: string, liveUrl: string }} props - Project content and outbound links.
+ * @param {{ name: string, tagline: string, description: string, stack: string, repoUrl: string, liveUrl: string, icon: import("react-native").ImageSourcePropType }} props - Project content, outbound links, and icon asset.
  * @returns {JSX.Element} A tilting project card with GitHub/live links.
  */
-function ProjectCard({ name, tagline, description, stack, repoUrl, liveUrl }) {
+function ProjectCard({ name, tagline, description, stack, repoUrl, liveUrl, icon }) {
   /**
    * Open an outbound link (new tab on web, external app on native).
    *
@@ -63,9 +64,19 @@ function ProjectCard({ name, tagline, description, stack, repoUrl, liveUrl }) {
     <TiltCard style={{ flex: 1 }} maxTilt={9}>
       <View className="relative h-full flex-1 rounded-2xl bg-[#161823] p-5 md:p-6">
         <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
-        <Text className="font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#25F4EE]">{name}</Text>
-        <Text className="font-outfit mt-1 text-xs md:text-sm text-white/80">{tagline}</Text>
-        <Text className="font-outfit mt-3 max-w-md text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
+        <View className="flex-row items-center gap-3 md:gap-4">
+          <Image
+            source={icon}
+            className="h-12 w-12 md:h-14 md:w-14 rounded-2xl"
+            resizeMode="cover"
+            accessibilityLabel={`${name} icon`}
+          />
+          <View className="flex-1">
+            <Text className="font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#25F4EE]">{name}</Text>
+            <Text className="font-outfit mt-1 text-xs md:text-sm text-white/80">{tagline}</Text>
+          </View>
+        </View>
+        <Text className="font-outfit mt-3 max-w-2xl text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
         <Text className="font-outfit mt-2 text-[10px] md:text-xs text-white/50">{stack}</Text>
         <View className="mt-4 flex-row flex-wrap gap-3">
           <Pressable
@@ -122,6 +133,7 @@ export default function ProjectsDimension() {
               stack="Flutter · Firebase · AdMob · In-App Purchases"
               repoUrl="https://github.com/yuriusuonly/tiptap"
               liveUrl="https://yuriusu-tiptap.firebaseapp.com"
+              icon={tiptapIcon}
             />
           </View>
           </View>

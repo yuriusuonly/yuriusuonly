@@ -47,6 +47,7 @@
 
 ## Assets & branding
 - Logo: `png/logo.png` (used on home tiles, PWA manifest icon). Vector source in `svg/logo.svg` — dark `#161823` bento tile with a bold geometric letter `Y` in TikTok’s chromatic-aberration style (red `#FE2C55` and cyan `#25F4EE` offset highlights behind a white foreground). Render the PNG from the SVG with `rsvg-convert -w 1024 -h 1024 svg/logo.svg -o png/logo.png` after editing the source.
+- TipTap project icon: `png/tiptap-icon.png` (from the TipTap repository; shown as an app-icon badge on the /projects project card).
 - Favicon configured in `app.config.js` (`web.favicon: "png/logo.png"`).
 - App name/description come from `EXPO_PUBLIC_TITLE`/`EXPO_PUBLIC_DESCRIPTION` (propagated to HTML/meta/manifest via config).
 
