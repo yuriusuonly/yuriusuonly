@@ -264,7 +264,7 @@ export default function Index() {
             </View>
             <View className="flex-row gap-3 md:flex-1 md:gap-4">
               <View className="h-56 flex-1 md:h-auto md:flex-1">
-                <StatTile number="4" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/projects" onOpen={openDimension} />
+                <StatTile number="5" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/projects" onOpen={openDimension} />
               </View>
               <View className="h-56 flex-1 md:h-auto md:flex-1">
                 <StatTile number="1" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/awards" onOpen={openDimension} />

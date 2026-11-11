@@ -150,6 +150,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   ├── dinorun-icon.png
 │   ├── superchat-icon.png
 │   ├── mojisumi-icon.png
+│   ├── scheme-icon.png
 │   ├── cs50x-icon.png
 │   ├── lifesaver-icon.png
 │   ├── qcu-icon.png
@@ -191,7 +192,8 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │       ├── tiptap.js
 │   │       ├── dino-dash.js
 │   │       ├── superchat.js
-│   │       └── mojisumi.js
+│   │       ├── mojisumi.js
+│   │       └── scheme.js
 │   ├── components/
 │   │   ├── animated-background.js
 │   │   ├── domain-shell.js
