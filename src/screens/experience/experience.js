@@ -26,8 +26,8 @@ import lifesaverMedicords from "./lifesaver-medicords.js";
  * ink-void world opened from the Experience portal, rendered by the
  * `/experience` route (`src/app/experience/index.js`). Features the experience
  * cards from this folder (Lifesaver Medicords Inc.) — icon avatar, title,
- * description, highlight bullets, stack, period · location, and live site /
- * App Store / Play Store link chips.
+ * description, highlight bullets, tech stack list, period · location, and
+ * live site / App Store / Play Store link chips.
  * @module screens/experience/experience
  */
 
@@ -53,7 +53,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  * @property {string} description Card description (role at the company and what it does).
  * @property {string} period Engagement period.
  * @property {string} location Engagement location.
- * @property {string} stack Stack line rendered above the period · location meta.
+ * @property {{ label: string, items: string[] }|undefined} stack Tech stack group rendered after the highlights: a labeled bullet with indented sub-bullets.
  * @property {string[]} highlights Highlight bullets rendered between the description and the stack.
  * @property {string} [liveUrl] Company live site URL; the chip renders only when set.
  * @property {string} [appStoreUrl] Apple App Store URL; the chip renders only when set.
@@ -108,8 +108,23 @@ function ExperienceCard({ experience, halfWidth = false }) {
             <Text className="flex-1 font-outfit text-[10px] md:text-xs text-white/60 leading-snug">{highlight}</Text>
           </View>
         ))}
-        <Text className="mt-2 font-outfit text-[10px] md:text-xs text-white/50">{stack}</Text>
-        <Text className="font-outfit text-[10px] md:text-xs text-white/50">{period} · {location}</Text>
+        {stack ? (
+          <View className="mt-2">
+            <View className="flex-row gap-2">
+              <Text className="text-[9px] leading-[3px]" style={{ color: "#C9CCDD" }}>❖</Text>
+              <Text className="flex-1 font-outfit text-[10px] md:text-xs text-white/60 leading-snug">{stack.label}</Text>
+            </View>
+            <View className="ml-5 mt-1 flex-col gap-1">
+              {stack.items.map((item) => (
+                <View key={item} className="flex-row gap-2">
+                  <Text className="text-[10px] leading-[13px]" style={{ color: "#C9CCDD" }}>–</Text>
+                  <Text className="flex-1 font-outfit text-[10px] md:text-xs text-white/60 leading-snug">{item}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        ) : null}
+        <Text className="mt-2 font-outfit text-[10px] md:text-xs text-white/50">{period} · {location}</Text>
         <View className="mt-4 flex-row flex-wrap gap-3">
           {liveUrl ? (
             <Pressable
