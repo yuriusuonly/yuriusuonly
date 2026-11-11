@@ -105,7 +105,7 @@ function AwardCard({ award, halfWidth = false }) {
             onPress={() => openLink(url)}
             className="rounded-full bg-[#FE2C55] px-4 py-2 active:opacity-80"
           >
-            <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">Certificate ↗</Text>
+            <Text className="font-outfit text-xs md:text-sm font-semibold text-white">Certificate ↗</Text>
           </Pressable>
         </View>
         </View>

@@ -217,29 +217,29 @@ export default function Index() {
                   accessibilityLabel={`${OWNER_NAME} avatar`}
                 />
               </View>
+              {/* Flexible spacer: on small screens it keeps at least a
+                  min-h gap below the avatar and hands any extra card height
+                  to the name + links cluster so they stay close together
+                  (hidden at md+, where the card keeps its centered rhythm). */}
+              <View className="min-h-[32px] flex-1 md:hidden" />
               {/* Identity */}
-              <View className="mt-4 md:mt-6 self-start">
+              <View className="self-start md:mt-6">
                 <Text className="font-outfit text-2xl md:text-4xl font-semibold text-[#161823]">{OWNER_NAME}</Text>
               </View>
-              {/* Social links + spinning badge row */}
-              <View className="mt-4 md:mt-6 self-stretch flex-row items-end justify-between gap-2">
-                <View className="flex-1 border-b border-dashed border-[#161823]/70 pb-2">
-                  <View className="flex-row flex-wrap gap-x-3 gap-y-1">
-                    {SOCIAL_LINKS.map((link) => (
-                      <Pressable
-                        key={link.label}
-                        accessibilityRole="link"
-                        accessibilityLabel={link.hint ?? `Open the ${link.label} profile`}
-                        onPress={() => Linking.openURL(link.url).catch(() => {})}
-                        className="active:opacity-70"
-                      >
-                        <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823] underline">{link.label} ↗</Text>
-                      </Pressable>
-                    ))}
-                  </View>
-                </View>
-                <View className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-[#161823] items-center justify-center">
-                  <View className="h-3 w-3 md:h-3.5 md:w-3.5 rounded-full bg-white" />
+              {/* Social links row */}
+              <View className="mt-4 md:mt-6 self-stretch border-b border-dashed border-[#161823]/70 pb-2">
+                <View className="flex-row flex-wrap gap-x-3 gap-y-1">
+                  {SOCIAL_LINKS.map((link) => (
+                    <Pressable
+                      key={link.label}
+                      accessibilityRole="link"
+                      accessibilityLabel={link.hint ?? `Open the ${link.label} profile`}
+                      onPress={() => Linking.openURL(link.url).catch(() => {})}
+                      className="active:opacity-70"
+                    >
+                      <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823] underline">{link.label} ↗</Text>
+                    </Pressable>
+                  ))}
                 </View>
               </View>
             </View>

@@ -105,8 +105,8 @@ function ListItem({ label, children, marker = "•", markerClass = "text-[#C9CCD
   return (
     <Li>
       <View className="flex-row gap-2">
-        <Text className={`w-3 shrink-0 font-outfit text-[10px] md:text-xs leading-snug ${markerClass}`}>{marker}</Text>
-        <Text className={`flex-1 font-outfit text-[10px] md:text-xs leading-snug ${textClass}`}>{label}</Text>
+        <Text className={`w-3 shrink-0 font-outfit text-xs md:text-sm leading-snug ${markerClass}`}>{marker}</Text>
+        <Text className={`flex-1 font-outfit text-xs md:text-sm leading-snug ${textClass}`}>{label}</Text>
       </View>
       {children ? (
         <View className="mt-1">

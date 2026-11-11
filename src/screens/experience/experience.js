@@ -126,7 +126,7 @@ function ExperienceCard({ experience, halfWidth = false }) {
               accessibilityRole="link"
               accessibilityLabel={`Open the ${name} live site`}
               onPress={() => openLink(liveUrl)}
-              className="rounded-full bg-[#C9CCDD] px-4 py-2 active:opacity-80"
+              className="rounded-full bg-white px-4 py-2 active:opacity-80"
             >
               <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">Live site ↗</Text>
             </Pressable>
@@ -136,7 +136,7 @@ function ExperienceCard({ experience, halfWidth = false }) {
               accessibilityRole="link"
               accessibilityLabel={`Open the ${name} App Store page`}
               onPress={() => openLink(appStoreUrl)}
-              className="rounded-full bg-[#C9CCDD] px-4 py-2 active:opacity-80"
+              className="rounded-full bg-white px-4 py-2 active:opacity-80"
             >
               <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">App Store ↗</Text>
             </Pressable>
@@ -146,7 +146,7 @@ function ExperienceCard({ experience, halfWidth = false }) {
               accessibilityRole="link"
               accessibilityLabel={`Open the ${name} Play Store page`}
               onPress={() => openLink(playStoreUrl)}
-              className="rounded-full bg-[#C9CCDD] px-4 py-2 active:opacity-80"
+              className="rounded-full bg-white px-4 py-2 active:opacity-80"
             >
               <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">Play Store ↗</Text>
             </Pressable>
