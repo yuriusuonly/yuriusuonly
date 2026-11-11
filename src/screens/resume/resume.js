@@ -36,7 +36,6 @@ const PRINT_CSS = `
   .page-break { page-break-before: always; break-before: page; }
   .resume-paper { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; }
   .resume-scroll { overflow: visible !important; height: auto !important; }
-  .resume-avatar { width: 1in !important; height: 1in !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   .resume-avatar, .resume-avatar * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 `;
