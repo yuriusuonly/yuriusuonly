@@ -82,10 +82,14 @@ export default function ResumeDimension() {
       </Head>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-4 pb-28 md:p-8 md:pb-32">
-          <Text className="no-print mb-4 font-outfit text-lg md:text-xl font-semibold text-white">Curriculum Vitae</Text>
+          <View className="w-full max-w-[816px]">
+            <View className="no-print mb-4 flex-row items-center gap-2">
+              <Text className="text-base" style={{ color: RESUME_THEME.lightColor }}>❖</Text>
+              <Text className="font-outfit text-base md:text-lg font-semibold text-white">Curriculum Vitae</Text>
+            </View>
 
-          {/* Paper page (Letter width) */}
-          <View className="w-full max-w-[816px] bg-white rounded-lg shadow-2xl p-6 md:p-10">
+            {/* Paper page (Letter width) */}
+            <View className="w-full bg-white rounded-lg shadow-2xl p-6 md:p-10">
             {/* Header */}
             <View>
               <Text className="font-outfit text-2xl md:text-3xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
@@ -153,6 +157,7 @@ export default function ResumeDimension() {
                 Learned the Linux command-line interface, C, Python, SQL (SQLite), and standard Web technologies (HTML, CSS, and JavaScript).
               </Text>
             </View>
+          </View>
           </View>
         </View>
       </ScrollView>
