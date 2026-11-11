@@ -107,7 +107,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 | `/` | `src/app/index.js` → `src/screens/root.js` | Home screen: bento-grid portfolio with portal tiles to dimension screens |
 | `/projects` | `src/app/projects/index.js` → `src/screens/projects/projects.js` | Projects dimension screen (project cards + Back portal) |
 | `/awards` | `src/app/awards/index.js` → `src/screens/awards/awards.js` | Awards dimension screen (award cards + Back portal) |
-| `/clients` | `src/app/clients/index.js` → `src/screens/clients/clients.js` | Clients dimension screen (themed highlights + Back portal) |
+| `/clients` | `src/app/clients/index.js` → `src/screens/clients/clients.js` | Clients dimension screen (experience cards + Back portal) |
 | `404` (fallback) | `src/app/+not-found.js` | Not-found screen for unmatched routes |
 | document shell | `src/app/+html.js` | Custom HTML document (charset/viewport/meta/manifest link) |
 | `/api/health` | `src/app/api/health+api.js` | JSON `{status, timestamp, uptime}`; `Cache-Control: no-store`; used by Docker healthcheck |
@@ -147,7 +147,8 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   ├── dinorun-icon.png
 │   ├── superchat-icon.png
 │   ├── mojisumi-icon.png
-│   └── cs50x-icon.png
+│   ├── cs50x-icon.png
+│   └── lifesaver-icon.png
 ├── src/
 │   ├── app/
 │   │   ├── _layout.js
@@ -174,7 +175,8 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   │   ├── awards.js
 │   │   │   └── cs50x.js
 │   │   ├── clients/
-│   │   │   └── clients.js
+│   │   │   ├── clients.js
+│   │   │   └── lifesaver-medicords.js
 │   │   └── projects/
 │   │       ├── projects.js
 │   │       ├── tiptap.js

@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { Image, Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { COLORS } from "../../shared/theme.js";
 
 /**
@@ -19,12 +19,14 @@ const CLIENTS_THEME = {
 };
 import DomainShell from "../../components/domain-shell.js";
 import TiltCard from "../../components/tilt-card.js";
+import lifesaverMedicords from "./lifesaver-medicords.js";
 
 /**
- * Clients dimension screen (`src/screens/clients/clients.js`): ink-void
- * world opened from the Clients portal, rendered by the `/clients` route
- * (`src/app/clients/index.js`). Client-row placeholder copy — wire real
- * data before production.
+ * Clients dimension screen (`src/screens/clients/clients.js`): ink-void world
+ * opened from the Clients portal, rendered by the `/clients` route
+ * (`src/app/clients/index.js`). Features the experience cards from this folder
+ * (Lifesaver Medicords) — icon avatar, title, role, description, highlight
+ * bullets, stack, period · location, and a company link chip.
  * @module screens/clients/clients
  */
 
@@ -43,25 +45,92 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 }
 
 /**
- * Single client-sector tile inside the clients dimension.
+ * Content for a single experience card, as exported by this folder's card files.
  *
- * @param {{ sector: string, note: string, tileClass: string, textClass: string, dark?: boolean }} props - Content and surface classes.
- * @returns {JSX.Element} A tilting bento tile.
+ * @typedef {object} ExperienceCardData
+ * @property {string} name Card title (company name).
+ * @property {string} role Role held at the company.
+ * @property {string} description Card description (what the company does).
+ * @property {string} period Engagement period.
+ * @property {string} location Engagement location.
+ * @property {string} stack Stack line rendered above the period · location meta.
+ * @property {string[]} highlights Highlight bullets rendered between the description and the stack.
+ * @property {string} [url] Company/product URL; the link chip renders only when set.
+ * @property {import("react-native").ImageSourcePropType} icon Card icon asset.
  */
-function ClientTile({ sector, note, tileClass, textClass, dark }) {
+
+/**
+ * Props for {@link ExperienceCard} — content from this folder plus row placement.
+ *
+ * @typedef {object} ExperienceCardProps
+ * @property {ExperienceCardData} experience Experience content, outbound link, and icon asset.
+ * @property {boolean} [halfWidth] Render the card at half width on desktop rows.
+ */
+
+/**
+ * Experience card inside the clients dimension.
+ *
+ * @param {ExperienceCardProps} props - Component props.
+ * @returns {JSX.Element} A tilting experience card with a company link.
+ */
+function ExperienceCard({ experience, halfWidth = false }) {
+  const { name, role, description, period, location, stack, highlights, url, icon } = experience;
+  /**
+   * Open an outbound link (new tab on web, external app on native).
+   *
+   * @param {string} target - Destination URL.
+   * @returns {void}
+   */
+  const openLink = (target) => {
+    Linking.openURL(target).catch(() => {});
+  };
+
   return (
-    <TiltCard style={{ flex: 1 }} maxTilt={9}>
-      <View className={`relative h-full flex-1 rounded-2xl p-4 md:p-6 justify-center ${tileClass}`}>
-        <CornerMark dark={dark} positionClass="right-4 top-4 md:right-6 md:top-6" />
-        <Text className={`font-outfit text-xl md:text-2xl font-extrabold leading-tight ${textClass}`}>{sector}</Text>
-        <Text className={`font-outfit mt-2 text-xs md:text-sm leading-snug ${textClass}`}>{note}</Text>
-      </View>
-    </TiltCard>
+    <View className={`h-80 md:h-full ${halfWidth ? "md:w-1/2" : "md:flex-1"}`}>
+      <TiltCard style={{ flex: 1 }} maxTilt={9}>
+        <View className="relative h-full flex-1 rounded-2xl bg-[#161823] p-5 md:p-6">
+        <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
+        <View className="flex-row items-center gap-3">
+          <Image
+            source={icon}
+            className="!h-10 !w-10 rounded-full border border-white/20"
+            resizeMode="cover"
+            accessibilityLabel={`${name} icon`}
+          />
+          <View className="flex-1">
+            <Text className="font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#C9CCDD]">{name}</Text>
+            <Text className="mt-1 font-outfit text-xs md:text-sm font-semibold text-white">{role}</Text>
+          </View>
+        </View>
+        <Text className="mt-3 font-outfit text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
+        {highlights.map((highlight) => (
+          <View key={highlight} className="mt-2 flex-row gap-2">
+            <Text className="text-[9px] leading-[3px]" style={{ color: "#C9CCDD" }}>❖</Text>
+            <Text className="flex-1 font-outfit text-[10px] md:text-xs text-white/60 leading-snug">{highlight}</Text>
+          </View>
+        ))}
+        <Text className="mt-2 font-outfit text-[10px] md:text-xs text-white/50">{stack}</Text>
+        <Text className="font-outfit text-[10px] md:text-xs text-white/50">{period} · {location}</Text>
+        <View className="mt-4 flex-row flex-wrap gap-3">
+          {url ? (
+            <Pressable
+              accessibilityRole="link"
+              accessibilityLabel={`Open the ${name} App Store page`}
+              onPress={() => openLink(url)}
+              className="rounded-full bg-[#C9CCDD] px-4 py-2 active:opacity-80"
+            >
+              <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823]">App Store ↗</Text>
+            </Pressable>
+          ) : null}
+        </View>
+        </View>
+      </TiltCard>
+    </View>
   );
 }
 
 /**
- * Clients dimension page: collaboration sectors staged in the ink void.
+ * Clients dimension page: experience highlights staged in the ink void.
  *
  * @returns {JSX.Element} The themed clients dimension.
  */
@@ -76,18 +145,16 @@ export default function ClientsDimension() {
             <Text className="text-base" style={{ color: theme.lightColor }}>❖</Text>
             <Text className="font-outfit text-base md:text-lg font-semibold text-white">Clients</Text>
           </View>
-          <Text className="font-outfit text-5xl md:text-8xl font-black tracking-tight leading-none mt-2" style={{ color: theme.accent }}>
-            156
-          </Text>
-          <Text className="font-outfit mt-3 md:mt-4 max-w-lg text-base md:text-xl text-white/80 leading-snug">
-            Collaborations across startups, studios, and global product teams.
-          </Text>
 
-          {/* Sector tiles */}
-          <View className="mt-6 md:mt-10 flex-col gap-3 md:flex-row md:gap-4 h-72 md:h-56">
-            <ClientTile sector="Consumer Apps" note="Social, media, entertainment." tileClass="bg-[#25F4EE]" textClass="text-[#161823]" dark />
-            <ClientTile sector="Fintech & SaaS" note="Dashboards, onboarding flows." tileClass="bg-[#FE2C55]" textClass="text-white" />
-            <ClientTile sector="Commerce" note="Brand stores, campaign pages." tileClass="bg-[#161823]" textClass="text-white" />
+          {/* Experience cards: two per row on desktop */}
+          <View className="mt-6 md:mt-10 flex-col gap-3 md:gap-4">
+            {[[lifesaverMedicords]].map((/** @type {ExperienceCardData[]} */ row) => (
+              <View key={row[0].name} className="flex-col gap-3 md:flex-row md:gap-4 md:h-80">
+                {row.map((experience) => (
+                  <ExperienceCard key={experience.name} experience={experience} halfWidth />
+                ))}
+              </View>
+            ))}
           </View>
           </View>
         </View>
