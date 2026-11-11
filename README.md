@@ -107,7 +107,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 | `/` | `src/app/index.js` → `src/screens/root.js` | Home screen: bento-grid portfolio with portal tiles to dimension screens |
 | `/projects` | `src/app/projects/index.js` → `src/screens/projects/projects.js` | Projects dimension screen (project cards + Back portal) |
 | `/awards` | `src/app/awards/index.js` → `src/screens/awards/awards.js` | Awards dimension screen (award cards + Back portal) |
-| `/experience` | `src/app/experience/index.js` → `src/screens/experience/experience.js` | Experience dimension screen (experience cards + Back portal) |
+| `/career` | `src/app/career/index.js` → `src/screens/career/career.js` | Career dimension screen (career cards + Back portal) |
 | `/resume` | `src/app/resume/index.js` → `src/screens/resume/resume.js` | Resume dimension screen (single-page printable curriculum vitae) |
 | `404` (fallback) | `src/app/+not-found.js` | Not-found screen for unmatched routes |
 | document shell | `src/app/+html.js` | Custom HTML document (charset/viewport/meta/manifest link) |
@@ -162,7 +162,7 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   │   └── health+api.js
 │   │   ├── awards/
 │   │   │   └── index.js
-│   │   ├── experience/
+│   │   ├── career/
 │   │   │   └── index.js
 │   │   ├── projects/
 │   │   │   └── index.js
@@ -179,8 +179,8 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 │   │   ├── awards/
 │   │   │   ├── awards.js
 │   │   │   └── cs50x.js
-│   │   ├── experience/
-│   │   │   ├── experience.js
+│   │   ├── career/
+│   │   │   ├── career.js
 │   │   │   └── lifesaver-medicords.js
 │   │   ├── resume/
 │   │   │   └── resume.js

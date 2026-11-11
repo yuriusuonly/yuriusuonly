@@ -2,13 +2,13 @@ import { Image, Linking, Pressable, ScrollView, Text, View } from "react-native"
 import { COLORS } from "../../shared/theme.js";
 
 /**
- * Experience dimension theme composed locally from base color tokens.
+ * Career dimension theme composed locally from base color tokens.
  *
  * @type {import("../../shared/theme.js").DimensionTheme}
  */
-const EXPERIENCE_THEME = {
-  id: "experience",
-  name: "Experience",
+const CAREER_THEME = {
+  id: "career",
+  name: "Career",
   tagline: "Where I've worked.",
   accent: COLORS.ink,
   void: "#05060B",
@@ -23,13 +23,13 @@ import { List, ListItem } from "../../components/list.js";
 import lifesaverMedicords from "./lifesaver-medicords.js";
 
 /**
- * Experience dimension screen (`src/screens/experience/experience.js`):
- * ink-void world opened from the Experience portal, rendered by the
- * `/experience` route (`src/app/experience/index.js`). Features the experience
+ * Career dimension screen (`src/screens/career/career.js`):
+ * ink-void world opened from the Career portal, rendered by the
+ * `/career` route (`src/app/career/index.js`). Features the career
  * cards from this folder (Lifesaver Medicords Inc.) — icon avatar, title,
  * description, highlight bullets, tech stack list, period · location, and
  * live site / App Store / Play Store link chips.
- * @module screens/experience/experience
+ * @module screens/career/career
  */
 
 /**
@@ -47,9 +47,9 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 }
 
 /**
- * Content for a single experience card, as exported by this folder's card files.
+ * Content for a single career card, as exported by this folder's card files.
  *
- * @typedef {object} ExperienceCardData
+ * @typedef {object} CareerCardData
  * @property {string} name Card title (company name).
  * @property {string} description Card description (role at the company and what it does).
  * @property {string} period Engagement period.
@@ -63,21 +63,21 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  */
 
 /**
- * Props for {@link ExperienceCard} — content from this folder plus row placement.
+ * Props for {@link CareerCard} — content from this folder plus row placement.
  *
- * @typedef {object} ExperienceCardProps
- * @property {ExperienceCardData} experience Experience content, outbound live site/store links, and icon asset.
+ * @typedef {object} CareerCardProps
+ * @property {CareerCardData} career Career content, outbound live site/store links, and icon asset.
  * @property {boolean} [halfWidth] Render the card at half width on desktop rows.
  */
 
 /**
- * Experience card inside the experience dimension.
+ * Career card inside the career dimension.
  *
- * @param {ExperienceCardProps} props - Component props.
- * @returns {JSX.Element} A tilting experience card with live site / store links.
+ * @param {CareerCardProps} props - Component props.
+ * @returns {JSX.Element} A tilting career card with live site / store links.
  */
-function ExperienceCard({ experience, halfWidth = false }) {
-  const { name, description, period, location, stack, highlights, liveUrl, appStoreUrl, playStoreUrl, icon } = experience;
+function CareerCard({ career, halfWidth = false }) {
+  const { name, description, period, location, stack, highlights, liveUrl, appStoreUrl, playStoreUrl, icon } = career;
   /**
    * Open an outbound link (new tab on web, external app on native).
    *
@@ -159,12 +159,12 @@ function ExperienceCard({ experience, halfWidth = false }) {
 }
 
 /**
- * Experience dimension page: experience highlights staged in the ink void.
+ * Career dimension page: career highlights staged in the ink void.
  *
- * @returns {JSX.Element} The themed experience dimension.
+ * @returns {JSX.Element} The themed career dimension.
  */
-export default function ExperienceDimension() {
-  const theme = EXPERIENCE_THEME;
+export default function CareerDimension() {
+  const theme = CAREER_THEME;
   return (
     <DomainShell theme={theme} homePortal>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
@@ -172,15 +172,15 @@ export default function ExperienceDimension() {
           <View className="w-full max-w-5xl">
           <View className="flex-row items-center gap-2">
             <Text className="text-base" style={{ color: theme.lightColor }}>❖</Text>
-            <Text className="font-outfit text-base md:text-lg font-semibold text-white">Experience</Text>
+            <Text className="font-outfit text-base md:text-lg font-semibold text-white">Career</Text>
           </View>
 
-          {/* Experience cards: two per row on desktop */}
+          {/* Career cards: two per row on desktop */}
           <View className="mt-6 md:mt-10 flex-col gap-3 md:gap-4">
-            {[[lifesaverMedicords]].map((/** @type {ExperienceCardData[]} */ row) => (
+            {[[lifesaverMedicords]].map((/** @type {CareerCardData[]} */ row) => (
               <View key={row[0].name} className="flex-col gap-3 md:flex-row md:gap-4">
-                {row.map((experience) => (
-                  <ExperienceCard key={experience.name} experience={experience} halfWidth />
+                {row.map((career) => (
+                  <CareerCard key={career.name} career={career} halfWidth />
                 ))}
               </View>
             ))}

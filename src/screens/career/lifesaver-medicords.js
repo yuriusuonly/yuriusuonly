@@ -1,8 +1,8 @@
 import lifesaverIcon from "../../../png/lifesaver-icon.png";
 
 /**
- * Lifesaver Medicords experience card content for the /experience dimension.
- * @module screens/experience/lifesaver-medicords
+ * Lifesaver Medicords career card content for the /career dimension.
+ * @module screens/career/lifesaver-medicords
  */
 
 /** @type {{ name: string, description: string, period: string, location: string, stack: { label: string, items: string[] }, highlights: string[], liveUrl: string, appStoreUrl: string, playStoreUrl: string, icon: import("react-native").ImageSourcePropType }} */

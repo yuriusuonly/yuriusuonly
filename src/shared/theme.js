@@ -32,7 +32,7 @@ export const COLORS = {
  * opens into, composed by each screen from {@link COLORS} and local accents.
  *
  * @typedef {object} DimensionTheme
- * @property {string} id Route identifier ("home", "projects", "awards", "experience", "void").
+ * @property {string} id Route identifier ("home", "projects", "awards", "career", "void").
  * @property {string} name Display name shown in domain pages.
  * @property {string} tagline Short copy used in scene overlays.
  * @property {string} accent Dominant brand color driving overlays and lights.
