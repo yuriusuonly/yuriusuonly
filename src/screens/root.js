@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Animated, Image, Pressable, ScrollView, Text, View } from "react-native";
+import { Animated, Image, Linking, Pressable, ScrollView, Text, View } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useExpansionStore } from "../stores/expansion-store.js";
 import config from "../shared/config.js";
@@ -37,6 +37,28 @@ import avatar from "../../jpg/avatar.jpg";
 
 /** Duration (ms) of the pressed-card cover before navigation. */
 const COVER_MS = 340;
+
+/**
+ * Social profile link shown under the home description.
+ *
+ * @typedef {object} SocialLink
+ * @property {string} label Link text (e.g. "GitHub").
+ * @property {string} url Destination URL (opens in a new tab; `mailto:` opens the mail client).
+ * @property {string} [hint] Accessibility label override (defaults to "Open the <label> profile").
+ */
+
+/**
+ * Social media profiles and contact rendered with the home description.
+ *
+ * @type {SocialLink[]}
+ */
+const SOCIAL_LINKS = [
+  { label: "GitHub", url: "https://github.com/yuriusuonly" },
+  { label: "LinkedIn", url: "https://linkedin.com/in/yuriusuonly" },
+  { label: "itch.io", url: "https://yuriusuonly.itch.io" },
+  { label: "Instagram", url: "https://www.instagram.com/yuriusuonly" },
+  { label: "Email", url: "mailto:yuriusu.dev@gmail.com", hint: "Send an email" }
+];
 
 /**
  * Card top-right crop-mark accent used across the bento tiles.
@@ -193,10 +215,23 @@ export default function Index() {
               <View className="mt-4 md:mt-6 self-start">
                 <Text className="font-outfit text-2xl md:text-4xl font-semibold text-[#161823]">{config.title}</Text>
               </View>
-              {/* Contact + spinning badge row */}
+              {/* Contact + social links + spinning badge row */}
               <View className="mt-4 md:mt-6 self-stretch flex-row items-end justify-between gap-2">
                 <View className="flex-1 border-b border-dashed border-[#161823]/70 pb-2">
                   <Text className="font-outfit text-xs md:text-sm text-[#161823]">{config.description}</Text>
+                  <View className="mt-2 flex-row flex-wrap gap-x-3 gap-y-1">
+                    {SOCIAL_LINKS.map((link) => (
+                      <Pressable
+                        key={link.label}
+                        accessibilityRole="link"
+                        accessibilityLabel={link.hint ?? `Open the ${link.label} profile`}
+                        onPress={() => Linking.openURL(link.url).catch(() => {})}
+                        className="active:opacity-70"
+                      >
+                        <Text className="font-outfit text-xs md:text-sm font-semibold text-[#161823] underline">{link.label} ↗</Text>
+                      </Pressable>
+                    ))}
+                  </View>
                 </View>
                 <View className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-[#161823] items-center justify-center">
                   <View className="h-3 w-3 md:h-3.5 md:w-3.5 rounded-full bg-white" />
