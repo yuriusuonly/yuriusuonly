@@ -88,7 +88,7 @@ function ProjectCard({ project, halfWidth = false }) {
   };
 
   return (
-    <View className={`h-64 md:h-full ${halfWidth ? "md:w-1/2" : "md:flex-1"}`}>
+    <View className={`h-80 md:h-full ${halfWidth ? "md:w-1/2" : "md:flex-1"}`}>
       <TiltCard style={{ flex: 1 }} maxTilt={9}>
         <View className="relative h-full flex-1 rounded-2xl bg-[#161823] p-5 md:p-6">
         <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
