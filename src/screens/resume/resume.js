@@ -141,7 +141,7 @@ export default function ResumeDimension() {
               {/* Header */}
               <View className="flex-row items-end">
                 <View className="w-32 md:w-48 pr-6 md:pr-10 items-start">
-                  {/* Avatar and title: shown only on the printable page */}
+                  {/* Avatar: shown only on the printable page */}
                   <View className="print-only resume-avatar h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full">
                     <Image
                       source={avatar}
@@ -150,7 +150,6 @@ export default function ResumeDimension() {
                       accessibilityLabel="Jullius Chua Pajanustan avatar"
                     />
                   </View>
-                  <Text className="print-only mt-2 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
                 </View>
                 <View className="flex-1">
                   <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
@@ -176,7 +175,10 @@ export default function ResumeDimension() {
                 </View>
               </View>
 
-              <SectionRow label="" className="mt-1">
+              <SectionRow
+                label={<Text className="print-only font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>}
+                className="mt-1"
+              >
                 {/* Profile/portfolio links: shown only on the printable page */}
                 <View className="print-only flex-row flex-wrap items-center">
                   {CONTACT_LINKS.map((link, index) => (
