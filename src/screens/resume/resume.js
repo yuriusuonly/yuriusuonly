@@ -41,10 +41,13 @@ const PRINT_CSS = `
 }
 `;
 
-const SOCIAL_LINKS = [
+const CONTACT_LINKS = [
   { label: "Portfolio", url: "https://yuriusuonly.expo.app" },
   { label: "GitHub", url: "https://github.com/yuriusuonly" },
-  { label: "LinkedIn", url: "https://linkedin.com/in/yuriusuonly" },
+  { label: "LinkedIn", url: "https://linkedin.com/in/yuriusuonly" }
+];
+
+const DIRECT_CONTACTS = [
   { label: "yuriusu.dev@gmail.com", url: "mailto:yuriusu.dev@gmail.com" },
   { label: "+63-9762869430", url: "tel:+639762869430" }
 ];
@@ -113,6 +116,22 @@ export default function ResumeDimension() {
                 <View className="flex-1">
                   <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
                   <Text className="mt-1 font-outfit text-xs md:text-sm text-[#161823]/70">2271 Church Backyard, Barracks Rd, Malaria, Tala, Caloocan City</Text>
+                  <View className="mt-1 flex-row flex-wrap items-center">
+                    {DIRECT_CONTACTS.map((link, index) => (
+                      <View key={link.label} className="flex-row items-center">
+                        {index > 0 ? (
+                          <Text className="mx-1 font-outfit text-xs md:text-sm text-[#161823]/60">•</Text>
+                        ) : null}
+                        <Pressable
+                          accessibilityRole="link"
+                          accessibilityLabel={`Open ${link.label}`}
+                          onPress={() => Linking.openURL(link.url).catch(() => {})}
+                        >
+                          <Text className="font-outfit text-xs md:text-sm text-[#161823] underline">{link.label}</Text>
+                        </Pressable>
+                      </View>
+                    ))}
+                  </View>
                 </View>
               </View>
 
@@ -122,7 +141,7 @@ export default function ResumeDimension() {
                 className="mt-1"
               >
                 <View className="flex-row flex-wrap items-center">
-                  {SOCIAL_LINKS.map((link, index) => (
+                  {CONTACT_LINKS.map((link, index) => (
                     <View key={link.label} className="flex-row items-center">
                       {index > 0 ? (
                         <Text className="mx-1 font-outfit text-xs md:text-sm text-[#161823]/60">•</Text>
