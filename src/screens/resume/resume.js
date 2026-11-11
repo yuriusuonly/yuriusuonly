@@ -56,11 +56,15 @@ const SOCIAL_LINKS = [
  * @param {{ label: string, children: import("react").ReactNode, divider?: boolean }} props - Section row props.
  * @returns {JSX.Element} The section row.
  */
-function SectionRow({ label, children, divider = true, className = "mt-4" }) {
+function SectionRow({ label, labelClassName = "font-outfit text-xs md:text-sm font-bold uppercase tracking-wide text-[#161823]", children, divider = true, className = "mt-4" }) {
   return (
     <View className={`flex-row ${className}`}>
       <View className="w-32 md:w-48 pr-6 md:pr-10">
-        <Text className="font-outfit text-xs md:text-sm font-bold uppercase tracking-wide text-[#161823]">{label}</Text>
+        {typeof label === "string" ? (
+          <Text className={labelClassName}>{label}</Text>
+        ) : (
+          label
+        )}
       </View>
       <View className={`flex-1 ${divider ? "border-b border-[#161823]/30 pb-3" : "pb-1"}`}>
         {children}
@@ -95,7 +99,7 @@ export default function ResumeDimension() {
             {/* Paper page (Letter width) */}
             <View className="resume-paper w-full bg-white rounded-lg shadow-2xl p-6 md:p-10">
               {/* Header */}
-              <View className="flex-row items-end">
+              <View className="flex-row">
                 <View className="w-32 md:w-48 pr-6 md:pr-10 items-start">
                   <View className="resume-avatar h-16 w-16 md:h-20 md:w-20 overflow-hidden rounded-full">
                     <Image
@@ -105,31 +109,37 @@ export default function ResumeDimension() {
                       accessibilityLabel="Jullius Chua Pajanustan avatar"
                     />
                   </View>
-                  <Text className="mt-2 font-outfit text-xs md:text-sm font-semibold text-[#161823]/80">Junior Developer</Text>
                 </View>
-                <View className="flex-1 border-b border-[#161823]/30 pb-6">
+                <View className="flex-1">
                   <Text className="font-outfit text-xl md:text-2xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
                   <Text className="mt-1 font-outfit text-xs md:text-sm text-[#161823]/70">2271 Church Backyard, Barracks Rd, Malaria, Tala, Caloocan City</Text>
-                  <View className="mt-2 flex-row flex-wrap items-center">
-                    {SOCIAL_LINKS.map((link, index) => (
-                      <View key={link.label} className="flex-row items-center">
-                        {index > 0 ? (
-                          <Text className="mx-1 font-outfit text-xs md:text-sm text-[#161823]/60">•</Text>
-                        ) : null}
-                        <Pressable
-                          accessibilityRole="link"
-                          accessibilityLabel={`Open ${link.label}`}
-                          onPress={() => Linking.openURL(link.url).catch(() => {})}
-                        >
-                          <Text className="font-outfit text-xs md:text-sm text-[#161823] underline">{link.label}</Text>
-                        </Pressable>
-                      </View>
-                    ))}
-                  </View>
                 </View>
               </View>
 
-              <SectionRow label="Skills" className="mt-8">
+              <SectionRow
+                label="Junior Developer"
+                labelClassName="font-outfit text-xs md:text-sm font-semibold text-[#161823]/80"
+                className="mt-2"
+              >
+                <View className="flex-row flex-wrap items-center">
+                  {SOCIAL_LINKS.map((link, index) => (
+                    <View key={link.label} className="flex-row items-center">
+                      {index > 0 ? (
+                        <Text className="mx-1 font-outfit text-xs md:text-sm text-[#161823]/60">•</Text>
+                      ) : null}
+                      <Pressable
+                        accessibilityRole="link"
+                        accessibilityLabel={`Open ${link.label}`}
+                        onPress={() => Linking.openURL(link.url).catch(() => {})}
+                      >
+                        <Text className="font-outfit text-xs md:text-sm text-[#161823] underline">{link.label}</Text>
+                      </Pressable>
+                    </View>
+                  ))}
+                </View>
+              </SectionRow>
+
+              <SectionRow label="Skills">
                 <Text className="font-outfit text-xs md:text-sm leading-snug text-[#161823]">
                   Strong grasp of programming logic, project management, and problem-solving. Experience integrating code into automated build and deployment workflows. Proactive in self-education, as evidenced by completing rigorous external certifications in modern computing.
                 </Text>
