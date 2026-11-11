@@ -62,12 +62,12 @@ function ClientTile({ sector, note, tileClass, textClass, dark }) {
 /**
  * Clients dimension page: collaboration sectors staged in the ink void.
  *
- * @returns {JSX.Element} The themed clients dimension with a return portal.
+ * @returns {JSX.Element} The themed clients dimension.
  */
 export default function ClientsDimension() {
   const theme = CLIENTS_THEME;
   return (
-    <DomainShell theme={theme} returnPortal>
+    <DomainShell theme={theme}>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-5 pb-28 md:p-10 md:pb-32">
           <View className="w-full max-w-5xl">

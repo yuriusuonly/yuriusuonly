@@ -121,7 +121,7 @@ export default function Index() {
   const coverGrow = useRef(new Animated.Value(0)).current;
 
   // Clear any stale forward cover when Home is (re)focused so returning here
-  // only shows the shell's closing (collapse) animation, never a replayed open.
+  // mounts with no overture, never a replayed open.
   useFocusEffect(
     useCallback(() => {
       coverGrow.stopAnimation();

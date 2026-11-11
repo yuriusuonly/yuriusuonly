@@ -24,7 +24,7 @@ import DomainShell from "../components/domain-shell.js";
 /**
  * Fallback route (`src/app/+not-found.js`) rendered when no route matches.
  * The 404 lives in its own lighter, calmer dimension (no floating geometry) —
- * same tokens and portal-back-home affordance, per DESIGN.md.
+ * same tokens, per DESIGN.md.
  * @module app/+not-found
  */
 
@@ -47,7 +47,7 @@ function CornerMark({ markClass = "border-white/90", positionClass = "right-2 to
  */
 export default function NotFound() {
   return (
-    <DomainShell theme={VOID_THEME} calm returnPortal>
+    <DomainShell theme={VOID_THEME} calm>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-4 pb-28 md:p-10 md:pb-32">
           <View className="w-full max-w-5xl bg-white rounded-[2rem] md:rounded-[2.75rem] p-5 md:p-8 items-center">

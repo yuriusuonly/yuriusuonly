@@ -62,12 +62,12 @@ function HighlightTile({ number, label, tileClass, textClass, dark }) {
 /**
  * Awards dimension page: recognition highlights staged in the red void.
  *
- * @returns {JSX.Element} The themed awards dimension with a return portal.
+ * @returns {JSX.Element} The themed awards dimension.
  */
 export default function AwardsDimension() {
   const theme = AWARDS_THEME;
   return (
-    <DomainShell theme={theme} returnPortal>
+    <DomainShell theme={theme}>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-5 pb-28 md:p-10 md:pb-32">
           <View className="w-full max-w-5xl">

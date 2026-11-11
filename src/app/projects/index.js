@@ -105,12 +105,12 @@ function ProjectCard({ name, description, stack, repoUrl, liveUrl, liveLabel, ic
 /**
  * Projects dimension page: portfolio highlights staged in the cyan void.
  *
- * @returns {JSX.Element} The themed projects dimension with a return portal.
+ * @returns {JSX.Element} The themed projects dimension.
  */
 export default function ProjectsDimension() {
   const theme = PROJECTS_THEME;
   return (
-    <DomainShell theme={theme} returnPortal>
+    <DomainShell theme={theme}>
       <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-5 pb-28 md:p-10 md:pb-32">
           <View className="w-full max-w-5xl">
