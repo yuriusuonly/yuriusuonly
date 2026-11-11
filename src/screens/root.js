@@ -212,7 +212,7 @@ export default function Index() {
               <Text className="text-base">❖</Text>
               <Text className="font-outfit text-base md:text-lg font-semibold">About Me</Text>
             </View>
-            <View className="h-56 md:h-auto md:flex-[2]">
+            <View className="h-56 md:h-auto md:flex-1">
               <Pressable accessibilityRole="button" accessibilityLabel="Open the clients dimension" onPress={(/** @type {import("react-native").GestureResponderEvent} */ e) => openDimension("/clients", COLORS.ink, e)} className="flex-1 active:opacity-90">
                 <TiltCard style={{ flex: 1 }} maxTilt={10}>
                   <View className="relative h-full flex-1 overflow-hidden rounded-2xl bg-[#161823]">
