@@ -226,11 +226,13 @@ export default function Index() {
                 </TiltCard>
               </Pressable>
             </View>
-            <View className="h-24 md:h-32">
-              <StatTile number="4" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/projects" onOpen={openDimension} />
-            </View>
-            <View className="h-24 md:h-32">
-              <StatTile number="1" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/awards" onOpen={openDimension} />
+            <View className="flex-row gap-3 md:gap-4">
+              <View className="h-24 flex-1 md:h-32">
+                <StatTile number="4" label="Projects" tileClass="bg-[#25F4EE]" accent={COLORS.primary} markClass="border-[#161823]/90" href="/projects" onOpen={openDimension} />
+              </View>
+              <View className="h-24 flex-1 md:h-32">
+                <StatTile number="1" label="Awards" tileClass="bg-[#FE2C55]" accent={COLORS.secondary} numberClass="text-white" href="/awards" onOpen={openDimension} />
+              </View>
             </View>
           </View>
           </View>
