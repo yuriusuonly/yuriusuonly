@@ -46,10 +46,10 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 /**
  * TipTap project card inside the projects dimension.
  *
- * @param {{ name: string, tagline: string, description: string, stack: string, repoUrl: string, liveUrl: string, icon: import("react-native").ImageSourcePropType }} props - Project content, outbound links, and icon asset.
+ * @param {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, icon: import("react-native").ImageSourcePropType }} props - Project content, outbound links, and icon asset.
  * @returns {JSX.Element} A tilting project card with GitHub/live links.
  */
-function ProjectCard({ name, tagline, description, stack, repoUrl, liveUrl, icon }) {
+function ProjectCard({ name, description, stack, repoUrl, liveUrl, icon }) {
   /**
    * Open an outbound link (new tab on web, external app on native).
    *
@@ -73,7 +73,6 @@ function ProjectCard({ name, tagline, description, stack, repoUrl, liveUrl, icon
           />
           <View className="flex-1">
             <Text className="font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#25F4EE]">{name}</Text>
-            <Text className="font-outfit mt-1 text-xs md:text-sm text-white/80">{tagline}</Text>
           </View>
         </View>
         <Text className="font-outfit mt-3 max-w-2xl text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
@@ -128,7 +127,6 @@ export default function ProjectsDimension() {
           <View className="mt-6 md:mt-10 flex-col gap-3 md:flex-row md:gap-4 h-72 md:h-64">
             <ProjectCard
               name="TipTap"
-              tagline="Tap. Learn. Impress."
               description="A cross-platform Flutter app that turns knowledge into a fast, vertical feed of short, verified facts — science, history, nature, space, and culture."
               stack="Flutter · Firebase · AdMob · In-App Purchases"
               repoUrl="https://github.com/yuriusuonly/tiptap"
