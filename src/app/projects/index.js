@@ -21,12 +21,13 @@ import DomainShell from "../../components/domain-shell.js";
 import TiltCard from "../../components/tilt-card.js";
 import tiptapIcon from "../../../png/tiptap-icon.png";
 import dinorunIcon from "../../../png/dinorun-icon.png";
+import superchatIcon from "../../../png/superchat-icon.png";
 
 /**
  * Projects dimension route (`src/app/projects/index.js`): home-theme
  * cyan-void world opened from the featured/logo and Projects portals.
- * Features project cards (TipTap, DinoRun) — icon avatar, title,
- * description, stack, and GitHub/live links.
+ * Features project cards (TipTap, DinoRun, Superchat) — icon avatar,
+ * title, description, stack, and GitHub/live links.
  * @module app/projects
  */
 
@@ -47,10 +48,10 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
 /**
  * Project card inside the projects dimension.
  *
- * @param {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType }} props - Project content, outbound links, and icon asset.
+ * @param {{ name: string, description: string, stack: string, repoUrl: string, liveUrl: string, liveLabel: string, icon: import("react-native").ImageSourcePropType, halfWidth?: boolean }} props - Project content, outbound links, icon asset, and desktop row width.
  * @returns {JSX.Element} A tilting project card with GitHub/live links.
  */
-function ProjectCard({ name, description, stack, repoUrl, liveUrl, liveLabel, icon }) {
+function ProjectCard({ name, description, stack, repoUrl, liveUrl, liveLabel, icon, halfWidth = false }) {
   /**
    * Open an outbound link (new tab on web, external app on native).
    *
@@ -62,7 +63,7 @@ function ProjectCard({ name, description, stack, repoUrl, liveUrl, liveLabel, ic
   };
 
   return (
-    <View className="h-64 md:h-full md:flex-1">
+    <View className={`h-64 md:h-full ${halfWidth ? "md:w-1/2" : "md:flex-1"}`}>
       <TiltCard style={{ flex: 1 }} maxTilt={9}>
         <View className="relative h-full flex-1 rounded-2xl bg-[#161823] p-5 md:p-6">
         <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
@@ -118,26 +119,42 @@ export default function ProjectsDimension() {
             <Text className="font-outfit text-base md:text-lg font-semibold text-white">Projects</Text>
           </View>
 
-          {/* Project cards */}
-          <View className="mt-6 md:mt-10 flex-col gap-3 md:flex-row md:gap-4 md:h-64">
-            <ProjectCard
-              name="TipTap"
-              description="A cross-platform Flutter app that turns knowledge into a fast, vertical feed of short, verified facts — science, history, nature, space, and culture."
-              stack="Flutter · Firebase · AdMob · In-App Purchases"
-              repoUrl="https://github.com/yuriusuonly/tiptap"
-              liveUrl="https://yuriusu-tiptap.firebaseapp.com"
-              liveLabel="Live site"
-              icon={tiptapIcon}
-            />
-            <ProjectCard
-              name="DinoRun"
-              description="A 2D pixel-art adventure game built with the Flutter Flame engine — run, jump, bite, and dash through a post-apocalyptic dino world."
-              stack="Flutter · Flame · Google Fonts"
-              repoUrl="https://github.com/yuriusuonly/dinorun"
-              liveUrl="https://yuriusuonly.itch.io/dinodash"
-              liveLabel="Play"
-              icon={dinorunIcon}
-            />
+          {/* Project cards: two per row on desktop, the last card on its own row */}
+          <View className="mt-6 md:mt-10 flex-col gap-3 md:gap-4">
+            <View className="flex-col gap-3 md:flex-row md:gap-4 md:h-64">
+              <ProjectCard
+                name="TipTap"
+                description="A cross-platform Flutter app that turns knowledge into a fast, vertical feed of short, verified facts — science, history, nature, space, and culture."
+                stack="Flutter · Firebase · AdMob · In-App Purchases"
+                repoUrl="https://github.com/yuriusuonly/tiptap"
+                liveUrl="https://yuriusu-tiptap.firebaseapp.com"
+                liveLabel="Live site"
+                icon={tiptapIcon}
+                halfWidth
+              />
+              <ProjectCard
+                name="DinoRun"
+                description="A 2D pixel-art adventure game built with the Flutter Flame engine — run, jump, bite, and dash through a post-apocalyptic dino world."
+                stack="Flutter · Flame · Google Fonts"
+                repoUrl="https://github.com/yuriusuonly/dinorun"
+                liveUrl="https://yuriusuonly.itch.io/dinodash"
+                liveLabel="Play"
+                icon={dinorunIcon}
+                halfWidth
+              />
+            </View>
+            <View className="flex-col gap-3 md:flex-row md:gap-4 md:h-64">
+              <ProjectCard
+                name="Superchat"
+                description="A realtime chat app built with React and Firebase — sign in, send messages, and watch them sync live across clients."
+                stack="React · Firebase · ESBuild"
+                repoUrl="https://github.com/yuriusuonly/superchat"
+                liveUrl="https://yuriusu-superchat.firebaseapp.com"
+                liveLabel="Live site"
+                icon={superchatIcon}
+                halfWidth
+              />
+            </View>
           </View>
           </View>
         </View>
