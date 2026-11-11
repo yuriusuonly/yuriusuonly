@@ -118,7 +118,7 @@ function BulletLinks({ links, className = "mt-2" }) {
 function SectionRow({ label, labelClassName = "font-outfit text-xs md:text-sm font-bold uppercase tracking-wide text-[#161823]", children, divider = true, className = "mt-4" }) {
   return (
     <View className={`resume-row flex-col md:flex-row ${className}`}>
-      <View className="resume-col w-full pr-0 pb-1 md:w-48 md:pr-10 md:pb-0">
+      <View className="resume-col w-full pr-0 pb-2 md:w-48 md:pr-10 md:pb-0">
         {typeof label === "string" ? (
           <Text className={labelClassName}>{label}</Text>
         ) : (
