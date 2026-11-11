@@ -5,11 +5,10 @@ import lifesaverIcon from "../../../png/lifesaver-icon.png";
  * @module screens/experience/lifesaver-medicords
  */
 
-/** @type {{ name: string, role: string, description: string, period: string, location: string, stack: string, highlights: string[], liveUrl: string, appStoreUrl: string, playStoreUrl: string, icon: import("react-native").ImageSourcePropType }} */
+/** @type {{ name: string, description: string, period: string, location: string, stack: string, highlights: string[], liveUrl: string, appStoreUrl: string, playStoreUrl: string, icon: import("react-native").ImageSourcePropType }} */
 const lifesaverMedicords = {
   name: "Lifesaver Medicords Inc.",
-  role: "Junior Mobile Developer",
-  description: "A SaaS startup that digitalizes medical records with online consultations.",
+  description: "Junior Mobile Developer at a SaaS startup that digitalizes medical records with online consultations.",
   period: "May 2026",
   location: "Aurora Blvd, Cubao, Quezon City",
   stack: "Dart/Flutter · Go · Redis · MySQL · Amazon AWS",

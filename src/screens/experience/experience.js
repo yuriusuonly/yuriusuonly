@@ -25,7 +25,7 @@ import lifesaverMedicords from "./lifesaver-medicords.js";
  * Experience dimension screen (`src/screens/experience/experience.js`):
  * ink-void world opened from the Experience portal, rendered by the
  * `/experience` route (`src/app/experience/index.js`). Features the experience
- * cards from this folder (Lifesaver Medicords Inc.) — icon avatar, title, role,
+ * cards from this folder (Lifesaver Medicords Inc.) — icon avatar, title,
  * description, highlight bullets, stack, period · location, and live site /
  * App Store / Play Store link chips.
  * @module screens/experience/experience
@@ -50,8 +50,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  *
  * @typedef {object} ExperienceCardData
  * @property {string} name Card title (company name).
- * @property {string} role Role held at the company.
- * @property {string} description Card description (what the company does).
+ * @property {string} description Card description (role at the company and what it does).
  * @property {string} period Engagement period.
  * @property {string} location Engagement location.
  * @property {string} stack Stack line rendered above the period · location meta.
@@ -77,7 +76,7 @@ function CornerMark({ dark = false, positionClass = "right-2 top-2" }) {
  * @returns {JSX.Element} A tilting experience card with live site / store links.
  */
 function ExperienceCard({ experience, halfWidth = false }) {
-  const { name, role, description, period, location, stack, highlights, liveUrl, appStoreUrl, playStoreUrl, icon } = experience;
+  const { name, description, period, location, stack, highlights, liveUrl, appStoreUrl, playStoreUrl, icon } = experience;
   /**
    * Open an outbound link (new tab on web, external app on native).
    *
@@ -100,10 +99,7 @@ function ExperienceCard({ experience, halfWidth = false }) {
             resizeMode="cover"
             accessibilityLabel={`${name} icon`}
           />
-          <View className="flex-1">
-            <Text className="font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#C9CCDD]">{name}</Text>
-            <Text className="mt-1 font-outfit text-xs md:text-sm font-semibold text-white">{role}</Text>
-          </View>
+          <Text className="flex-1 font-outfit text-2xl md:text-3xl font-extrabold leading-none text-[#C9CCDD]">{name}</Text>
         </View>
         <Text className="mt-3 font-outfit text-xs md:text-sm text-white/70 leading-snug">{description}</Text>
         {highlights.map((highlight) => (
