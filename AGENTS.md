@@ -21,7 +21,7 @@
 - Motion stack: React Native `Animated` + DOM pointer events only — no WebGL (`three` was removed; keep the 2D approach); `zustand` for expansion overture state.
 - API/special routes follow Expo Router web conventions in filenames: `src/app/api/health+api.js`, `manifest.json+api.js`, `robots.txt+api.js`, `service-worker.js+api.js`.
 - Shared app config: `src/shared/config.js` reads `EXPO_PUBLIC_*` env vars; `app.config.js` derives app name/version from `EXPO_PUBLIC_TITLE`/`EXPO_PUBLIC_VERSION` and the Expo/EAS slug from `EAS_PROJECT_SLUG`.
-- Assets: `png/`, `svg/`, `ttf/` (custom font `Outfit` loaded in `src/app/_layout.js` from `ttf/Outfit-VariableFont_wght.ttf`). Local design references (e.g. `.dribbble/portfolio-website-v1.png`, gitignored) may live under `.dribbble/`; the Dribbble shot link and author are documented in `DESIGN.md`.
+- Assets: `png/`, `jpg/` (photos, e.g. `jpg/avatar.jpg` — the home About Me avatar), `svg/`, `ttf/` (custom font `Outfit` loaded in `src/app/_layout.js` from `ttf/Outfit-VariableFont_wght.ttf`). Local design references (e.g. `.dribbble/portfolio-website-v1.png`, gitignored) may live under `.dribbble/`; the Dribbble shot link and author are documented in `DESIGN.md`.
 - MCP: `opencode.json` configures the local `dribbble` MCP server (`dribbble-mcp` via `npx`) for Dribbble access when needed; it uses Dribbble OAuth and typically requires `DRIBBBLE_CLIENT_ID`/`DRIBBBLE_CLIENT_SECRET` in the environment (sourced from `.env` per runtime), not hardcoded.
 
 ## Runtime & deployment notes

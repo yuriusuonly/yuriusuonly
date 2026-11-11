@@ -141,6 +141,8 @@ npm run docker       # full cycle: docker:build && docker:up && docker:logs (sta
 ├── .dockerignore
 ├── .env
 ├── .gitignore
+├── jpg/
+│   └── avatar.jpg
 ├── png/
 │   ├── logo.png
 │   ├── tiptap-icon.png

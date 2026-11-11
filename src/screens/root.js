@@ -24,6 +24,7 @@ const HOME_THEME = {
 import DomainShell from "../components/domain-shell.js";
 import TiltCard from "../components/tilt-card.js";
 import logo from "../../png/logo.png";
+import avatar from "../../jpg/avatar.jpg";
 
 /**
  * Home/root screen (`src/screens/root.js`): 2D interactive bento-grid
@@ -180,13 +181,13 @@ export default function Index() {
             </View>
             <View className="relative flex-1 bg-[#25F4EE] rounded-3xl p-5 md:p-6 items-center justify-center">
               <CornerMark markClass="border-[#161823]/90" positionClass="right-5 top-5 md:right-6 md:top-6" />
-              {/* Avatar with ring on pink circle */}
-              <View className="h-32 w-32 md:h-40 md:w-40 items-center justify-center rounded-full border-2 border-[#161823] bg-[#FE2C55]">
+              {/* Avatar photo with dark ring */}
+              <View className="h-32 w-32 md:h-40 md:w-40 overflow-hidden rounded-full border-2 border-[#161823]">
                 <Image
-                  source={logo}
-                  className="!h-28 !w-28 md:!h-32 md:!w-32 rounded-full"
+                  source={avatar}
+                  className="!h-full !w-full"
                   resizeMode="cover"
-                  accessibilityLabel={`${config.title} logo`}
+                  accessibilityLabel={`${config.title} avatar`}
                 />
               </View>
               {/* Identity */}
