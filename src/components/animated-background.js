@@ -75,7 +75,7 @@ export default function AnimatedBackground({ theme, blobCount = 8 }) {
   }, [theme, blobCount]);
 
   return (
-    <View pointerEvents="none" className="absolute inset-0 overflow-hidden" style={{ backgroundColor: theme.void }}>
+    <View pointerEvents="none" className="no-print absolute inset-0 overflow-hidden" style={{ backgroundColor: theme.void }}>
       {blobs.map((blob, i) => (
         <Blob key={`blob-${i}`} left={blob.left} top={blob.top} size={blob.size} color={blob.color} driftMs={blob.driftMs} />
       ))}

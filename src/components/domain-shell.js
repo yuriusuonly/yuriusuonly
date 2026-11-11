@@ -162,7 +162,7 @@ export default function DomainShell({ theme, children, calm = false, homePortal 
 
         {/* Home portal */}
         {homePortal && (
-          <View pointerEvents="box-none" className="absolute bottom-5 self-center md:bottom-8">
+          <View pointerEvents="box-none" className="no-print absolute bottom-5 self-center md:bottom-8">
             <Pressable
               accessibilityRole="button"
               accessibilityLabel="Collapse domain and return home"

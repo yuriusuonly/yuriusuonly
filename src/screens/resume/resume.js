@@ -27,11 +27,13 @@ const RESUME_THEME = {
 };
 
 const PRINT_CSS = `
-@page { size: Letter; margin: 0.6in; }
+@page { size: Letter; margin: 0.5in; }
 @media print {
+  html, body, #root, #root > div, #root > div > div { background: #ffffff !important; height: auto !important; overflow: visible !important; }
   .no-print { display: none !important; }
   .page-break { page-break-before: always; break-before: page; }
-  body { background: #ffffff; }
+  .resume-paper { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; }
+  .resume-scroll { overflow: visible !important; height: auto !important; }
 }
 `;
 
@@ -66,7 +68,7 @@ export default function ResumeDimension() {
         <title>Resume — {config.title}</title>
         <style>{PRINT_CSS}</style>
       </Head>
-      <ScrollView className="flex-1" contentContainerStyle={{ flexGrow: 1 }}>
+      <ScrollView className="resume-scroll flex-1" contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-grow items-center justify-center p-4 pb-28 md:p-8 md:pb-32">
           <View className="w-full max-w-[816px]">
             <View className="no-print mb-4 flex-row items-center gap-2">
@@ -75,7 +77,7 @@ export default function ResumeDimension() {
             </View>
 
             {/* Paper page (Letter width) */}
-            <View className="w-full bg-white rounded-lg shadow-2xl p-6 md:p-10">
+            <View className="resume-paper w-full bg-white rounded-lg shadow-2xl p-6 md:p-10">
             {/* Header */}
             <View>
               <Text className="font-outfit text-2xl md:text-3xl font-extrabold text-[#161823]">Jullius Chua Pajanustan</Text>
