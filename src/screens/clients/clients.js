@@ -86,7 +86,7 @@ function ExperienceCard({ experience, halfWidth = false }) {
   };
 
   return (
-    <View className={`h-80 md:h-full ${halfWidth ? "md:w-1/2" : "md:flex-1"}`}>
+    <View className={`${halfWidth ? "md:w-1/2" : "md:flex-1"}`}>
       <TiltCard style={{ flex: 1 }} maxTilt={9}>
         <View className="relative h-full flex-1 rounded-2xl bg-[#161823] p-5 md:p-6">
         <CornerMark positionClass="right-4 top-4 md:right-5 md:top-5" />
@@ -149,7 +149,7 @@ export default function ClientsDimension() {
           {/* Experience cards: two per row on desktop */}
           <View className="mt-6 md:mt-10 flex-col gap-3 md:gap-4">
             {[[lifesaverMedicords]].map((/** @type {ExperienceCardData[]} */ row) => (
-              <View key={row[0].name} className="flex-col gap-3 md:flex-row md:gap-4 md:h-80">
+              <View key={row[0].name} className="flex-col gap-3 md:flex-row md:gap-4">
                 {row.map((experience) => (
                   <ExperienceCard key={experience.name} experience={experience} halfWidth />
                 ))}
