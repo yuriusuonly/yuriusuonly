@@ -59,6 +59,33 @@ const DIRECT_CONTACTS = [
 ];
 
 /**
+ * Renders a horizontal bullet-separated list of links (same style as header links).
+ * @param {{ links: Array<{ label: string, url: string }>, className?: string }} props - Link row props.
+ * @returns {JSX.Element|null} The bullet link row, or null when no links.
+ */
+function BulletLinks({ links, className = "mt-2" }) {
+  if (!links?.length) return null;
+  return (
+    <View className={`${className} flex-row flex-wrap items-center`}>
+      {links.map((link, index) => (
+        <View key={link.label} className="flex-row items-center">
+          {index > 0 ? (
+            <Text className="mx-1 font-outfit text-xs md:text-sm text-[#161823]/60">•</Text>
+          ) : null}
+          <Pressable
+            accessibilityRole="link"
+            accessibilityLabel={`Open ${link.label}`}
+            onPress={() => Linking.openURL(link.url).catch(() => {})}
+          >
+            <Text className="font-outfit text-xs md:text-sm text-[#161823] underline">{link.label}</Text>
+          </Pressable>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+/**
  * Two-column resume section: label in the left column, content in the right
  * column with an optional divider shown only on the right column.
  *
@@ -200,6 +227,13 @@ export default function ResumeDimension() {
                         </ListItem>
                       </List>
                     </View>
+                    <BulletLinks
+                      links={[
+                        { label: "Website", url: lifesaverMedicords.liveUrl },
+                        { label: "App Store", url: lifesaverMedicords.appStoreUrl },
+                        { label: "Play Store", url: lifesaverMedicords.playStoreUrl }
+                      ]}
+                    />
                   </View>
                 </View>
               </SectionRow>
@@ -214,6 +248,7 @@ export default function ResumeDimension() {
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{tiptap.name}</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{tiptap.stack.replace(/ · /g, " • ")}</Text>
                     <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{tiptap.description}</Text>
+                    <BulletLinks links={[{ label: "GitHub", url: tiptap.repoUrl }, ...(tiptap.liveUrl ? [{ label: tiptap.liveLabel || "Live site", url: tiptap.liveUrl }] : [])]} />
                   </View>
                 </View>
                 <View className="mt-4 flex-row items-start gap-3">
@@ -222,6 +257,7 @@ export default function ResumeDimension() {
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{dinoDash.name}</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{dinoDash.stack.replace(/ · /g, " • ")}</Text>
                     <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{dinoDash.description}</Text>
+                    <BulletLinks links={[{ label: "GitHub", url: dinoDash.repoUrl }, ...(dinoDash.liveUrl ? [{ label: dinoDash.liveLabel || "Live site", url: dinoDash.liveUrl }] : [])]} />
                   </View>
                 </View>
                 <View className="mt-4 flex-row items-start gap-3">
@@ -230,6 +266,7 @@ export default function ResumeDimension() {
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{superchat.name}</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{superchat.stack.replace(/ · /g, " • ")}</Text>
                     <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{superchat.description}</Text>
+                    <BulletLinks links={[{ label: "GitHub", url: superchat.repoUrl }, ...(superchat.liveUrl ? [{ label: superchat.liveLabel || "Live site", url: superchat.liveUrl }] : [])]} />
                   </View>
                 </View>
                 <View className="mt-4 flex-row items-start gap-3">
@@ -238,6 +275,7 @@ export default function ResumeDimension() {
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{mojisumi.name}</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{mojisumi.stack.replace(/ · /g, " • ")}</Text>
                     <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{mojisumi.description}</Text>
+                    <BulletLinks links={[{ label: "GitHub", url: mojisumi.repoUrl }, ...(mojisumi.liveUrl ? [{ label: mojisumi.liveLabel || "Live site", url: mojisumi.liveUrl }] : [])]} />
                   </View>
                 </View>
               </SectionRow>
@@ -248,6 +286,7 @@ export default function ResumeDimension() {
                   <View className="flex-1">
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">Bachelor of Science in Information Technology • Quezon City Polytechnic University</Text>
                     <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">May 2017 • Sinagtala St, corner Batasan Rd, Batasan Hills, Quezon City</Text>
+                    <BulletLinks links={[{ label: "Website", url: "https://qcu.edu.ph/" }]} />
                   </View>
                 </View>
                 <View className="mt-4 flex-row items-start gap-3">
@@ -258,6 +297,7 @@ export default function ResumeDimension() {
                     <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
                       Learned C, C++, and Java programming languages.
                     </Text>
+                    <BulletLinks links={[{ label: "Website", url: "https://laconcepcioncollege.com/" }]} />
                   </View>
                 </View>
               </SectionRow>
@@ -271,6 +311,7 @@ export default function ResumeDimension() {
                     <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">
                       Learned the Linux command-line interface, C, Python, SQL (SQLite), and standard Web technologies (HTML, CSS, and JavaScript).
                     </Text>
+                    <BulletLinks links={[{ label: "Certificate", url: cs50x.url }]} />
                   </View>
                 </View>
               </SectionRow>
