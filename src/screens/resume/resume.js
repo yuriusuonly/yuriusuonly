@@ -42,7 +42,8 @@ const SOCIAL_LINKS = [
   { label: "LinkedIn", url: "https://linkedin.com/in/yuriusuonly" },
   { label: "itch.io", url: "https://yuriusuonly.itch.io" },
   { label: "Instagram", url: "https://www.instagram.com/yuriusuonly" },
-  { label: "Email", url: "mailto:yuriusu.dev@gmail.com" }
+  { label: "Email", url: "mailto:yuriusu.dev@gmail.com" },
+  { label: "+63-9762869430", url: "tel:+639762869430" }
 ];
 
 /**
