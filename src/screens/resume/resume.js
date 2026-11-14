@@ -10,6 +10,7 @@ import dinoDash from "../projects/dino-dash.js";
 import superchat from "../projects/superchat.js";
 import mojisumi from "../projects/mojisumi.js";
 import scheme from "../projects/scheme.js";
+import pakuPaku from "../projects/paku-paku.js";
 import cs50x from "../awards/cs50x.js";
 
 const avatar = require("../../../jpg/avatar.jpg");
@@ -257,6 +258,15 @@ export default function ResumeDimension() {
 
               <SectionRow label="Projects">
                 <View className="flex-row items-start gap-3">
+                  <Image source={pakuPaku.icon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel={`${pakuPaku.name} icon`} />
+                  <View className="flex-1">
+                    <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{pakuPaku.name}</Text>
+                    <Text className="font-outfit text-xs md:text-sm text-[#161823]/60">{pakuPaku.stack.replace(/ · /g, " • ")}</Text>
+                    <Text className="mt-1 font-outfit text-xs md:text-sm leading-snug text-[#161823]">{pakuPaku.description}</Text>
+                    <BulletLinks links={[{ label: "GitHub", url: pakuPaku.repoUrl }, ...(pakuPaku.liveUrl ? [{ label: pakuPaku.liveLabel || "Live site", url: pakuPaku.liveUrl }] : [])]} />
+                  </View>
+                </View>
+                <View className="mt-4 flex-row items-start gap-3">
                   <Image source={tiptap.icon} className="!h-8 !w-8 md:!h-10 md:!w-10" resizeMode="contain" accessibilityLabel={`${tiptap.name} icon`} />
                   <View className="flex-1">
                     <Text className="font-outfit text-sm md:text-base font-bold text-[#161823]">{tiptap.name}</Text>

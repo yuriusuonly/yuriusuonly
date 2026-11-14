@@ -24,13 +24,14 @@ import dinoDash from "./dino-dash.js";
 import superchat from "./superchat.js";
 import mojisumi from "./mojisumi.js";
 import scheme from "./scheme.js";
+import pakuPaku from "./paku-paku.js";
 
 /**
  * Projects dimension screen (`src/screens/projects/projects.js`): home-theme
  * cyan-void world opened from the featured/logo and Projects portals,
  * rendered by the `/projects` route (`src/app/projects/index.js`).
- * Features the project cards from this folder (TipTap, Dino Dash, Superchat,
- * Mojisumi, Scheme) — icon avatar, title, description, stack, and GitHub/live
+ * Features the project cards from this folder (Paku Paku, TipTap, Dino Dash,
+ * Superchat, Mojisumi, Scheme) — icon avatar, title, description, stack, and GitHub/live
  * links (live chip only when a live URL exists).
  * @module screens/projects/projects
  */
@@ -149,7 +150,7 @@ export default function ProjectsDimension() {
 
           {/* Project cards: two per row on desktop */}
           <View className="mt-6 md:mt-10 flex-col gap-3 md:gap-4">
-            {[[tiptap, dinoDash], [superchat, mojisumi], [scheme]].map((/** @type {ProjectCardData[]} */ row) => (
+            {[[pakuPaku, tiptap], [dinoDash, superchat], [mojisumi, scheme]].map((/** @type {ProjectCardData[]} */ row) => (
               <View key={row[0].name} className="flex-col gap-3 md:flex-row md:gap-4">
                 {row.map((project) => (
                   <ProjectCard key={project.name} project={project} halfWidth />
